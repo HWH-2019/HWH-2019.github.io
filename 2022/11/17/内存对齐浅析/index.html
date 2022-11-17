@@ -1,0 +1,645 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="HWH">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="引入在了解内存对齐之前，我们先来做个简短的测试。看看下面的代码输出的结果。 123456789101112131415#include&lt;iostream&gt;using std::cout;struct test&amp;#123;	int x;	char y;&amp;#125;;int main()&amp;#123;	test t;	cout&lt;&lt;sizeof(t); &#x2F;&#x2F;输出结果是多少？	ret">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存对齐浅析">
+<meta property="og:url" content="http://example.com/2022/11/17/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%B5%85%E6%9E%90/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="引入在了解内存对齐之前，我们先来做个简短的测试。看看下面的代码输出的结果。 123456789101112131415#include&lt;iostream&gt;using std::cout;struct test&amp;#123;	int x;	char y;&amp;#125;;int main()&amp;#123;	test t;	cout&lt;&lt;sizeof(t); &#x2F;&#x2F;输出结果是多少？	ret">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716221214388.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2022-11-17T13:39:20.000Z">
+<meta property="article:modified_time" content="2022-11-17T14:33:21.764Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200716221214388.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
+  
+  
+  
+  <title>内存对齐浅析 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="内存对齐浅析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-17 21:39" pubdate>
+          2022年11月17日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">内存对齐浅析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p>在了解内存对齐之前，我们先来做个简短的测试。<br>看看下面的代码输出的结果。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> std::cout;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">test</span>&#123;<br>	<span class="hljs-type">int</span> x;<br>	<span class="hljs-type">char</span> y;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br><br>	test t;<br>	cout&lt;&lt;<span class="hljs-built_in">sizeof</span>(t); <span class="hljs-comment">//输出结果是多少？</span><br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果你的答案是<strong>8</strong>，那么恭喜你答对了，不过相信很多人并不理解为什么是<strong>8</strong>，而不是<strong>5</strong>。按照正常思路，32位系统下，<strong>int</strong>占<strong>4</strong>个字节，<strong>char</strong>占<strong>1</strong>个字节，<strong>4+1&#x3D;5</strong>,所以<strong>t</strong>占<strong>5</strong>个字节，<strong>sizeof</strong>应该返回<strong>5</strong>，那为什么是<strong>8</strong>呢？<br>这就涉及到了文章的主题，<em><strong>内存对齐</strong></em>。</p>
+<h2 id="内存对齐的原因"><a href="#内存对齐的原因" class="headerlink" title="内存对齐的原因"></a>内存对齐的原因</h2><p>原因主要分两部分，平台原因和性能原因。</p>
+<h3 id="平台原因"><a href="#平台原因" class="headerlink" title="平台原因"></a>平台原因</h3><p>因为现代计算机中内存的最小单位是<strong>byte</strong>，所以从理论上讲似乎对任何类型的变量的访问可以从任何地址开始。<br>但是实际上有些硬件平台对基本类型数据在内存中存放的位置有限制，它们会要求这些数据的首地址的值是<strong>某个数k（通常它为4或8）的倍数</strong> 。</p>
+<h3 id="性能原因"><a href="#性能原因" class="headerlink" title="性能原因"></a>性能原因</h3><p>假如没有内存对齐机制，数据可以任意存放，现在一个<strong>int</strong>变量存放在从地址<strong>1</strong>开始的联系四个字节地址中，该处理器去取数据时，要先从<strong>0</strong>地址开始读取第一个<strong>4</strong>字节块,剔除不想要的字节（<strong>0</strong>地址）,然后从地址<strong>4</strong>开始读取下一个<strong>4</strong>字节块,同样剔除不要的数据（<strong>5，6，7</strong>地址）,最后留下的两块数据合并放入寄存器，这需要做很多工作。</p>
+<h2 id="内存对齐规则"><a href="#内存对齐规则" class="headerlink" title="内存对齐规则"></a>内存对齐规则</h2><blockquote>
+<p>每个特定平台上的编译器都有自己的默认“<strong>对齐系数</strong>”(也叫<strong>对齐模数</strong>)。程序员可以通过预编译命令#<strong>pragma pack(n)，n&#x3D;1,2,4,8,16</strong>来改变这一系数，其中的<strong>n</strong>就是你要指定的“<strong>对齐系数</strong>”。</p>
+</blockquote>
+<p>有效对其值：是给定值#pragma pack(n)和结构体中<strong>最长数据类型长度中较小的</strong>那个。有效对齐值也叫<strong>对齐单位</strong>。</p>
+<h3 id="对齐规则"><a href="#对齐规则" class="headerlink" title="对齐规则"></a>对齐规则</h3><h4 id="1、数据成员对齐规则"><a href="#1、数据成员对齐规则" class="headerlink" title="1、数据成员对齐规则"></a>1、数据成员对齐规则</h4><blockquote>
+<p><strong>结构(struct)</strong>(或<strong>联合(union)</strong>)的数据成员，第一个数据成员放在<strong>offset</strong>为<strong>0</strong>的地方，以后每个数据成员的对齐按照#pragma<br>pack指定的数值和这个数据成员自身长度中，<strong>比较小</strong>的那个进行。</p>
+</blockquote>
+<h4 id="2、结构-或联合-的整体对齐规则"><a href="#2、结构-或联合-的整体对齐规则" class="headerlink" title="2、结构(或联合)的整体对齐规则"></a>2、结构(或联合)的整体对齐规则</h4><blockquote>
+<p>在数据成员完成各自对齐之后，<strong>结构(或联合)本身也要进行对齐</strong>，对齐将按照#pragma<br>pack指定的数值和结构(或联合)最大数据成员长度中，<strong>比较小</strong>的那个进行。</p>
+</blockquote>
+<h4 id="3、结合1、2"><a href="#3、结合1、2" class="headerlink" title="3、结合1、2"></a>3、结合1、2</h4><blockquote>
+<p>当#pragma pack的<strong>n</strong>值<strong>等于或超过</strong>所有数据成员长度的时候，这个<strong>n</strong>值的大小将不产生任何效果。</p>
+</blockquote>
+<h2 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> std::cout;<br><span class="hljs-keyword">using</span> std::endl;<br><span class="hljs-keyword">struct</span><br>&#123;<br>   <span class="hljs-type">char</span> c1;<br>    <span class="hljs-type">int</span> i;<br>    <span class="hljs-type">char</span> c2;<br>&#125;x1;<br><br><br><span class="hljs-keyword">struct</span> &#123;<br>    <span class="hljs-type">char</span> c1;<br>    <span class="hljs-type">char</span> c2;<br>    <span class="hljs-type">int</span> i;<br>&#125;x2;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cout &lt;&lt; <span class="hljs-built_in">sizeof</span>(x1) &lt;&lt; endl;  <span class="hljs-comment">// 输出12</span><br>    cout &lt;&lt; <span class="hljs-built_in">sizeof</span>(x2) &lt;&lt; endl;  <span class="hljs-comment">// 输出8</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>以上测试都是在<strong>Win32</strong>环境下进行的，默认#<strong>pragma pack(4)<strong>，因此</strong>对齐单位</strong>为<strong>4</strong>。</p>
+<p>以<strong>x1</strong>对象分析，首先使用<strong>对齐规则1</strong>，对<strong>x1</strong>的<strong>数据成员</strong>进行<strong>内存对齐</strong></p>
+<p>sizeof(c1) &#x3D; 1 &lt; 4(<strong>对齐单位</strong>) 所以按照<strong>1</strong>字节对齐，占内存的第<strong>0</strong>单元。<br>sizeof(i) &#x3D; 4 &lt; &#x3D; 4(<strong>对齐单位</strong>) 相对于结构体首地址的偏移要为<strong>4</strong>的倍数，占内存的<strong>4,5,6,7</strong>单元。<br>sizeof(c2) &#x3D; 1 &lt; 4(<strong>对齐单位</strong>) 相对于结构体首地址的偏移要为<strong>4</strong>的倍数，占内存的第<strong>8</strong>单元。</p>
+<p>接着，使用<strong>对齐规则2</strong>，对<strong>结构体整体</strong>进行<strong>内存对齐</strong>。</p>
+<p><strong>x1</strong>中变量i占用内存最大占<strong>4</strong>字节，而有效对齐单位也为<strong>4</strong>字节，两者较小值就是<strong>4</strong>字节。因此<strong>整体也是按照4字节对齐</strong>。由<strong>对齐规则1</strong>得到<strong>x1</strong>占<strong>9</strong>个字节，此处再按照<strong>对齐规则2</strong>进行整体的<strong>4</strong>字节对齐，所以整个结构体占用<strong>12</strong>个字节。<img src="https://img-blog.csdnimg.cn/20200716221214388.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="x1内存布局"><br><strong>x2</strong>对象的分析也是类似。<br>先套用<strong>对齐规则1</strong>，<strong>c1</strong>和<strong>c2</strong>都是按照<strong>1</strong>个字节对齐，分别占用内存的第<strong>0</strong>和<strong>1</strong>单元，<strong>i</strong>相对于结构体首地址的偏移要为<strong>4</strong>的倍数，占内存的<strong>4,5,6,7</strong>单元。<br>再套用<strong>对齐规则2</strong>，因此<strong>整体也是按照4字节对齐</strong>。由<strong>对齐规则1</strong>得到<strong>x2</strong>占<strong>8</strong>个字节，此处再按照<strong>对齐规则2</strong>进行整体的<strong>4</strong>字节对齐，所以整个结构体占用<strong>8</strong>个字节。</p>
+<blockquote>
+<p>参考资料：<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/9537460?fr=aladdin">内存对齐_百度百科</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30007037">C&#x2F;C++内存对齐详解 - 知乎</a></p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/">#C++</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>内存对齐浅析</div>
+      <div>http://example.com/2022/11/17/内存对齐浅析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>HWH</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/17/%E7%BA%BF%E6%80%A7%E8%A1%A8%E6%B5%85%E8%B0%88/" title="线性表浅谈">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">线性表浅谈</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
