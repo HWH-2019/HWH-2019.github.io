@@ -16,20 +16,18 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基本概念和数据类型基本概念  标识符（identifier）  用来表示的有效字符序列：类、变量、方法、数组、文件 命名规则：  以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。 不能使用其他特殊符号，如: +、@、&amp;、空格等。 不能与Java关键字同名 英文字母大小写敏感 长度无最大长度的限制  （建议 小于255个">
+    <meta name="description" content="基本概念和数据类型基本概念  标识符（identifier）  用来表示的有效字符序列：类、变量、方法、数组、文件 命名规则： 以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。 不能使用其他特殊符号，如: +、@、&amp;、空格等。 不能与Java关键字同名 英文字母大小写敏感 长度无最大长度的限制  （建议 小于255个字">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础语法总结">
-<meta property="og:url" content="http://example.com/2022/11/17/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:url" content="https://hwh-2019.github.io/2022/11/17/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基本概念和数据类型基本概念  标识符（identifier）  用来表示的有效字符序列：类、变量、方法、数组、文件 命名规则：  以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。 不能使用其他特殊符号，如: +、@、&amp;、空格等。 不能与Java关键字同名 英文字母大小写敏感 长度无最大长度的限制  （建议 小于255个">
+<meta property="og:description" content="基本概念和数据类型基本概念  标识符（identifier）  用来表示的有效字符序列：类、变量、方法、数组、文件 命名规则： 以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。 不能使用其他特殊符号，如: +、@、&amp;、空格等。 不能与Java关键字同名 英文字母大小写敏感 长度无最大长度的限制  （建议 小于255个字">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200817112349285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="article:published_time" content="2022-11-17T14:47:46.000Z">
-<meta property="article:modified_time" content="2022-11-17T15:11:41.831Z">
+<meta property="article:modified_time" content="2022-11-18T02:14:29.211Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200817112349285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
   
   
   
@@ -71,7 +69,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"hwh-2019.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -97,7 +95,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>HWH&#39;s Blogs</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -166,6 +164,18 @@
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
               </a>
             </li>
           
@@ -279,11 +289,11 @@
 <ol>
 <li>用来表示的有效字符序列：类、变量、方法、数组、文件</li>
 <li>命名规则：<ol>
-<li><font color=red> 以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥</font>。</li>
-<li>不能使用其他特殊符号，<font color=red>如: +、@、&amp;、空格等</font>。</li>
+<li>以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。</li>
+<li>不能使用其他特殊符号，如: +、@、&amp;、空格等。</li>
 <li>不能与Java关键字同名</li>
 <li>英文字母大小写敏感</li>
-<li>长度无最大长度的限制  （<font color=red>建议 小于255个字符</font>）</li>
+<li>长度无最大长度的限制  （建议 小于255个字符）</li>
 </ol>
 </li>
 </ol>
@@ -299,22 +309,19 @@
 <li><strong>简单数据类型</strong></li>
 </ul>
 <ol>
-<li>整数类型 (Integer)： <font color=green> byte， short， int (默认) ，long</font>　</li>
-<li>浮点类型 (Floating)：<font color=green>float，double (默认)</font></li>
-<li>字符类型 (Textual)： <font color=green>char</font>　</li>
-<li>布尔类型 (Logical)： <font color=green>boolean</font></li>
+<li>整数类型 (Integer)：  byte， short， int (默认) ，long　</li>
+<li>浮点类型 (Floating)：float，double (默认)</li>
+<li>字符类型 (Textual)： char　</li>
+<li>布尔类型 (Logical)： boolean</li>
 </ol>
 <ul>
-<li><strong>引用（复合）数据类型</strong><br><font color=green>interface  数组  class  Vector  Date  HashMap … …<br>String</font>           Unicode字符集16位   0~65535</li>
+<li><strong>引用（复合）数据类型</strong><br>interface  数组  class  Vector  Date  HashMap … …<br>String           Unicode字符集16位   0~65535</li>
 </ul>
 <h2 id="简单数据类型优先级和转换"><a href="#简单数据类型优先级和转换" class="headerlink" title="简单数据类型优先级和转换"></a>简单数据类型优先级和转换</h2><ul>
-<li><strong>简单类型数据的优先级</strong><br><font color=red>byte,short,char  &lt;  int   &lt;  long  &lt; float  &lt; double</font>   (由低到高）</li>
-</ul>
-<blockquote>
-<p>简单类型转换示意图<br>虚线表示有精度损失<br>实线表示无精度损失<img src="https://img-blog.csdnimg.cn/20200817112349285.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="简单数据类型转换示意图"></p>
-</blockquote>
-<ul>
-<li><strong>自动类型转换</strong><br>当两个简单数据类型的数据进行二元运算，要先将两个操作数转换成同一类型的数据，再进行运算。<br>自动类型转换规则：</li>
+<li><p><strong>简单类型数据的优先级</strong><br>byte,short,char  &lt;  int   &lt;  long  &lt; float  &lt; double   (由低到高）</p>
+</li>
+<li><p><strong>自动类型转换</strong><br>当两个简单数据类型的数据进行二元运算，要先将两个操作数转换成同一类型的数据，再进行运算。<br>自动类型转换规则：</p>
+</li>
 </ul>
 <table>
 <thead>
@@ -346,7 +353,7 @@
 </tr>
 </tbody></table>
 <ul>
-<li><strong>强制类型转换</strong><br>高优先级数据要转换成低优先级数据，需用强制类型转换。<br>强制类型转换一般存在数据精度损失。<br>强制类型转换格式：<br><font color=red>目标类型	目标变量名&#x3D;（目标类型）原变量名</font></li>
+<li><strong>强制类型转换</strong><br>高优先级数据要转换成低优先级数据，需用强制类型转换。<br>强制类型转换一般存在数据精度损失。<br>强制类型转换格式：<br>目标类型	目标变量名&#x3D;（目标类型）原变量名</li>
 </ul>
 <h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
 <li><strong>算术运算符</strong></li>
@@ -413,15 +420,16 @@
 <td align="center">&lt;&lt;</td>
 <td align="center">左移</td>
 </tr>
+<tr>
+<td align="center">&gt;&gt;</td>
+<td align="center">算术右移</td>
+</tr>
+<tr>
+<td align="center">&gt;&gt;&gt;</td>
+<td align="center">逻辑右移</td>
+</tr>
 </tbody></table>
-<blockquote>
-<blockquote>
-<p>|算术右移</p>
-<blockquote>
-<p>|逻辑右移<br><font color=red>注：对于&gt;&gt;,&lt;&lt;,&gt;&gt;&gt;详解请参见<a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/113813970">《彻底搞懂Java中的＞＞,＜＜,＞＞＞》</a></font></p>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>注：对于&gt;&gt;,&lt;&lt;,&gt;&gt;&gt;详解请参见<a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/113813970">《彻底搞懂Java中的＞＞,＜＜,＞＞＞》</a></p>
 <ul>
 <li><strong>赋值运算符</strong></li>
 </ul>
@@ -457,7 +465,7 @@
 <td align="center">取余（取模）赋值</td>
 </tr>
 </tbody></table>
-<p><font color=red>注：以+&#x3D;为例，a+&#x3D;1等价于a&#x3D;a+1</font>。</p>
+<p>注：以+&#x3D;为例，a+&#x3D;1等价于a&#x3D;a+1。</p>
 <ul>
 <li><strong>关系运算符</strong></li>
 </ul>
@@ -476,10 +484,23 @@
 <td align="center">&lt;&#x3D;</td>
 <td align="center">小于等于</td>
 </tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+</tr>
+<tr>
+<td align="center">&gt;&#x3D;</td>
+<td align="center">大于等于</td>
+</tr>
+<tr>
+<td align="center">&#x3D;&#x3D;</td>
+<td align="center">等于</td>
+</tr>
+<tr>
+<td align="center">!&#x3D;</td>
+<td align="center">不等于</td>
+</tr>
 </tbody></table>
-<blockquote>
-<p>|大于<br>&#x3D;|大于等于<br>&#x3D;&#x3D;|等于<br>!&#x3D;|不等于</p>
-</blockquote>
 <ul>
 <li><strong>逻辑运算符</strong></li>
 </ul>
@@ -504,10 +525,10 @@
 </tr>
 </tbody></table>
 <ul>
-<li><strong>条件运算符</strong><br><font color=green>? :</font> 运算符<br>格式：<font color=green>条件表达式 ？表达式1：表达式2</font><br>含义：<font color=green>如果&lt;条件表达式&gt;为真，则执行&lt;表达式1&gt;，否则，&lt;执行表达式2&gt;</font></li>
+<li><strong>条件运算符</strong><br>? : 运算符<br>格式：条件表达式 ？表达式1：表达式2<br>含义：如果&lt;条件表达式&gt;为真，则执行&lt;表达式1&gt;，否则，&lt;执行表达式2&gt;</li>
 </ul>
 <h2 id="input-x2F-output-statement"><a href="#input-x2F-output-statement" class="headerlink" title="input&#x2F;output statement"></a>input&#x2F;output statement</h2><ul>
-<li><strong>input statement</strong><br>标准的输入设备是键盘（KeyBoard）<br>库 <font color=green>java.util.Scanner</font> (after JDK1.5)</li>
+<li><strong>input statement</strong><br>标准的输入设备是键盘库 java.util.Scanner (after JDK1.5)</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//导入库</span><br><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-comment">//import java.util.Scanner也行</span><br><br><span class="hljs-comment">//创建对象</span><br>Scanner Input=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><br><span class="hljs-comment">//调用方法</span><br>Input.nextInt()      <span class="hljs-comment">//read int data</span><br>Input.nextByte()	 <span class="hljs-comment">//read byte data</span><br></code></pre></td></tr></table></figure>
 
@@ -534,18 +555,18 @@
 <li><strong>for</strong>语句</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span>(initialization; termination; iteration)&#123;　　　　<br>	<span class="hljs-comment">//body</span><br>&#125;<br></code></pre></td></tr></table></figure>
-<p>功能：首先对循环条件（通常为i）<font color=green>进行initialization（初始化），然后执行termination（判断是否终止循环）</font>，然后执行循环体里的语句，最后执行iteration（循环条件i改变）</p>
+<p>功能：首先对循环条件（通常为i）进行initialization（初始化），然后执行termination（判断是否终止循环），然后执行循环体里的语句，最后执行iteration（循环条件i改变）</p>
 <ol start="2">
 <li><strong>while</strong>语句</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">initialization<br><span class="hljs-title function_">while</span><span class="hljs-params">(termination)</span>&#123;　　　<br>	<span class="hljs-comment">//body;　      　</span><br>iteration;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>功能：首先对循环条件（通常为i）<font color=green>进行initialization（初始化），然后执行termination（判断是否终止循环）</font>，然后执行循环体里的语句，最后执行iteration（循环条件i改变）</p>
+<p>功能：首先对循环条件（通常为i）进行initialization（初始化），然后执行termination（判断是否终止循环），然后执行循环体里的语句，最后执行iteration（循环条件i改变）</p>
 <ol start="3">
 <li><strong>do while</strong>语句</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">initialization<br><span class="hljs-keyword">do</span>&#123;　　　<br>	<span class="hljs-comment">//body;　      　</span><br>iteration;<br>&#125;<span class="hljs-keyword">while</span>(termination);<br></code></pre></td></tr></table></figure>
-<p>功能：首先对循环条件（通常为i）进行initialization（初始化），<font color=red>然后执行循环体里的语句，然后执行termination（判断是否终止循环）</font>，最后执行iteration（循环条件i改变）</p>
-<p><font color=red>注：<strong>while</strong>和<strong>do while</strong>语句的区别在于执行循环体和执行termination的顺序。</font></p>
+<p>功能：首先对循环条件（通常为i）进行initialization（初始化），然后执行循环体里的语句，然后执行termination（判断是否终止循环），最后执行iteration（循环条件i改变）</p>
+<p>注：<strong>while</strong>和<strong>do while</strong>语句的区别在于执行循环体和执行termination的顺序。</p>
 <p>-<strong>跳转语句</strong></p>
 <ol>
 <li><p><strong>break</strong>语句<br>格式：break；<br>功能：终止当前循环体，转移到循环语句的下一条语句或标号处执行。</p>
@@ -564,8 +585,8 @@
 </li>
 </ol>
 <h3 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h3><ul>
-<li>是 <font color=green>java.util </font>包中的一个类，实现了类似动态数组的功能。</li>
-<li>向量与数组的重要区别之一就是<font color=green> 向量的容量是可变的</font></li>
+<li>是 java.util 包中的一个类，实现了类似动态数组的功能。</li>
+<li>向量与数组的重要区别之一就是 向量的容量是可变的</li>
 </ul>
 <ol>
 <li>向量的容量：向量的存储空间大小</li>
@@ -615,6 +636,27 @@ D --&gt; 增量大于0
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Summarize/" class="category-chain-item">Summarize</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
@@ -632,7 +674,7 @@ D --&gt; 增量大于0
   <div class="license-box my-3">
     <div class="license-title">
       <div>Java基础语法总结</div>
-      <div>http://example.com/2022/11/17/Java基础语法总结/</div>
+      <div>https://hwh-2019.github.io/2022/11/17/Java基础语法总结/</div>
     </div>
     <div class="license-meta">
       
