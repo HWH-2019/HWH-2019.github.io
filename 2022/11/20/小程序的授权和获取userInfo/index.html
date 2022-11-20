@@ -1,0 +1,728 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/site.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="HWH">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="写在前面 小程序官方在2021年4月28日后修改了wx.getUserInfo函数，所以导致目前网上大部分的文章已经不适用于解决目前小程序授权和获取userInfo的问题，此问题也是困扰了我一整天，算是初步解决，但解决方式比较粗糙，日后知识完善了会进一步修改。  新的函数 我的授权是采用wx.getUserProfile()函数，此函数只能在用户操作时调用(重点)，因此配合以按钮进行，下面是我采取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小程序的授权和获取userInfo">
+<meta property="og:url" content="https://hwh-2019.github.io/2022/11/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%88%E6%9D%83%E5%92%8C%E8%8E%B7%E5%8F%96userInfo/index.html">
+<meta property="og:site_name" content="HWH&#39;s Blogs">
+<meta property="og:description" content="写在前面 小程序官方在2021年4月28日后修改了wx.getUserInfo函数，所以导致目前网上大部分的文章已经不适用于解决目前小程序授权和获取userInfo的问题，此问题也是困扰了我一整天，算是初步解决，但解决方式比较粗糙，日后知识完善了会进一步修改。  新的函数 我的授权是采用wx.getUserProfile()函数，此函数只能在用户操作时调用(重点)，因此配合以按钮进行，下面是我采取">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-20T06:52:21.000Z">
+<meta property="article:modified_time" content="2022-11-20T07:16:23.490Z">
+<meta property="article:author" content="HWH">
+<meta property="article:tag" content="UserInfo">
+<meta property="article:tag" content="Applet">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>小程序的授权和获取userInfo - HWH&#39;s Blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hwh-2019.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HWH&#39;s Blogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="小程序的授权和获取userInfo"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-20 14:52" pubdate>
+          2022年11月20日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          33 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">小程序的授权和获取userInfo</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><ul>
+<li>小程序官方在2021年4月28日后修改了<code>wx.getUserInfo</code>函数，所以导致目前网上大部分的文章已经不适用于解决目前小程序授权和获取userInfo的问题，此问题也是困扰了我一整天，算是初步解决，但解决方式比较粗糙，日后知识完善了会进一步修改。</li>
+</ul>
+<h2 id="新的函数"><a href="#新的函数" class="headerlink" title="新的函数"></a>新的函数</h2><ul>
+<li>我的授权是采用<code>wx.getUserProfile()</code>函数，此函数只能在用户操作时调用(重点)，因此配合以按钮进行，下面是我采取的一种做法。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;isShow&#125;&#125;&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;!hasUserInfo&#125;&#125;&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;headView&#x27;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;headImageView&#x27;</span>&gt;</span><br>          <span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;headImage&#x27;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;cloud://cloud-hwh.636c-cloud-hwh-1302901969/头像.png&#x27;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">image</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;titleText&#x27;</span>&gt;</span>申请获取以下权限<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&#x27;contentText&#x27;</span>&gt;</span>获得你的公开信息(昵称,头像,手机等)<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;canIUseGetUserProfile&#125;&#125;&quot;</span> <span class="hljs-attr">bindtap</span>=<span class="hljs-string">&quot;getUserProfile&quot;</span>&gt;</span> 允许授权 <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>wxml和js设置的参数绑定(参数自行设置)，设置了一个按钮，并绑定了getUserProfile函数。</p>
+</li>
+<li><p>下面显示关于getUserProfile部分的js</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">getUserProfile</span>(<span class="hljs-params">e</span>) &#123;<br>    <span class="hljs-comment">// 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认</span><br>    <span class="hljs-comment">// 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗</span><br>    wx.<span class="hljs-title function_">getUserProfile</span>(&#123;<br>      <span class="hljs-attr">desc</span>: <span class="hljs-string">&#x27;完善个人资料&#x27;</span>, <span class="hljs-comment">// 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写</span><br>      <span class="hljs-attr">success</span>: <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">userInfo</span>)<br>        <span class="hljs-comment">//获取成功后将userInfo保存</span><br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setData</span>(&#123;<br>          <span class="hljs-attr">userInfo</span>: res.<span class="hljs-property">userInfo</span>,<br>          <span class="hljs-attr">hasUserInfo</span>: <span class="hljs-literal">true</span>,<br>          <span class="hljs-attr">isShow</span>: <span class="hljs-literal">false</span><br>        &#125;)<br>        <span class="hljs-comment">//将userInfo写入本地存储</span><br>        wx.<span class="hljs-title function_">setStorage</span>(&#123;<br>          <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;userInfo&quot;</span>,<br>          <span class="hljs-attr">data</span>: res.<span class="hljs-property">userInfo</span><br>        &#125;)<br>        <span class="hljs-comment">//调用获取本地存储的函数，将存储到本地的userInfo取出，存放到app.globalData.userInfo</span><br>        <span class="hljs-comment">//此处是为了将userInfo存到全局，以便其他页面使用</span><br>        app.<span class="hljs-title function_">getStorageUserInfo</span>().<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(app.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span>)<br>          <span class="hljs-keyword">if</span> (app.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span>) &#123;<br>            that.<span class="hljs-title function_">setData</span>(&#123;<br>              <span class="hljs-attr">userInfo</span>: app.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span>,<br>              <span class="hljs-attr">hasUserInfo</span>: <span class="hljs-literal">true</span><br>            &#125;)<br>          &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(wx.<span class="hljs-property">getUserProfile</span>)<br>            <span class="hljs-keyword">if</span> (wx.<span class="hljs-property">getUserProfile</span>) &#123;<br>              that.<span class="hljs-title function_">setData</span>(&#123;<br>                <span class="hljs-attr">isShow</span>: <span class="hljs-literal">true</span>,<br>                <span class="hljs-attr">canIUseGetUserProfile</span>: <span class="hljs-literal">true</span><br>              &#125;)<br>            &#125;<br>          &#125;<br>        &#125;)<br>      &#125;<br>    &#125;)<br>  &#125;,<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>上面的代码实现授权和获取数据</li>
+</ul>
+<h2 id="解决重复授权"><a href="#解决重复授权" class="headerlink" title="解决重复授权"></a>解决重复授权</h2><ul>
+<li>为了让已授权的用户在使用时无需重复授权，在app.js中使用</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">getStorageUserInfo</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> that = <span class="hljs-variable language_">this</span>;<br>    <span class="hljs-comment">//进入页面获取是否授权----------------------------</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) &#123;<br>      wx.<span class="hljs-title function_">getSetting</span>(&#123;<br>        <span class="hljs-title function_">success</span>(<span class="hljs-params">res</span>) &#123;<span class="hljs-comment">//authSetting用户授权结果</span><br>          <span class="hljs-comment">//scope.userInfo</span><br>          <span class="hljs-keyword">if</span> (res.<span class="hljs-property">authSetting</span>[<span class="hljs-string">&#x27;scope.userInfo&#x27;</span>]) &#123;<span class="hljs-comment">//授权过</span><br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;授权过信息&#x27;</span>);<br>            <span class="hljs-comment">//获取本地存储中的userInfo</span><br>            <span class="hljs-keyword">let</span> userInfo = wx.<span class="hljs-title function_">getStorageSync</span>(<span class="hljs-string">&#x27;userInfo&#x27;</span>);<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(userInfo)<br>            <span class="hljs-comment">//判断是否存在useInfo，如果存在则存储到globalData.userInfo中</span><br>            <span class="hljs-keyword">if</span> (userInfo != <span class="hljs-string">&quot;&quot;</span>) &#123;<br>              that.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span> = userInfo<br>            &#125;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(that.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span>)<br>          &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;没有授权&#x27;</span>)<br>          &#125;<br>          <span class="hljs-comment">//对执行成功的数据传送</span><br>          <span class="hljs-title function_">resolve</span>(<span class="hljs-string">&quot;调用成功&quot;</span>)<br>        &#125;<br>      &#125;)<br>    &#125;)<br><br>  &#125;,<br>  <span class="hljs-attr">globalData</span>: &#123;<br>    <span class="hljs-attr">userInfo</span>: <span class="hljs-literal">null</span><br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="无法使用wx-getUserInfo或者wx-getUserProfile获取userInfo"><a href="#无法使用wx-getUserInfo或者wx-getUserProfile获取userInfo" class="headerlink" title="无法使用wx.getUserInfo或者wx.getUserProfile获取userInfo"></a>无法使用<code>wx.getUserInfo</code>或者<code>wx.getUserProfile</code>获取userInfo</h3><ul>
+<li><p><code>wx.getUserInfo()</code>仅能获取到匿名数据，这是在官方修改函数后导致的。</p>
+</li>
+<li><p>我采用将userInfo数据存入本地，每个小程序允许有10M的本地存储，用来解决<code>wx.getUserProfile()</code>函数只能在用户操作下调用(前面有讲过)，在js中无法直接调用的问题。</p>
+</li>
+<li><p>小程序的本地数据存取可以参考下面的文章</p>
+</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pp8080/p/12019757.html">微信小程序中怎么存setStorage - 酷爱。 - 博客园</a></p>
+</blockquote>
+<h3 id="执行顺序问题"><a href="#执行顺序问题" class="headerlink" title="执行顺序问题"></a>执行顺序问题</h3><ul>
+<li><p>由于默认情况下主页面的onLoad函数要比app.js中的onLaunch函数先执行，所以在app.js中直接调用此函数无法实现判断用户是否需要授权，因此需要让onLoad函数中的操作在getStorageUserInfo函数之后执行(此函数在上面也有使用)</p>
+</li>
+<li><p>此处我采用Promise写法以解决这个问题(Promise写法可以参考下面的文章)</p>
+</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012693479/article/details/98214802">小程序 ES6 Promise用法讲解_u012693479的博客-CSDN博客_小程序promise详解</a></p>
+</blockquote>
+<ul>
+<li>下面看onLoad函数中的调用</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> that = <span class="hljs-variable language_">this</span>;<br>   <span class="hljs-comment">//在此处调用getStorageUserInfo,在执行后执行原本的操作</span><br>   app.<span class="hljs-title function_">getStorageUserInfo</span>().<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(app.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span>)<br>     <span class="hljs-comment">//判断globalData.userInfo是否为空</span><br>     <span class="hljs-comment">//注意如果直接在app.js中调用，每次进入小程序时globalData.userInfo将一直为空，因为此处先于app.js执行</span><br>     <span class="hljs-keyword">if</span> (app.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span>) &#123;<br>       that.<span class="hljs-title function_">setData</span>(&#123;<br>         <span class="hljs-attr">userInfo</span>: app.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span>,<br>         <span class="hljs-attr">hasUserInfo</span>: <span class="hljs-literal">true</span><br>       &#125;)<br>     &#125; <span class="hljs-keyword">else</span> &#123;<br>       <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(wx.<span class="hljs-property">getUserProfile</span>)<br>       <span class="hljs-comment">//获取授权和userInfo</span><br>       <span class="hljs-keyword">if</span> (wx.<span class="hljs-property">getUserProfile</span>) &#123;<br>         that.<span class="hljs-title function_">setData</span>(&#123;<br>           <span class="hljs-attr">isShow</span>: <span class="hljs-literal">true</span>,<br>           <span class="hljs-attr">canIUseGetUserProfile</span>: <span class="hljs-literal">true</span><br>         &#125;)<br>       &#125;<br>     &#125;<br>   &#125;)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>app</code>是在全局添加<code>var app = getApp()</code>而来的，这样使得在其他界面可以使用app.js中的全局变量和函数，即<code>globalData</code>和<code>getStorageUserInfo()</code>，使用方法可以参考这篇文章</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiangtengteng/p/10531297.html">微信小程序 如何使用globalData - 姜腾腾 - 博客园</a></p>
+</blockquote>
+<ul>
+<li>对于上面的问题还有两种办法可以解决，可以参考下面的文章</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shipskunkun/p/11802379.html">小程序Page里的函数比app.js先执行的解决办法 - shipskunkun - 博客园</a></p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Tutorial/" class="category-chain-item">Tutorial</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Solutions/" class="category-chain-item">Solutions</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/UserInfo/">#UserInfo</a>
+      
+        <a href="/tags/Applet/">#Applet</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>小程序的授权和获取userInfo</div>
+      <div>https://hwh-2019.github.io/2022/11/20/小程序的授权和获取userInfo/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>HWH</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月20日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/20/Electron-vue%E5%87%BA%E7%8E%B0ERR-ABORTED%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="Electron-vue出现GET http://localhost:9080/__webpack_hmr net::ERR_ABORTED解决方案">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Electron-vue出现GET http://localhost:9080/__webpack_hmr net::ERR_ABORTED解决方案</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/20/create-electron-app%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="create-electron-app安装配置">
+                        <span class="hidden-mobile">create-electron-app安装配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

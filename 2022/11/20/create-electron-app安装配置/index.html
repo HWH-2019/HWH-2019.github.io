@@ -16,24 +16,22 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="写在前面 梳理了如何制作安装教程的流程。 在以下测试环境中通过 VS2019 Qt 5.14.2 Windows 10   总结了网上主流教程没有的解决问题方法 Qt项目拉取依赖 Application Folder下创建的文件夹，将不会自动创建 生成项目时报有警告   文章没有图片，但十分详细如果环境相似请耐心阅读。  首先下载Microsoft Visual Studio Installer">
+    <meta name="description" content="写在前面 本文章分为三个部分 Node.js安装配置 Git安装配置 安装create-electron-app   如果已安装过Node.js和Git可适当跳过 Node.js的配置较为重要，确保按教程修改 遇到一切问题请仔细分析报错 确保修改环境变量时所填路径无误  Node.js安装配置下载 官网下载node.js不建议使用最新版本  需要安装其他版本的可以访问，node.js其他版本  根">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vs2019下创建的Qt项目发布并制作安装程序流程">
-<meta property="og:url" content="https://hwh-2019.github.io/2022/11/18/vs2019%E4%B8%8B%E5%88%9B%E5%BB%BA%E7%9A%84Qt%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83%E5%B9%B6%E5%88%B6%E4%BD%9C%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:title" content="create-electron-app安装配置">
+<meta property="og:url" content="https://hwh-2019.github.io/2022/11/20/create-electron-app%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="写在前面 梳理了如何制作安装教程的流程。 在以下测试环境中通过 VS2019 Qt 5.14.2 Windows 10   总结了网上主流教程没有的解决问题方法 Qt项目拉取依赖 Application Folder下创建的文件夹，将不会自动创建 生成项目时报有警告   文章没有图片，但十分详细如果环境相似请耐心阅读。  首先下载Microsoft Visual Studio Installer">
+<meta property="og:description" content="写在前面 本文章分为三个部分 Node.js安装配置 Git安装配置 安装create-electron-app   如果已安装过Node.js和Git可适当跳过 Node.js的配置较为重要，确保按教程修改 遇到一切问题请仔细分析报错 确保修改环境变量时所填路径无误  Node.js安装配置下载 官网下载node.js不建议使用最新版本  需要安装其他版本的可以访问，node.js其他版本  根">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-18T12:34:25.000Z">
-<meta property="article:modified_time" content="2022-11-18T12:38:17.116Z">
+<meta property="article:published_time" content="2022-11-20T06:39:01.000Z">
+<meta property="article:modified_time" content="2022-11-20T06:51:21.132Z">
 <meta property="article:author" content="HWH">
-<meta property="article:tag" content="Qt">
-<meta property="article:tag" content="Installer">
-<meta property="article:tag" content="vs2019">
+<meta property="article:tag" content="Electron">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>vs2019下创建的Qt项目发布并制作安装程序流程 - HWH&#39;s Blogs</title>
+  <title>create-electron-app安装配置 - HWH&#39;s Blogs</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +208,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vs2019下创建的Qt项目发布并制作安装程序流程"></span>
+            <span id="subtitle" data-typed-text="create-electron-app安装配置"></span>
           
         </div>
 
@@ -221,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-18 20:34" pubdate>
-          2022年11月18日 晚上
+        <time datetime="2022-11-20 14:39" pubdate>
+          2022年11月20日 下午
         </time>
       </span>
     
@@ -233,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          1.5k 字
         
       </span>
     
@@ -244,7 +242,7 @@
         
         
         
-          20 分钟
+          13 分钟
         
       </span>
     
@@ -282,84 +280,120 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vs2019下创建的Qt项目发布并制作安装程序流程</h1>
+            <h1 style="display: none">create-electron-app安装配置</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><ul>
-<li>梳理了如何制作安装教程的流程。</li>
-<li>在以下测试环境中通过<ul>
-<li>VS2019</li>
-<li>Qt 5.14.2</li>
-<li>Windows 10</li>
+<li>本文章分为三个部分<ul>
+<li>Node.js安装配置</li>
+<li>Git安装配置</li>
+<li>安装create-electron-app</li>
 </ul>
 </li>
-<li>总结了网上主流教程没有的解决问题方法<ul>
-<li><a href="#jump1">Qt项目拉取依赖</a></li>
-<li><a href="#jump2"><code>Application Folder</code>下创建的文件夹，将不会自动创建</a></li>
-<li><a href="#jump3">生成项目时报有警告</a></li>
+<li>如果已安装过Node.js和Git可适当跳过</li>
+<li>Node.js的配置较为重要，确保按教程修改</li>
+<li>遇到一切问题请仔细分析报错</li>
+<li>确保修改环境变量时所填路径无误</li>
 </ul>
+<h2 id="Node-js安装配置"><a href="#Node-js安装配置" class="headerlink" title="Node.js安装配置"></a>Node.js安装配置</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://nodejs.org/en/">官网</a>下载node.js不建议使用最新版本</p>
 </li>
-<li>文章没有图片，但十分详细如果环境相似请耐心阅读。</li>
-</ul>
-<h2 id="首先下载Microsoft-Visual-Studio-Installer-Projects插件"><a href="#首先下载Microsoft-Visual-Studio-Installer-Projects插件" class="headerlink" title="首先下载Microsoft Visual Studio Installer Projects插件"></a>首先下载Microsoft Visual Studio Installer Projects插件</h2><ul>
-<li>项目下点击: 扩展-&gt;管理扩展-&gt;选择联机-&gt;搜索框输入<code>installer</code>搜索-&gt;安装插件-&gt;关闭所有vs界面后自动安装。</li>
-</ul>
-<h2 id="新建Setup项目"><a href="#新建Setup项目" class="headerlink" title="新建Setup项目"></a>新建Setup项目</h2><ul>
-<li>项目下点击: 右键解决方案-&gt;添加-&gt;新建项目…-&gt;搜索<code>Setup</code>-&gt;选择<code>Setup Project</code>-&gt; 下一步直到创建好Setup项目</li>
-</ul>
-<h2 id="了解Setup项目"><a href="#了解Setup项目" class="headerlink" title="了解Setup项目"></a>了解Setup项目</h2><ul>
-<li>vs在创建好Setup项目后会默认打开项目的文件系统，如果不慎关闭或者未打开可以依次点击: 右键Setup项目-&gt;view-&gt;文件系统(File System)</li>
-<li>文件系统(File System)中主要分为三个文件夹<code>Application Folder</code>, <code>User&#39;s Desktop</code> ,<code>User&#39;sPrograms Menu</code><ul>
-<li><code>Application Folder</code> 存放主程序入口(主输出)、依赖(.dll)、图标(.ico)、卸载程序</li>
-<li><code>User&#39;s Desktop</code> 存放桌面快捷方式</li>
-<li><code>User&#39;s Programs Menu</code>	存放开始菜单的快捷方式<br><span id="jump1"></span></li>
-</ul>
+<li><p>需要安装其他版本的可以访问，<a target="_blank" rel="noopener" href="https://nodejs.org/download/release/">node.js其他版本</a></p>
+</li>
+<li><p>根据自己的系统选择对应的版本，此处以<code>v14.17.0</code>为例</p>
+</li>
+<li><p>下载<a target="_blank" rel="noopener" href="https://nodejs.org/download/release/v14.17.0/node-v14.17.0-x64.msi">node-v14.17.0-x64.msi</a></p>
 </li>
 </ul>
-<h2 id="Qt项目制作安装程序前准备"><a href="#Qt项目制作安装程序前准备" class="headerlink" title="Qt项目制作安装程序前准备"></a>Qt项目制作安装程序前准备</h2><ul>
-<li>vs生成Release版本的.exe: 点击调试-&gt;项目属性-&gt;点击配置管理器-&gt;检查是否为Release-&gt;点击生成-&gt;生成项目。</li>
-<li>从Qt自带的控制台进入-&gt;将路径切换到生成的Release版本的.exe路径下-&gt;执行<code>windeployqt xxx.exe</code></li>
-<li><code>xxx.exe</code>为你Qt项目的名称。</li>
-<li>等待执行完毕则成功将Qt项目所需的依赖(.dll)，拉取到你的.exe文件目录下，此时双击.exe文件则可直接执行。</li>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><p>运行<code>.msi</code>文件，除了修改安装路径，均点击下一步</p>
+</li>
+<li><p>安装完成后打开<code>cmd</code></p>
+</li>
+<li><p>执行<code>node -v</code>，如果正确显示版本则安装成功</p>
+</li>
+<li><p>执行<code>npm -v</code> ，如果正确显示版本则安装成功</p>
+</li>
+<li><p>如果安装路径为C盘，注意<code>cmd</code>用管理员身份打开</p>
+</li>
+<li><p>如果执行上面命令出错，检查环境变量是否正确。</p>
+</li>
 </ul>
-<h2 id="编辑Setup项目"><a href="#编辑Setup项目" class="headerlink" title="编辑Setup项目"></a>编辑Setup项目</h2><h3 id="首先添加主输出"><a href="#首先添加主输出" class="headerlink" title="首先添加主输出"></a>首先添加主输出</h3><ul>
-<li>右键<code>Application Folder</code>-&gt;Add-&gt;项目输出-&gt;主输出</li>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="配置npm安装全局模块和缓存路径"><a href="#配置npm安装全局模块和缓存路径" class="headerlink" title="配置npm安装全局模块和缓存路径"></a>配置npm安装全局模块和缓存路径</h4><ul>
+<li><p>在node.js的安装目录下新建两个文件夹 node_global和node_cache</p>
+</li>
+<li><p><code>cmd</code>执行<code>npm config set prefix &quot;D:\nodejs\node_global&quot;</code></p>
+</li>
+<li><p><code>cmd</code>执行<code>npm config set cache &quot;D:\nodejs\node_cache&quot;</code></p>
+</li>
+<li><p>执行成功后配置环境变量</p>
+</li>
+<li><p><strong>系统变量</strong>：新建系统变量，变量名<code>NODE_PATH</code>，变量值<code>D:\nodejs\node_modules</code></p>
+</li>
+<li><p><strong>用户变量</strong>：在Path中修改node的默认路径<code>C:\Users\users\AppData\Roaming\npm</code> 为<code>D:\nodejs\node_global</code></p>
+</li>
+<li><p><code>cmd</code>执行<code>npm install vue -g</code>，安装完成后查看<code>D:\nodejs\node_global\node_modules</code>路径下是否出现vue文件夹，出现则修改成功。</p>
+</li>
+<li><p>注意：上述要修改成的路径以自己的实际路径为准，关注<code>node_global</code>和<code>node_cache</code>即可。</p>
+</li>
 </ul>
-<h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><ul>
-<li>右键<code>Application Folder</code>-&gt;Add-&gt;文件，选择需要的文件(.dll)</li>
+<h4 id="修改npm镜像"><a href="#修改npm镜像" class="headerlink" title="修改npm镜像"></a>修改npm镜像</h4><ul>
+<li><p><code>cmd</code>执行如下命令</p>
+</li>
+<li><p><code>npm config set ELECTRON_MIRROR http://npm.taobao.org/mirrors/electron/</code></p>
+</li>
+<li><p>修改环境变量，新建用户变量</p>
+</li>
+<li><p>变量名<code>ELECTRON_MIRROR</code>，变量值<code>http://npm.taobao.org/mirrors/electron/</code></p>
+</li>
+<li><p>重启<code>cmd</code></p>
+</li>
 </ul>
-<h3 id="添加具有文件夹的依赖"><a href="#添加具有文件夹的依赖" class="headerlink" title="添加具有文件夹的依赖"></a>添加具有文件夹的依赖</h3><ul>
-<li>例如Qt项目所需的依赖一部分与.exe同级另一部分则在与.exe同级的文件夹下</li>
-<li>右键<code>Application Folder</code>-&gt;Add-&gt;文件夹(Folder)-&gt;修改文件夹名称为依赖所需的文件夹名-&gt;单击打开文件夹-&gt;右侧右击-&gt;Add-&gt;文件，选择需要的文件(.dll)<br><span id="jump2"></span></li>
+<hr>
+<h2 id="Git安装配置"><a href="#Git安装配置" class="headerlink" title="Git安装配置"></a>Git安装配置</h2><h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://npm.taobao.org/mirrors/git-for-windows/">国内镜像</a>下载</p>
+</li>
+<li><p>此处以<code>v2.30.0</code>为例</p>
+</li>
+<li><p>下载<a target="_blank" rel="noopener" href="https://npm.taobao.org/mirrors/git-for-windows/v2.30.0.windows.1/Git-2.30.0-64-bit.exe">Git-2.30.0-64-bit.exe</a></p>
+</li>
 </ul>
-<h3 id="使文件夹在安装的时候创建"><a href="#使文件夹在安装的时候创建" class="headerlink" title="使文件夹在安装的时候创建"></a>使文件夹在安装的时候创建</h3><ul>
-<li>如果不做修改，在生成好<code>Setup.exe</code>和<code>Setup.msi</code>文件后，安装到电脑时，对于自己在<code>Application Folder</code>下创建的文件夹，将不会自动创建，因此会破坏目录结构，安装好的文件将因为无法找到依赖而无法运行。</li>
-<li>解决方法: 右键自己创建的文件夹-&gt;单击属性窗口(F4)-&gt;修改属性窗口中的<code>AlwaysCreate</code>和<code>transitive</code>为<code>True</code></li>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><p>运行<code>.exe</code>文件，除了修改安装路径，均点击下一步</p>
+</li>
+<li><p>安装完成后打开<code>cmd</code>执行<code>git --version</code></p>
+</li>
+<li><p>若未出现版本号，则检查系统环境变量</p>
+</li>
 </ul>
-<h3 id="添加快捷方式"><a href="#添加快捷方式" class="headerlink" title="添加快捷方式"></a>添加快捷方式</h3><ul>
-<li>桌面快捷方式(Shortcut): 打开<code>User&#39;s Desktop</code>-&gt;右侧右击-&gt;创建新的快捷方式(C)-&gt;选择<code>Application Folder</code>(默认)-&gt;点击Ok或者双击<code>Application Folder</code>-&gt;选择主输出-&gt;创建后修改快捷方式的名字(此名字为桌面自动生成的快捷方式的名字)</li>
-<li>开始菜单的快捷方式: 打开<code>User&#39;s Programs Menu</code>-&gt;后续步骤与创建桌面快捷方式无异。</li>
-<li>如有多个文件需要连接到开始菜单，可以在开始菜单创建文件夹来存放: 右键<code>User&#39;s Programs Menu</code>-&gt;Add-&gt;文件夹(Floder)-&gt;修改文件夹为想要的名字-&gt;打开文件夹-&gt;后续步骤与创建桌面快捷方式无异。</li>
-<li>开始菜单的文件夹会自动创建。</li>
+<hr>
+<h2 id="安装create-electron-app"><a href="#安装create-electron-app" class="headerlink" title="安装create-electron-app"></a>安装create-electron-app</h2><h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><p>安装yarn，<code>cmd</code>执行<code>npm install yarn -g</code></p>
+</li>
+<li><p>安装create-electron-app，<code>cmd</code>执行<code>yarn global add create-electron-app</code></p>
+</li>
+<li><p>如果出现yarn不是可执行的命令，请检查环境变量的配置</p>
+</li>
 </ul>
-<h3 id="添加图标"><a href="#添加图标" class="headerlink" title="添加图标"></a>添加图标</h3><ul>
-<li>右键<code>Application Folder</code>-&gt;Add-&gt;文件，选择需要的图标文件(.ico)</li>
-<li>给快捷方式添加图标: 单击创建好的快捷方式(Shortcut)-&gt;属性窗口中找到<code>Icon</code>-&gt;下拉框找到并单击<code>Browse</code>-&gt;再次点击弹出窗口的<code>Browse</code>-&gt;在<code>Application Folder</code>下找到需要的图标文件(.ico)-&gt;点击Ok添加完成。</li>
-<li>所有快捷方式或者.exe只要属性窗口有<code>Icon</code>都可以参照上述步骤修改图标。<br><span id="jump3"></span></li>
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><ul>
+<li><p>create-electron-app将安装到<code>D:\nodejs\node_global\bin</code>目录下</p>
+</li>
+<li><p>用户变量的Path添加create-electron-app的安装目录，即添加<code>D:\nodejs\node_global\bin</code></p>
+</li>
 </ul>
-<h2 id="修改Setup项目属性"><a href="#修改Setup项目属性" class="headerlink" title="修改Setup项目属性"></a>修改Setup项目属性</h2><ul>
-<li>点击<code>Setup</code>项目，查看属性窗口</li>
-<li>注意<code>Author</code>, <code>Manufacturer</code>,<code>ProductCode</code>,<code>TargetPlatform</code>,<code>Title</code></li>
-<li>尤其注意<code>TargetPlatform</code>,默认为<code>x86</code>,如果项目生成的是<code>x64</code>版本的需要修改，否则会报警告。</li>
-<li>还有一项属性为了更好的兼容,可以修改也可以不修改。</li>
-<li>步骤: 右键<code>Setup</code>项目-&gt;点击属性-&gt;点击<code>Prerequisites</code>-&gt;勾选<code>Microsoft .NET Framework 4.6.1 (x86和x64)</code>-&gt;点击确定</li>
-</ul>
-<h2 id="生成Setup项目"><a href="#生成Setup项目" class="headerlink" title="生成Setup项目"></a>生成Setup项目</h2><ul>
-<li>右键项目名生成</li>
-<li>会生成<code>Setup.exe</code>和<code>Setup.msi</code>文件</li>
-<li><code>Setup.exe</code>相当于<code>Setup.msi</code>的一个连接,使用<code>Setup.exe</code>安装时需要确保两个文件在同一目录下。</li>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
+<li><p>到希望安装的目录下打开<code>cmd</code></p>
+</li>
+<li><p>执行<code>create-electron-app test</code>，即创建名为test的项目</p>
+</li>
+<li><p>如果报有关node install.js的错误</p>
+</li>
+<li><p>进入项目的<code>node_modules\electron\</code>下，<code>cmd</code>执行<code>node install.js</code></p>
+</li>
+<li><p>上述执行完成无报错后，可在<code>test\</code>下执行<code>npm start</code>，启动项目</p>
+</li>
 </ul>
 
                 
@@ -386,6 +420,16 @@
       </span>
     
   
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Tools/" class="category-chain-item">Tools</a>
+  
+  
+
+      </span>
+    
+  
 </span>
 
     </div>
@@ -394,11 +438,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Qt/">#Qt</a>
-      
-        <a href="/tags/Installer/">#Installer</a>
-      
-        <a href="/tags/vs2019/">#vs2019</a>
+        <a href="/tags/Electron/">#Electron</a>
       
     </div>
   
@@ -410,8 +450,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>vs2019下创建的Qt项目发布并制作安装程序流程</div>
-      <div>https://hwh-2019.github.io/2022/11/18/vs2019下创建的Qt项目发布并制作安装程序流程/</div>
+      <div>create-electron-app安装配置</div>
+      <div>https://hwh-2019.github.io/2022/11/20/create-electron-app安装配置/</div>
     </div>
     <div class="license-meta">
       
@@ -423,7 +463,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月18日</div>
+          <div>2022年11月20日</div>
         </div>
       
       
@@ -455,9 +495,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/20/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Vue-devtools/" title="编译安装Vue-devtools">
+                      <a href="/2022/11/20/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%8E%88%E6%9D%83%E5%92%8C%E8%8E%B7%E5%8F%96userInfo/" title="小程序的授权和获取userInfo">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">编译安装Vue-devtools</span>
+                        <span class="hidden-mobile">小程序的授权和获取userInfo</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -465,8 +505,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/18/Intellij-IDEA-2020-2-3-%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8-Tomcat-Servlet/" title="Intellij IDEA 2020.2.3 配置使用 Tomcat+Servlet">
-                        <span class="hidden-mobile">Intellij IDEA 2020.2.3 配置使用 Tomcat+Servlet</span>
+                      <a href="/2022/11/20/Java%E5%BF%85%E8%80%83%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" title="Java必考知识点整理">
+                        <span class="hidden-mobile">Java必考知识点整理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
