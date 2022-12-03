@@ -16,12 +16,12 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基本概念和数据类型基本概念  标识符（identifier）  用来表示的有效字符序列：类、变量、方法、数组、文件 命名规则： 以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。 不能使用其他特殊符号，如: +、@、&amp;、空格等。 不能与Java关键字同名 英文字母大小写敏感 长度无最大长度的限制  （建议 小于255个字">
+    <meta name="description" content="基本概念和数据类型 基本概念 标识符（identifier） 1. 用来表示的有效字符序列：类、变量、方法、数组、文件 2. 命名规则： 1. 以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。 2. 不能使用其他特殊符号，如: +、@、&amp;、空格等。 3. 不能与Java关键字同名 4. 英文字母大小写敏感 5. 长">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础语法总结">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/11/17/Java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="基本概念和数据类型基本概念  标识符（identifier）  用来表示的有效字符序列：类、变量、方法、数组、文件 命名规则： 以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。 不能使用其他特殊符号，如: +、@、&amp;、空格等。 不能与Java关键字同名 英文字母大小写敏感 长度无最大长度的限制  （建议 小于255个字">
+<meta property="og:description" content="基本概念和数据类型 基本概念 标识符（identifier） 1. 用来表示的有效字符序列：类、变量、方法、数组、文件 2. 命名规则： 1. 以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。 2. 不能使用其他特殊符号，如: +、@、&amp;、空格等。 3. 不能与Java关键字同名 4. 英文字母大小写敏感 5. 长">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-17T14:47:46.000Z">
 <meta property="article:modified_time" content="2022-11-18T02:14:29.211Z">
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.8k 字
+          6.7k 字
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          57 分钟
+          56 分钟
         
       </span>
     
@@ -285,310 +285,287 @@
             
               <div class="markdown-body">
                 
-                <h2 id="基本概念和数据类型"><a href="#基本概念和数据类型" class="headerlink" title="基本概念和数据类型"></a>基本概念和数据类型</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>  <strong>标识符（identifier）</strong></p>
-<ol>
-<li>用来表示的有效字符序列：类、变量、方法、数组、文件</li>
-<li>命名规则：<ol>
-<li>以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。</li>
-<li>不能使用其他特殊符号，如: +、@、&amp;、空格等。</li>
-<li>不能与Java关键字同名</li>
-<li>英文字母大小写敏感</li>
-<li>长度无最大长度的限制  （建议 小于255个字符）</li>
-</ol>
-</li>
-</ol>
+                <h2 id="基本概念和数据类型">基本概念和数据类型</h2>
+<h3 id="基本概念">基本概念</h3>
+<p><strong>标识符（identifier）</strong> 1. 用来表示的有效字符序列：类、变量、方法、数组、文件 2. 命名规则： 1. 以字母、下划线或货币符号开始,后跟上述三种符号和数字(0-9)，字母不限于英文字母，货币符号除$,也可以是其他符号如￥。 2. 不能使用其他特殊符号，如: +、@、&amp;、空格等。 3. 不能与Java关键字同名 4. 英文字母大小写敏感 5. 长度无最大长度的限制 （建议 小于255个字符） - <strong>关键字</strong> 1. Java语言本身必须使用的标识符 2. 保留字是Java语言保留起来不允许用户使用的标识符 3. 关键字（保留字）均用小写字母表示 ### 数据类型 - <strong>简单数据类型</strong> 1. 整数类型 (Integer)： byte， short， int (默认) ，long　 2. 浮点类型 (Floating)：float，double (默认) 3. 字符类型 (Textual)： char　 4. 布尔类型 (Logical)： boolean - <strong>引用（复合）数据类型</strong> interface 数组 class Vector Date HashMap … … String Unicode字符集16位 0~65535</p>
+<h2 id="简单数据类型优先级和转换">简单数据类型优先级和转换</h2>
 <ul>
-<li><strong>关键字</strong></li>
-</ul>
-<ol>
-<li>Java语言本身必须使用的标识符</li>
-<li>保留字是Java语言保留起来不允许用户使用的标识符</li>
-<li>关键字（保留字）均用小写字母表示</li>
-</ol>
-<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ul>
-<li><strong>简单数据类型</strong></li>
-</ul>
-<ol>
-<li>整数类型 (Integer)：  byte， short， int (默认) ，long　</li>
-<li>浮点类型 (Floating)：float，double (默认)</li>
-<li>字符类型 (Textual)： char　</li>
-<li>布尔类型 (Logical)： boolean</li>
-</ol>
-<ul>
-<li><strong>引用（复合）数据类型</strong><br>interface  数组  class  Vector  Date  HashMap … …<br>String           Unicode字符集16位   0~65535</li>
-</ul>
-<h2 id="简单数据类型优先级和转换"><a href="#简单数据类型优先级和转换" class="headerlink" title="简单数据类型优先级和转换"></a>简单数据类型优先级和转换</h2><ul>
-<li><p><strong>简单类型数据的优先级</strong><br>byte,short,char  &lt;  int   &lt;  long  &lt; float  &lt; double   (由低到高）</p>
-</li>
-<li><p><strong>自动类型转换</strong><br>当两个简单数据类型的数据进行二元运算，要先将两个操作数转换成同一类型的数据，再进行运算。<br>自动类型转换规则：</p>
-</li>
+<li><p><strong>简单类型数据的优先级</strong> byte,short,char &lt; int &lt; long &lt; float &lt; double (由低到高）</p></li>
+<li><p><strong>自动类型转换</strong> 当两个简单数据类型的数据进行二元运算，要先将两个操作数转换成同一类型的数据，再进行运算。 自动类型转换规则：</p></li>
 </ul>
 <table>
 <thead>
-<tr>
-<th align="center">操作数1类型</th>
-<th align="center">操作数2类型</th>
-<th align="center">类型转换</th>
+<tr class="header">
+<th style="text-align: center;">操作数1类型</th>
+<th style="text-align: center;">操作数2类型</th>
+<th style="text-align: center;">类型转换</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">byte、short、char</td>
-<td align="center">int</td>
-<td align="center">int</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">byte、short、char</td>
+<td style="text-align: center;">int　</td>
+<td style="text-align: center;">int</td>
 </tr>
-<tr>
-<td align="center">byte、short、char、int</td>
-<td align="center">long</td>
-<td align="center">long</td>
+<tr class="even">
+<td style="text-align: center;">byte、short、char、int</td>
+<td style="text-align: center;">long</td>
+<td style="text-align: center;">　long</td>
 </tr>
-<tr>
-<td align="center">byte、short、char、int、long</td>
-<td align="center">float</td>
-<td align="center">float</td>
+<tr class="odd">
+<td style="text-align: center;">byte、short、char、int、long</td>
+<td style="text-align: center;">　float</td>
+<td style="text-align: center;">float</td>
 </tr>
-<tr>
-<td align="center">byte、short、char、int、long、float</td>
-<td align="center">double</td>
-<td align="center">double</td>
+<tr class="even">
+<td style="text-align: center;">byte、short、char、int、long、float</td>
+<td style="text-align: center;">double</td>
+<td style="text-align: center;">double</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
-<li><strong>强制类型转换</strong><br>高优先级数据要转换成低优先级数据，需用强制类型转换。<br>强制类型转换一般存在数据精度损失。<br>强制类型转换格式：<br>目标类型	目标变量名&#x3D;（目标类型）原变量名</li>
+<li><strong>强制类型转换</strong> 高优先级数据要转换成低优先级数据，需用强制类型转换。 强制类型转换一般存在数据精度损失。 强制类型转换格式： 目标类型 目标变量名=（目标类型）原变量名</li>
 </ul>
-<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
+<h2 id="运算符">运算符</h2>
+<ul>
 <li><strong>算术运算符</strong></li>
 </ul>
 <table>
 <thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">含义</th>
+<tr class="header">
+<th style="text-align: center;">运算符</th>
+<th style="text-align: center;">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">+</td>
-<td align="center">加</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">加</td>
 </tr>
-<tr>
-<td align="center">-</td>
-<td align="center">减</td>
+<tr class="even">
+<td style="text-align: center;">-</td>
+<td style="text-align: center;">减</td>
 </tr>
-<tr>
-<td align="center">*</td>
-<td align="center">乘</td>
+<tr class="odd">
+<td style="text-align: center;">*</td>
+<td style="text-align: center;">乘</td>
 </tr>
-<tr>
-<td align="center">&#x2F;</td>
-<td align="center">除</td>
+<tr class="even">
+<td style="text-align: center;">/</td>
+<td style="text-align: center;">除</td>
 </tr>
-<tr>
-<td align="center">%</td>
-<td align="center">取余（取模）</td>
+<tr class="odd">
+<td style="text-align: center;">%</td>
+<td style="text-align: center;">取余（取模）</td>
 </tr>
-<tr>
-<td align="center">++</td>
-<td align="center">自增</td>
+<tr class="even">
+<td style="text-align: center;">++</td>
+<td style="text-align: center;">自增</td>
 </tr>
-<tr>
-<td align="center">–</td>
-<td align="center">自减</td>
+<tr class="odd">
+<td style="text-align: center;">--</td>
+<td style="text-align: center;">自减</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li><strong>位运算符</strong></li>
 </ul>
 <table>
 <thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">含义</th>
+<tr class="header">
+<th style="text-align: center;">运算符</th>
+<th style="text-align: center;">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">&amp;</td>
-<td align="center">与</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">&amp;</td>
+<td style="text-align: center;">与</td>
 </tr>
-<tr>
-<td align="center">&#96;</td>
-<td align="center">&#96;</td>
+<tr class="even">
+<td style="text-align: center;"><code>|</code></td>
+<td style="text-align: center;">或</td>
 </tr>
-<tr>
-<td align="center">^</td>
-<td align="center">异或</td>
+<tr class="odd">
+<td style="text-align: center;">^</td>
+<td style="text-align: center;">异或</td>
 </tr>
-<tr>
-<td align="center">&lt;&lt;</td>
-<td align="center">左移</td>
+<tr class="even">
+<td style="text-align: center;">&lt;&lt;</td>
+<td style="text-align: center;">左移</td>
 </tr>
-<tr>
-<td align="center">&gt;&gt;</td>
-<td align="center">算术右移</td>
+<tr class="odd">
+<td style="text-align: center;">&gt;&gt;</td>
+<td style="text-align: center;">算术右移</td>
 </tr>
-<tr>
-<td align="center">&gt;&gt;&gt;</td>
-<td align="center">逻辑右移</td>
+<tr class="even">
+<td style="text-align: center;">&gt;&gt;&gt;</td>
+<td style="text-align: center;">逻辑右移</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>注：对于&gt;&gt;,&lt;&lt;,&gt;&gt;&gt;详解请参见<a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/113813970">《彻底搞懂Java中的＞＞,＜＜,＞＞＞》</a></p>
 <ul>
 <li><strong>赋值运算符</strong></li>
 </ul>
 <table>
 <thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">含义</th>
+<tr class="header">
+<th style="text-align: center;">运算符</th>
+<th style="text-align: center;">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">&#x3D;</td>
-<td align="center">赋值</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">=</td>
+<td style="text-align: center;">赋值</td>
 </tr>
-<tr>
-<td align="center">+&#x3D;</td>
-<td align="center">加赋值</td>
+<tr class="even">
+<td style="text-align: center;">+=</td>
+<td style="text-align: center;">加赋值</td>
 </tr>
-<tr>
-<td align="center">-&#x3D;</td>
-<td align="center">减赋值</td>
+<tr class="odd">
+<td style="text-align: center;">-=</td>
+<td style="text-align: center;">减赋值</td>
 </tr>
-<tr>
-<td align="center">*&#x3D;</td>
-<td align="center">乘赋值</td>
+<tr class="even">
+<td style="text-align: center;">*=</td>
+<td style="text-align: center;">乘赋值</td>
 </tr>
-<tr>
-<td align="center">&#x2F;&#x3D;</td>
-<td align="center">除赋值</td>
+<tr class="odd">
+<td style="text-align: center;">/=</td>
+<td style="text-align: center;">除赋值</td>
 </tr>
-<tr>
-<td align="center">%&#x3D;</td>
-<td align="center">取余（取模）赋值</td>
+<tr class="even">
+<td style="text-align: center;">%=</td>
+<td style="text-align: center;">取余（取模）赋值</td>
 </tr>
-</tbody></table>
-<p>注：以+&#x3D;为例，a+&#x3D;1等价于a&#x3D;a+1。</p>
+</tbody>
+</table>
+<p>注：以+=为例，a+=1等价于a=a+1。</p>
 <ul>
 <li><strong>关系运算符</strong></li>
 </ul>
 <table>
 <thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">含义</th>
+<tr class="header">
+<th style="text-align: center;">运算符</th>
+<th style="text-align: center;">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">&lt;</td>
-<td align="center">小于</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">&lt;</td>
+<td style="text-align: center;">小于</td>
 </tr>
-<tr>
-<td align="center">&lt;&#x3D;</td>
-<td align="center">小于等于</td>
+<tr class="even">
+<td style="text-align: center;">&lt;=</td>
+<td style="text-align: center;">小于等于</td>
 </tr>
-<tr>
-<td align="center">&gt;</td>
-<td align="center">大于</td>
+<tr class="odd">
+<td style="text-align: center;">&gt;</td>
+<td style="text-align: center;">大于</td>
 </tr>
-<tr>
-<td align="center">&gt;&#x3D;</td>
-<td align="center">大于等于</td>
+<tr class="even">
+<td style="text-align: center;">&gt;=</td>
+<td style="text-align: center;">大于等于</td>
 </tr>
-<tr>
-<td align="center">&#x3D;&#x3D;</td>
-<td align="center">等于</td>
+<tr class="odd">
+<td style="text-align: center;">==</td>
+<td style="text-align: center;">等于</td>
 </tr>
-<tr>
-<td align="center">!&#x3D;</td>
-<td align="center">不等于</td>
+<tr class="even">
+<td style="text-align: center;">!=</td>
+<td style="text-align: center;">不等于</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li><strong>逻辑运算符</strong></li>
 </ul>
 <table>
 <thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">含义</th>
+<tr class="header">
+<th style="text-align: center;">运算符</th>
+<th style="text-align: center;">含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">&amp;&amp;</td>
-<td align="center">逻辑与</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">&amp;&amp;</td>
+<td style="text-align: center;">逻辑与</td>
 </tr>
-<tr>
-<td align="center">&#96;</td>
-<td align="center"></td>
+<tr class="even">
+<td style="text-align: center;"><code>||</code></td>
+<td style="text-align: center;">逻辑或</td>
 </tr>
-<tr>
-<td align="center">!</td>
-<td align="center">逻辑非</td>
+<tr class="odd">
+<td style="text-align: center;">!</td>
+<td style="text-align: center;">逻辑非</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
-<li><strong>条件运算符</strong><br>? : 运算符<br>格式：条件表达式 ？表达式1：表达式2<br>含义：如果&lt;条件表达式&gt;为真，则执行&lt;表达式1&gt;，否则，&lt;执行表达式2&gt;</li>
+<li><strong>条件运算符</strong> ? : 运算符 格式：条件表达式 ？表达式1：表达式2 含义：如果<条件表达式>为真，则执行<表达式1>，否则，<执行表达式2></li>
 </ul>
-<h2 id="input-x2F-output-statement"><a href="#input-x2F-output-statement" class="headerlink" title="input&#x2F;output statement"></a>input&#x2F;output statement</h2><ul>
-<li><strong>input statement</strong><br>标准的输入设备是键盘库 java.util.Scanner (after JDK1.5)</li>
+<h2 id="inputoutput-statement">input/output statement</h2>
+<ul>
+<li><strong>input statement</strong> 标准的输入设备是键盘库 java.util.Scanner (after JDK1.5)</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//导入库</span><br><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-comment">//import java.util.Scanner也行</span><br><br><span class="hljs-comment">//创建对象</span><br>Scanner Input=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><br><span class="hljs-comment">//调用方法</span><br>Input.nextInt()      <span class="hljs-comment">//read int data</span><br>Input.nextByte()	 <span class="hljs-comment">//read byte data</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><ul>
+<h2 id="流程控制语句">流程控制语句</h2>
+<ul>
 <li><strong>分支语句</strong></li>
 </ul>
-<ol>
+<ol type="1">
 <li><strong>if</strong>语句</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(<span class="hljs-type">boolean</span>-expression)<br>	statement;<br></code></pre></td></tr></table></figure>
-
-<p>功能：当boolean-expression为“真”时，执行statement 。<br>2. <strong>if    else</strong>语句<br>格式：</p>
+<p>功能：当boolean-expression为“真”时，执行statement 。 2. <strong>if else</strong>语句 格式：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(<span class="hljs-type">boolean</span>-expression)<br>	 statement1；<br><span class="hljs-keyword">else</span> statement2；<br></code></pre></td></tr></table></figure>
-
-
-
-<p>功能：当 boolean-expression为“真”时，执行statement1； 否则，执行statement 2。<br>3. <strong>switch</strong>语句</p>
+<p>功能：当 boolean-expression为“真”时，执行statement1； 否则，执行statement 2。 3. <strong>switch</strong>语句</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">switch</span>(expression)&#123;<br>      <span class="hljs-keyword">case</span> value1：statement1;<br>           <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> value2：statement2;<br>           <span class="hljs-keyword">break</span>;<br>         ┆         ┆<br>      <span class="hljs-keyword">case</span> valueN：statementN;<br>           <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">default</span> : defaultStatement;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>功能：将expression的值与value1~valueN匹配，如果匹配则执行对应的statement，然后退出；否则                   执行defaultStatement。</p>
+<p>功能：将expression的值与value1~valueN匹配，如果匹配则执行对应的statement，然后退出；否则 执行defaultStatement。</p>
 <ul>
 <li><strong>循环语句</strong></li>
 </ul>
-<ol>
+<ol type="1">
 <li><strong>for</strong>语句</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span>(initialization; termination; iteration)&#123;　　　　<br>	<span class="hljs-comment">//body</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <p>功能：首先对循环条件（通常为i）进行initialization（初始化），然后执行termination（判断是否终止循环），然后执行循环体里的语句，最后执行iteration（循环条件i改变）</p>
-<ol start="2">
+<ol start="2" type="1">
 <li><strong>while</strong>语句</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">initialization<br><span class="hljs-title function_">while</span><span class="hljs-params">(termination)</span>&#123;　　　<br>	<span class="hljs-comment">//body;　      　</span><br>iteration;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>功能：首先对循环条件（通常为i）进行initialization（初始化），然后执行termination（判断是否终止循环），然后执行循环体里的语句，最后执行iteration（循环条件i改变）</p>
-<ol start="3">
+<ol start="3" type="1">
 <li><strong>do while</strong>语句</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">initialization<br><span class="hljs-keyword">do</span>&#123;　　　<br>	<span class="hljs-comment">//body;　      　</span><br>iteration;<br>&#125;<span class="hljs-keyword">while</span>(termination);<br></code></pre></td></tr></table></figure>
 <p>功能：首先对循环条件（通常为i）进行initialization（初始化），然后执行循环体里的语句，然后执行termination（判断是否终止循环），最后执行iteration（循环条件i改变）</p>
 <p>注：<strong>while</strong>和<strong>do while</strong>语句的区别在于执行循环体和执行termination的顺序。</p>
-<p>-<strong>跳转语句</strong></p>
-<ol>
-<li><p><strong>break</strong>语句<br>格式：break；<br>功能：终止当前循环体，转移到循环语句的下一条语句或标号处执行。</p>
-</li>
-<li><p><strong>continue</strong>语句<br> 格式：continue；<br> 功能： 跳过当前循环体的剩余语句，转移到下一次循环或标号处执行。</p>
-</li>
-<li><p><strong>return</strong>语句<br> 格式：return    [返回值]；<br>功能：终止方法或程序的执行，将控制返回调用者。</p>
-</li>
+<p>-<strong>跳转语句</strong> 1. <strong>break</strong>语句 格式：break； 功能：终止当前循环体，转移到循环语句的下一条语句或标号处执行。</p>
+<ol start="2" type="1">
+<li><p><strong>continue</strong>语句 格式：continue； 功能： 跳过当前循环体的剩余语句，转移到下一次循环或标号处执行。</p></li>
+<li><p><strong>return</strong>语句 格式：return [返回值]； 功能：终止方法或程序的执行，将控制返回调用者。</p></li>
 </ol>
-<h2 id="数组和向量"><a href="#数组和向量" class="headerlink" title="数组和向量"></a>数组和向量</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ol>
-<li><p><strong>一维数组的声明</strong></p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">arrayType  arrayName[];<br><br>arrayType []arrayName;<br></code></pre></td></tr></table></figure></li>
+<h2 id="数组和向量">数组和向量</h2>
+<h3 id="数组">数组</h3>
+<ol type="1">
+<li><p><strong>一维数组的声明</strong> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">arrayType  arrayName[];<br><br>arrayType []arrayName;<br></code></pre></td></tr></table></figure></p></li>
 <li><p><strong>一维数组的创建</strong></p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//数组元素为简单数据类型</span><br><br>	<span class="hljs-comment">//静态初始化</span><br> 	arrayType  arrayName[]=&#123;element1[,element2…]&#125;;<br>	arrayType  []arrayName=&#123;element1[,element2…]&#125;;<br>	<span class="hljs-comment">//例如</span><br>	<span class="hljs-type">int</span> [] samllPrimes=&#123;<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">11</span>,<span class="hljs-number">13</span>&#125;;<br><br><span class="hljs-comment">//动态初始化</span><br>arrayName= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[arrayLength];<br><span class="hljs-comment">//声明与初始化合并</span><br>arrayType arrayName= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[arrayLength];<br><span class="hljs-comment">//例如</span><br><span class="hljs-type">int</span> arr[]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>]<br><br><span class="hljs-comment">//数组元素为复合数据类型</span><br><br><span class="hljs-comment">//创建数组元素</span><br>arrayName= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[arrayLength];<br><span class="hljs-comment">//为数组元素开辟存储空间</span><br>arrayName[i]= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[paramList]<br><span class="hljs-comment">//例如</span><br>String  stringArray[];<br>   stringArray=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[<span class="hljs-number">3</span>];<br>   stringArray[<span class="hljs-number">0</span>]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(″Welcome″);<br>   stringArray[<span class="hljs-number">1</span>]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(″To″);<br>   stringArray[<span class="hljs-number">2</span>]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(″Zhnejiang″);<br></code></pre></td></tr></table></figure></li>
-<li><p><strong>数组操作</strong><br> 引用数组元素，下标从0开始<br> 数组复制<br>   使用系统类的方法 ( System.arraycopy )。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">  	<span class="hljs-comment">/*</span><br><span class="hljs-comment">  	*sourceArray             		被复制的数组的数组名</span><br><span class="hljs-comment">  	*sourcePosition      			被复制的数组的起始位置</span><br><span class="hljs-comment">  	*destinationArray  				新数组的数组名</span><br><span class="hljs-comment">  	*destinationposition 			新数组储存复制的数组的起始位置</span><br><span class="hljs-comment">  	*numberOfEntriesToCopy 			需要被复制的元素个数</span><br><span class="hljs-comment">  	*/</span><br>  	<span class="hljs-comment">//导入所需的库</span><br>  	<span class="hljs-keyword">import</span> java.io.*;<br><br>System.arraycopy( sourceArray, sourcePosition,<br>destinationArray, destinationposition, numberOfEntriesToCopy)<br></code></pre></td></tr></table></figure></p>
-</li>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//数组元素为简单数据类型</span><br><br>	<span class="hljs-comment">//静态初始化</span><br> 	arrayType  arrayName[]=&#123;element1[,element2…]&#125;;<br>	arrayType  []arrayName=&#123;element1[,element2…]&#125;;<br>	<span class="hljs-comment">//例如</span><br>	<span class="hljs-type">int</span> [] samllPrimes=&#123;<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">11</span>,<span class="hljs-number">13</span>&#125;;<br><br><span class="hljs-comment">//动态初始化</span><br>arrayName= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[arrayLength];<br><span class="hljs-comment">//声明与初始化合并</span><br>arrayType arrayName= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[arrayLength];<br><span class="hljs-comment">//例如</span><br><span class="hljs-type">int</span> arr[]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>]<br><br><span class="hljs-comment">//数组元素为复合数据类型</span><br><br><span class="hljs-comment">//创建数组元素</span><br>arrayName= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[arrayLength];<br><span class="hljs-comment">//为数组元素开辟存储空间</span><br>arrayName[i]= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[paramList]<br><span class="hljs-comment">//例如</span><br>String  stringArray[];<br>   stringArray=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[<span class="hljs-number">3</span>];<br>   stringArray[<span class="hljs-number">0</span>]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(″Welcome″);<br>   stringArray[<span class="hljs-number">1</span>]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(″To″);<br>   stringArray[<span class="hljs-number">2</span>]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(″Zhnejiang″);<br></code></pre></td></tr></table></figure></p></li>
+<li><p><strong>数组操作</strong> 引用数组元素，下标从0开始 数组复制 使用系统类的方法 ( System.arraycopy )。 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">  	<span class="hljs-comment">/*</span><br><span class="hljs-comment">  	*sourceArray             		被复制的数组的数组名</span><br><span class="hljs-comment">  	*sourcePosition      			被复制的数组的起始位置</span><br><span class="hljs-comment">  	*destinationArray  				新数组的数组名</span><br><span class="hljs-comment">  	*destinationposition 			新数组储存复制的数组的起始位置</span><br><span class="hljs-comment">  	*numberOfEntriesToCopy 			需要被复制的元素个数</span><br><span class="hljs-comment">  	*/</span><br>  	<span class="hljs-comment">//导入所需的库</span><br>  	<span class="hljs-keyword">import</span> java.io.*;<br><br>System.arraycopy( sourceArray, sourcePosition,<br>destinationArray, destinationposition, numberOfEntriesToCopy)<br></code></pre></td></tr></table></figure></p></li>
 </ol>
-<h3 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h3><ul>
+<h3 id="向量">向量</h3>
+<ul>
 <li>是 java.util 包中的一个类，实现了类似动态数组的功能。</li>
 <li>向量与数组的重要区别之一就是 向量的容量是可变的</li>
 </ul>
-<ol>
+<ol type="1">
 <li>向量的容量：向量的存储空间大小</li>
 <li>向量的长度：线路的实际元素个数</li>
 <li>向量的增量：向量的长度发生变化时，向量容量的增加量</li>
@@ -606,7 +583,7 @@ D --&gt; 增量大于0
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Vector &lt;datatype&gt; variable_identifier;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>构造方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">Vector</span><span class="hljs-params">()</span><br><span class="hljs-comment">//创建空向量, 初始容量为 10 ,容量增量为 0 。</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">Vector</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity)</span><br><span class="hljs-comment">//创建空向量, 初始容量为capacity, 容量增量为 0 。</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">Vector</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity, <span class="hljs-type">int</span> capacityIncrement)</span><br><span class="hljs-comment">//创建空向量, 初始容量为 initialCapacity，容量增量为 capacityIncrement。</span><br></code></pre></td></tr></table></figure></li>
+<li>构造方法 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">Vector</span><span class="hljs-params">()</span><br><span class="hljs-comment">//创建空向量, 初始容量为 10 ,容量增量为 0 。</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">Vector</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity)</span><br><span class="hljs-comment">//创建空向量, 初始容量为capacity, 容量增量为 0 。</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">Vector</span><span class="hljs-params">(<span class="hljs-type">int</span> initialCapacity, <span class="hljs-type">int</span> capacityIncrement)</span><br><span class="hljs-comment">//创建空向量, 初始容量为 initialCapacity，容量增量为 capacityIncrement。</span><br></code></pre></td></tr></table></figure></li>
 <li>添加元素</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(Element obj)</span><br><span class="hljs-comment">//把element组件加到向量末尾，同时大小加1，向量容量比以前大1</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addElement</span><span class="hljs-params">(Element obj)</span><br><span class="hljs-comment">//同上</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> index,E element)</span><br><span class="hljs-comment">//把element组件加到指定处，此后的内容向后移动1 个单位。 注意与 insertElementAt 的不同参数。</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">insertElementAt</span><span class="hljs-params">(E element,<span class="hljs-type">int</span> index)</span><br><span class="hljs-comment">//把element组件加到指定处，此后的内容向后移动1个单位</span><br></code></pre></td></tr></table></figure>
@@ -625,8 +602,8 @@ D --&gt; 增量大于0
 <ul>
 <li>可在向量的任意位置插入不同类型的对象，无需考虑对象的类型，也无需考虑向量的容量。</li>
 <li>向量只能存储对象，不能直接存储简单数据类型。</li>
-<li>适合向量的场合:<br>频繁进行对象的插入和删除工作<br>需要处理的对象数目不定<br>列表成员全部都是对象，或者可以方便的用对象表示<br>需要很快确定列表内是否存在某一特定对象，并且需要很快了解到对象的存放位置</li>
-<li>适合数组的场合:<br>所需处理的对象数目大致可以确定<br>所需处理的是简单数据类型</li>
+<li>适合向量的场合: 频繁进行对象的插入和删除工作 需要处理的对象数目不定 列表成员全部都是对象，或者可以方便的用对象表示 需要很快确定列表内是否存在某一特定对象，并且需要很快了解到对象的存放位置</li>
+<li>适合数组的场合: 所需处理的对象数目大致可以确定 所需处理的是简单数据类型</li>
 </ul>
 
                 

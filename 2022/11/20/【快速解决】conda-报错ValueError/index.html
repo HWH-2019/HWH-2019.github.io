@@ -16,12 +16,12 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="写在前面 我的环境： Anaconda 4.10.1 Win10    快速解决  根据报错信息可以判断出是网络连接问题，检查后是因为我设置了代理，只需要给conda也配置上代理即可 在 C:\users\username\ 下找到并打开 .condarc 文件，文件可能隐藏，可以在文件资源管理器中设置查看-&gt;显示隐藏的文件-.condarc 文件可能为空也可能有内容，只需要添加上如下语句:">
+    <meta name="description" content="写在前面  我的环境：  Anaconda 4.10.1 Win10   快速解决  报错内容   根据报错信息可以判断出是网络连接问题，检查后是因为我设置了代理，只需要给conda也配置上代理即可 在 C:\users\username\ 下找到并打开 .condarc 文件，文件可能隐藏，可以在文件资源管理器中设置查看-&gt;显示隐藏的文件 -.condarc 文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【快速解决】conda 报错ValueError check_hostname requires server_hostname">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/11/20/%E3%80%90%E5%BF%AB%E9%80%9F%E8%A7%A3%E5%86%B3%E3%80%91conda-%E6%8A%A5%E9%94%99ValueError/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="写在前面 我的环境： Anaconda 4.10.1 Win10    快速解决  根据报错信息可以判断出是网络连接问题，检查后是因为我设置了代理，只需要给conda也配置上代理即可 在 C:\users\username\ 下找到并打开 .condarc 文件，文件可能隐藏，可以在文件资源管理器中设置查看-&gt;显示隐藏的文件-.condarc 文件可能为空也可能有内容，只需要添加上如下语句:">
+<meta property="og:description" content="写在前面  我的环境：  Anaconda 4.10.1 Win10   快速解决  报错内容   根据报错信息可以判断出是网络连接问题，检查后是因为我设置了代理，只需要给conda也配置上代理即可 在 C:\users\username\ 下找到并打开 .condarc 文件，文件可能隐藏，可以在文件资源管理器中设置查看-&gt;显示隐藏的文件 -.condarc 文">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/71c803243b62421b8895e9c65a7dce27.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="article:published_time" content="2022-11-20T07:14:46.000Z">
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          291 字
+          295 字
         
       </span>
     
@@ -287,17 +287,21 @@
             
               <div class="markdown-body">
                 
-                <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><ul>
-<li>我的环境：<ul>
+                <h2 id="写在前面">写在前面</h2>
+<ul>
+<li>我的环境：
+<ul>
 <li>Anaconda 4.10.1</li>
 <li>Win10</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="快速解决"><a href="#快速解决" class="headerlink" title="快速解决"></a>快速解决</h2><p><img src="https://img-blog.csdnimg.cn/71c803243b62421b8895e9c65a7dce27.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt="报错内容"></p>
+<h2 id="快速解决">快速解决</h2>
+<figure>
+<img src="https://img-blog.csdnimg.cn/71c803243b62421b8895e9c65a7dce27.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt="报错内容" /><figcaption aria-hidden="true">报错内容</figcaption>
+</figure>
 <ul>
 <li>根据报错信息可以判断出是网络连接问题，检查后是因为我设置了代理，只需要给conda也配置上代理即可</li>
-<li>在 <code>C:\users\username\</code> 下找到并打开 <code>.condarc</code> 文件，文件可能隐藏，可以在文件资源管理器中设置查看-&gt;显示隐藏的文件<br>-<code>.condarc</code> 文件可能为空也可能有内容，只需要添加上如下语句:</li>
+<li>在 <code>C:\users\username\</code> 下找到并打开 <code>.condarc</code> 文件，文件可能隐藏，可以在文件资源管理器中设置查看-&gt;显示隐藏的文件 -<code>.condarc</code> 文件可能为空也可能有内容，只需要添加上如下语句:</li>
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">proxy_servers: &#123;http: <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:port, https: <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:port&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -392,6 +396,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/12/03/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8F%8D%E5%B0%84%E6%A0%BC%E9%9B%B7%E7%A0%81%E5%92%8CTromino%E9%97%AE%E9%A2%98Python%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/" title="二进制反射格雷码和Tromino问题Python代码实现">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">二进制反射格雷码和Tromino问题Python代码实现</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

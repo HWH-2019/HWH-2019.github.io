@@ -16,12 +16,12 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="版本 Tomcat 10.0.6 PHP 8.0.6 Mysql 8.0.21  Tomcat 安装配置 下载tomcat 从tomcat官网下载zip包 解压到自己想要的目录下 使用Tomcat之前需要JDK以及JAVA_HOME环境变量配置 修改conf文件下的logging.properties文件,解决控制台乱码问题 配置tomcat环境变量，将bin目录路径添加到path下 cmd下执行">
+    <meta name="description" content="版本  Tomcat 10.0.6 PHP 8.0.6 Mysql 8.0.21  Tomcat 安装配置  下载tomcat 从tomcat官网下载zip包 解压到自己想要的目录下 使用Tomcat之前需要JDK以及JAVA_HOME环境变量配置 修改conf文件下的logging.properties文件,解决控制台乱码问题 配置tomcat环境变量，将bin目录路径添">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat+PHP+Mysql环境配置">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/11/18/Tomcat-PHP-Mysql%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="版本 Tomcat 10.0.6 PHP 8.0.6 Mysql 8.0.21  Tomcat 安装配置 下载tomcat 从tomcat官网下载zip包 解压到自己想要的目录下 使用Tomcat之前需要JDK以及JAVA_HOME环境变量配置 修改conf文件下的logging.properties文件,解决控制台乱码问题 配置tomcat环境变量，将bin目录路径添加到path下 cmd下执行">
+<meta property="og:description" content="版本  Tomcat 10.0.6 PHP 8.0.6 Mysql 8.0.21  Tomcat 安装配置  下载tomcat 从tomcat官网下载zip包 解压到自己想要的目录下 使用Tomcat之前需要JDK以及JAVA_HOME环境变量配置 修改conf文件下的logging.properties文件,解决控制台乱码问题 配置tomcat环境变量，将bin目录路径添">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210516194605404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210516194717224.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
@@ -290,54 +290,46 @@
             
               <div class="markdown-body">
                 
-                <h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><ul>
+                <h2 id="版本">版本</h2>
+<ul>
 <li>Tomcat 10.0.6</li>
 <li>PHP 8.0.6</li>
 <li>Mysql 8.0.21</li>
 </ul>
-<h2 id="Tomcat-安装配置"><a href="#Tomcat-安装配置" class="headerlink" title="Tomcat 安装配置"></a>Tomcat 安装配置</h2><ul>
+<h2 id="tomcat-安装配置">Tomcat 安装配置</h2>
+<ul>
 <li>下载tomcat 从tomcat官网<a target="_blank" rel="noopener" href="https://tomcat.apache.org/download-10.cgi">下载zip包</a></li>
 <li>解压到自己想要的目录下</li>
 <li>使用Tomcat之前需要JDK以及JAVA_HOME环境变量配置</li>
 <li>修改<code>conf</code>文件下的<code>logging.properties</code>文件,<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44580492/article/details/106358111">解决控制台乱码问题</a></li>
 <li>配置tomcat环境变量，将<code>bin</code>目录路径添加到<code>path</code>下</li>
 <li><code>cmd</code>下执行startup启动服务</li>
-<li>浏览器输入<code>localhost:8080</code>,成功启动服务效果如下图:<br><img src="https://img-blog.csdnimg.cn/20210516194605404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="tomcat初始界面"></li>
+<li>浏览器输入<code>localhost:8080</code>,成功启动服务效果如下图: <img src="https://img-blog.csdnimg.cn/20210516194605404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="tomcat初始界面" /></li>
 </ul>
-<h2 id="Tomcat-配置-PHP"><a href="#Tomcat-配置-PHP" class="headerlink" title="Tomcat 配置 PHP"></a>Tomcat 配置 PHP</h2><ul>
-<li><p><a target="_blank" rel="noopener" href="https://windows.php.net/download#php-7.0">官网下载php</a></p>
-</li>
-<li><p>将php解压到自己想要的目录下</p>
-</li>
-<li><p>复制一份<code>php.ini-development</code>,并改名为<code>php.ini</code></p>
-</li>
+<h2 id="tomcat-配置-php">Tomcat 配置 PHP</h2>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://windows.php.net/download#php-7.0">官网下载php</a></p></li>
+<li><p>将php解压到自己想要的目录下</p></li>
+<li><p>复制一份<code>php.ini-development</code>,并改名为<code>php.ini</code></p></li>
 <li><p>修改<code>php.ini</code>文件</p>
 <ul>
-<li>搜索定位到<code>extension_dir= &quot;ext&quot;</code>,去掉此行前的<code>;</code>,也可重写并指定<code>ext</code>文件夹的路径</li>
+<li>搜索定位到<code>extension_dir= "ext"</code>,去掉此行前的<code>;</code>,也可重写并指定<code>ext</code>文件夹的路径</li>
 <li>搜索定位到<code>cgi.force_redirect</code>,改为<code>cgi.force_redirect=0</code></li>
-</ul>
-</li>
-<li><p>回到<code>tomcat</code>所在目录下，打开<code>conf/context.xml</code>文件</p>
-</li>
-<li><p>将<code>&lt;context&gt;</code>标签加上<code>privileged = &quot;true&quot;</code>属性,即修改为<code>&lt;Context privileged=&quot;true&quot;&gt;</code></p>
-</li>
-<li><p>打开<code>web.xml</code>文件,在添加<code>&lt;web-app&gt;</code>中添加如下代码：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- ================== Built In Servlet Definitions ==================== --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>php<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>org.apache.catalina.servlets.CGIServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>clientInputTimeout<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>200<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>debug<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>executable<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>      <span class="hljs-comment">&lt;!-- 此处为php-cgi.exe的路径，需要根据自己的文件路径进行修改 --&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>D:\tomcat\php\php-cgi.exe<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>passShellEnvironment<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>cgiPathPrefix<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>      <span class="hljs-comment">&lt;!-- 此处与后文对应 --&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>WEB-INF/phpbin<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>5<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
-<li><p>注意修改<code>php-cgi.exe</code>的路径，路径为自己安装<code>php</code>的路径</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- ================ Built In Servlet Mappings ========================= --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>php<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/phpbin/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>重启服务</p>
-</li>
-<li><p>由于上面在<code>web.xml</code>中添加了<code>&lt;param-value&gt;WEB-INF/phpbin&lt;/param-value&gt;</code>,因此在<code>WEB-INF</code>下新建<code>phpbin</code>文件夹,并新建<code>index.php</code>作为测试。</p>
-</li>
-<li><p><code>index.php</code>的内容为:</p>
-</li>
+</ul></li>
+<li><p>回到<code>tomcat</code>所在目录下，打开<code>conf/context.xml</code>文件</p></li>
+<li><p>将<code>&lt;context&gt;</code>标签加上<code>privileged = "true"</code>属性,即修改为<code>&lt;Context privileged="true"&gt;</code></p></li>
+<li><p>打开<code>web.xml</code>文件,在添加<code>&lt;web-app&gt;</code>中添加如下代码： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- ================== Built In Servlet Definitions ==================== --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>php<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>org.apache.catalina.servlets.CGIServlet<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>clientInputTimeout<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>200<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>debug<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>executable<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>      <span class="hljs-comment">&lt;!-- 此处为php-cgi.exe的路径，需要根据自己的文件路径进行修改 --&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>D:\tomcat\php\php-cgi.exe<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>passShellEnvironment<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>cgiPathPrefix<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>      <span class="hljs-comment">&lt;!-- 此处与后文对应 --&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>WEB-INF/phpbin<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">load-on-startup</span>&gt;</span>5<span class="hljs-tag">&lt;/<span class="hljs-name">load-on-startup</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>注意修改<code>php-cgi.exe</code>的路径，路径为自己安装<code>php</code>的路径 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- ================ Built In Servlet Mappings ========================= --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>php<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>/phpbin/*<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>重启服务</p></li>
+<li><p>由于上面在<code>web.xml</code>中添加了<code>&lt;param-value&gt;WEB-INF/phpbin&lt;/param-value&gt;</code>,因此在<code>WEB-INF</code>下新建<code>phpbin</code>文件夹,并新建<code>index.php</code>作为测试。</p></li>
+<li><p><code>index.php</code>的内容为:</p></li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">phpinfo</span>();<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li>确保服务已启动,访问 <a target="_blank" rel="noopener" href="http://localhost:8080/phpbin/index.php">http://localhost:8080/phpbin/index.php</a> 查看效果，正确效果如下：<br><img src="https://img-blog.csdnimg.cn/20210516194717224.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="php验证"></li>
+<li>确保服务已启动,访问 <a target="_blank" rel="noopener" href="http://localhost:8080/phpbin/index.php">http://localhost:8080/phpbin/index.php</a> 查看效果，正确效果如下： <img src="https://img-blog.csdnimg.cn/20210516194717224.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="php验证" /></li>
 </ul>
-<h2 id="配置-Tomcat-利用-jsp-连接-Mysql"><a href="#配置-Tomcat-利用-jsp-连接-Mysql" class="headerlink" title="配置 Tomcat 利用 jsp 连接 Mysql"></a>配置 Tomcat 利用 jsp 连接 Mysql</h2><ul>
+<h2 id="配置-tomcat-利用-jsp-连接-mysql">配置 Tomcat 利用 jsp 连接 Mysql</h2>
+<ul>
 <li>将mysql的jdbc驱动程序放到tomcat的lib中,如:<a target="_blank" rel="noopener" href="https://download.csdn.net/download/h2763246823/18777147">mysql-connector-java-8.0.21.jar</a></li>
 <li>在<code>ROOT</code>目录下新建<code>connect_mysql.jsp</code>文件,添加如下内容:</li>
 </ul>
@@ -347,7 +339,8 @@
 <li>不熟悉<code>JSP</code>语句的可以去<a target="_blank" rel="noopener" href="https://www.runoob.com/jsp/jsp-database-access.html">菜鸟教程</a>学习。</li>
 <li>确保tomcat服务已启动,访问 <a target="_blank" rel="noopener" href="http://localhost:8080/connect_mysql.jsp">http://localhost:8080/connect_mysql.jsp</a> 查看效果。</li>
 </ul>
-<h2 id="配置-Tomcat-利用-PHP-连接-Mysql"><a href="#配置-Tomcat-利用-PHP-连接-Mysql" class="headerlink" title="配置 Tomcat 利用 PHP 连接 Mysql"></a>配置 Tomcat 利用 PHP 连接 Mysql</h2><ul>
+<h2 id="配置-tomcat-利用-php-连接-mysql">配置 Tomcat 利用 PHP 连接 Mysql</h2>
+<ul>
 <li>为php添加mysql扩展,在<code>php.ini</code>中搜索定位<code>extension</code>,将下面两行前的<code>;</code>去掉</li>
 </ul>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">extension</span>=mysqli<br><span class="hljs-attr">extension</span>=pdo_mysql<br></code></pre></td></tr></table></figure>
@@ -360,9 +353,10 @@
 <li>不熟悉<code>php</code>语句的可以去<a target="_blank" rel="noopener" href="https://www.runoob.com/php/php-mysql-intro.html">菜鸟教程</a>学习。</li>
 <li>确保tomcat服务已启动，访问<a target="_blank" rel="noopener" href="http://localhost:8080/phpbin/connect_mysql.php">http://localhost:8080/phpbin/connect_mysql.php</a> 查看效果。</li>
 </ul>
-<h2 id="可能遇到的问题解决"><a href="#可能遇到的问题解决" class="headerlink" title="可能遇到的问题解决"></a>可能遇到的问题解决</h2><ul>
+<h2 id="可能遇到的问题解决">可能遇到的问题解决</h2>
+<ul>
 <li>如果<code>php</code>连接<code>mysql</code>出现<code>The server requested authentication method unknown to the client</code>报错</li>
-<li><code>cmd</code>下登录数据库，执行如下语句修改密码。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><br>mysql <span class="hljs-operator">-</span>uroot <span class="hljs-operator">-</span>p<br><br>use mysql;<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">WITH</span> mysql_native_password <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;你的密码&#x27;</span>;<br></code></pre></td></tr></table></figure></li>
+<li><code>cmd</code>下登录数据库，执行如下语句修改密码。 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><br>mysql <span class="hljs-operator">-</span>uroot <span class="hljs-operator">-</span>p<br><br>use mysql;<br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">WITH</span> mysql_native_password <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;你的密码&#x27;</span>;<br></code></pre></td></tr></table></figure></li>
 </ul>
 
                 

@@ -16,12 +16,12 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="写在前面 梳理了如何制作安装教程的流程。 在以下测试环境中通过 VS2019 Qt 5.14.2 Windows 10   总结了网上主流教程没有的解决问题方法 Qt项目拉取依赖 Application Folder下创建的文件夹，将不会自动创建 生成项目时报有警告   文章没有图片，但十分详细如果环境相似请耐心阅读。  首先下载Microsoft Visual Studio Installer">
+    <meta name="description" content="写在前面  梳理了如何制作安装教程的流程。 在以下测试环境中通过  VS2019 Qt 5.14.2 Windows 10  总结了网上主流教程没有的解决问题方法  Qt项目拉取依赖 Application Folder下创建的文件夹，将不会自动创建 生成项目时报有警告  文章没有图片，但十分详细如果环境相似请耐心阅读。  首先下载Microsoft Visual">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vs2019下创建的Qt项目发布并制作安装程序流程">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/11/18/vs2019%E4%B8%8B%E5%88%9B%E5%BB%BA%E7%9A%84Qt%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83%E5%B9%B6%E5%88%B6%E4%BD%9C%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="写在前面 梳理了如何制作安装教程的流程。 在以下测试环境中通过 VS2019 Qt 5.14.2 Windows 10   总结了网上主流教程没有的解决问题方法 Qt项目拉取依赖 Application Folder下创建的文件夹，将不会自动创建 生成项目时报有警告   文章没有图片，但十分详细如果环境相似请耐心阅读。  首先下载Microsoft Visual Studio Installer">
+<meta property="og:description" content="写在前面  梳理了如何制作安装教程的流程。 在以下测试环境中通过  VS2019 Qt 5.14.2 Windows 10  总结了网上主流教程没有的解决问题方法  Qt项目拉取依赖 Application Folder下创建的文件夹，将不会自动创建 生成项目时报有警告  文章没有图片，但十分详细如果环境相似请耐心阅读。  首先下载Microsoft Visual">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-18T12:34:25.000Z">
 <meta property="article:modified_time" content="2022-11-18T12:38:17.116Z">
@@ -244,7 +244,7 @@
         
         
         
-          20 分钟
+          19 分钟
         
       </span>
     
@@ -287,76 +287,81 @@
             
               <div class="markdown-body">
                 
-                <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><ul>
+                <h2 id="写在前面">写在前面</h2>
+<ul>
 <li>梳理了如何制作安装教程的流程。</li>
-<li>在以下测试环境中通过<ul>
+<li>在以下测试环境中通过
+<ul>
 <li>VS2019</li>
 <li>Qt 5.14.2</li>
 <li>Windows 10</li>
-</ul>
-</li>
-<li>总结了网上主流教程没有的解决问题方法<ul>
+</ul></li>
+<li>总结了网上主流教程没有的解决问题方法
+<ul>
 <li><a href="#jump1">Qt项目拉取依赖</a></li>
 <li><a href="#jump2"><code>Application Folder</code>下创建的文件夹，将不会自动创建</a></li>
 <li><a href="#jump3">生成项目时报有警告</a></li>
-</ul>
-</li>
+</ul></li>
 <li>文章没有图片，但十分详细如果环境相似请耐心阅读。</li>
 </ul>
-<h2 id="首先下载Microsoft-Visual-Studio-Installer-Projects插件"><a href="#首先下载Microsoft-Visual-Studio-Installer-Projects插件" class="headerlink" title="首先下载Microsoft Visual Studio Installer Projects插件"></a>首先下载Microsoft Visual Studio Installer Projects插件</h2><ul>
+<h2 id="首先下载microsoft-visual-studio-installer-projects插件">首先下载Microsoft Visual Studio Installer Projects插件</h2>
+<ul>
 <li>项目下点击: 扩展-&gt;管理扩展-&gt;选择联机-&gt;搜索框输入<code>installer</code>搜索-&gt;安装插件-&gt;关闭所有vs界面后自动安装。</li>
 </ul>
-<h2 id="新建Setup项目"><a href="#新建Setup项目" class="headerlink" title="新建Setup项目"></a>新建Setup项目</h2><ul>
-<li>项目下点击: 右键解决方案-&gt;添加-&gt;新建项目…-&gt;搜索<code>Setup</code>-&gt;选择<code>Setup Project</code>-&gt; 下一步直到创建好Setup项目</li>
+<h2 id="新建setup项目">新建Setup项目</h2>
+<ul>
+<li>项目下点击: 右键解决方案-&gt;添加-&gt;新建项目...-&gt;搜索<code>Setup</code>-&gt;选择<code>Setup Project</code>-&gt; 下一步直到创建好Setup项目</li>
 </ul>
-<h2 id="了解Setup项目"><a href="#了解Setup项目" class="headerlink" title="了解Setup项目"></a>了解Setup项目</h2><ul>
+<h2 id="了解setup项目">了解Setup项目</h2>
+<ul>
 <li>vs在创建好Setup项目后会默认打开项目的文件系统，如果不慎关闭或者未打开可以依次点击: 右键Setup项目-&gt;view-&gt;文件系统(File System)</li>
-<li>文件系统(File System)中主要分为三个文件夹<code>Application Folder</code>, <code>User&#39;s Desktop</code> ,<code>User&#39;sPrograms Menu</code><ul>
+<li>文件系统(File System)中主要分为三个文件夹<code>Application Folder</code>, <code>User's Desktop</code> ,<code>User'sPrograms Menu</code>
+<ul>
 <li><code>Application Folder</code> 存放主程序入口(主输出)、依赖(.dll)、图标(.ico)、卸载程序</li>
-<li><code>User&#39;s Desktop</code> 存放桌面快捷方式</li>
-<li><code>User&#39;s Programs Menu</code>	存放开始菜单的快捷方式<br><span id="jump1"></span></li>
-</ul>
-</li>
-</ul>
-<h2 id="Qt项目制作安装程序前准备"><a href="#Qt项目制作安装程序前准备" class="headerlink" title="Qt项目制作安装程序前准备"></a>Qt项目制作安装程序前准备</h2><ul>
+<li><code>User's Desktop</code> 存放桌面快捷方式</li>
+<li><code>User's Programs Menu</code> 存放开始菜单的快捷方式 <span id="jump1"></span> ## Qt项目制作安装程序前准备</li>
+</ul></li>
 <li>vs生成Release版本的.exe: 点击调试-&gt;项目属性-&gt;点击配置管理器-&gt;检查是否为Release-&gt;点击生成-&gt;生成项目。</li>
 <li>从Qt自带的控制台进入-&gt;将路径切换到生成的Release版本的.exe路径下-&gt;执行<code>windeployqt xxx.exe</code></li>
 <li><code>xxx.exe</code>为你Qt项目的名称。</li>
 <li>等待执行完毕则成功将Qt项目所需的依赖(.dll)，拉取到你的.exe文件目录下，此时双击.exe文件则可直接执行。</li>
 </ul>
-<h2 id="编辑Setup项目"><a href="#编辑Setup项目" class="headerlink" title="编辑Setup项目"></a>编辑Setup项目</h2><h3 id="首先添加主输出"><a href="#首先添加主输出" class="headerlink" title="首先添加主输出"></a>首先添加主输出</h3><ul>
+<h2 id="编辑setup项目">编辑Setup项目</h2>
+<h3 id="首先添加主输出">首先添加主输出</h3>
+<ul>
 <li>右键<code>Application Folder</code>-&gt;Add-&gt;项目输出-&gt;主输出</li>
 </ul>
-<h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><ul>
+<h3 id="添加依赖">添加依赖</h3>
+<ul>
 <li>右键<code>Application Folder</code>-&gt;Add-&gt;文件，选择需要的文件(.dll)</li>
 </ul>
-<h3 id="添加具有文件夹的依赖"><a href="#添加具有文件夹的依赖" class="headerlink" title="添加具有文件夹的依赖"></a>添加具有文件夹的依赖</h3><ul>
+<h3 id="添加具有文件夹的依赖">添加具有文件夹的依赖</h3>
+<ul>
 <li>例如Qt项目所需的依赖一部分与.exe同级另一部分则在与.exe同级的文件夹下</li>
-<li>右键<code>Application Folder</code>-&gt;Add-&gt;文件夹(Folder)-&gt;修改文件夹名称为依赖所需的文件夹名-&gt;单击打开文件夹-&gt;右侧右击-&gt;Add-&gt;文件，选择需要的文件(.dll)<br><span id="jump2"></span></li>
-</ul>
-<h3 id="使文件夹在安装的时候创建"><a href="#使文件夹在安装的时候创建" class="headerlink" title="使文件夹在安装的时候创建"></a>使文件夹在安装的时候创建</h3><ul>
+<li>右键<code>Application Folder</code>-&gt;Add-&gt;文件夹(Folder)-&gt;修改文件夹名称为依赖所需的文件夹名-&gt;单击打开文件夹-&gt;右侧右击-&gt;Add-&gt;文件，选择需要的文件(.dll) <span id="jump2"></span> ### 使文件夹在安装的时候创建</li>
 <li>如果不做修改，在生成好<code>Setup.exe</code>和<code>Setup.msi</code>文件后，安装到电脑时，对于自己在<code>Application Folder</code>下创建的文件夹，将不会自动创建，因此会破坏目录结构，安装好的文件将因为无法找到依赖而无法运行。</li>
 <li>解决方法: 右键自己创建的文件夹-&gt;单击属性窗口(F4)-&gt;修改属性窗口中的<code>AlwaysCreate</code>和<code>transitive</code>为<code>True</code></li>
 </ul>
-<h3 id="添加快捷方式"><a href="#添加快捷方式" class="headerlink" title="添加快捷方式"></a>添加快捷方式</h3><ul>
-<li>桌面快捷方式(Shortcut): 打开<code>User&#39;s Desktop</code>-&gt;右侧右击-&gt;创建新的快捷方式(C)-&gt;选择<code>Application Folder</code>(默认)-&gt;点击Ok或者双击<code>Application Folder</code>-&gt;选择主输出-&gt;创建后修改快捷方式的名字(此名字为桌面自动生成的快捷方式的名字)</li>
-<li>开始菜单的快捷方式: 打开<code>User&#39;s Programs Menu</code>-&gt;后续步骤与创建桌面快捷方式无异。</li>
-<li>如有多个文件需要连接到开始菜单，可以在开始菜单创建文件夹来存放: 右键<code>User&#39;s Programs Menu</code>-&gt;Add-&gt;文件夹(Floder)-&gt;修改文件夹为想要的名字-&gt;打开文件夹-&gt;后续步骤与创建桌面快捷方式无异。</li>
+<h3 id="添加快捷方式">添加快捷方式</h3>
+<ul>
+<li>桌面快捷方式(Shortcut): 打开<code>User's Desktop</code>-&gt;右侧右击-&gt;创建新的快捷方式(C)-&gt;选择<code>Application Folder</code>(默认)-&gt;点击Ok或者双击<code>Application Folder</code>-&gt;选择主输出-&gt;创建后修改快捷方式的名字(此名字为桌面自动生成的快捷方式的名字)</li>
+<li>开始菜单的快捷方式: 打开<code>User's Programs Menu</code>-&gt;后续步骤与创建桌面快捷方式无异。</li>
+<li>如有多个文件需要连接到开始菜单，可以在开始菜单创建文件夹来存放: 右键<code>User's Programs Menu</code>-&gt;Add-&gt;文件夹(Floder)-&gt;修改文件夹为想要的名字-&gt;打开文件夹-&gt;后续步骤与创建桌面快捷方式无异。</li>
 <li>开始菜单的文件夹会自动创建。</li>
 </ul>
-<h3 id="添加图标"><a href="#添加图标" class="headerlink" title="添加图标"></a>添加图标</h3><ul>
+<h3 id="添加图标">添加图标</h3>
+<ul>
 <li>右键<code>Application Folder</code>-&gt;Add-&gt;文件，选择需要的图标文件(.ico)</li>
 <li>给快捷方式添加图标: 单击创建好的快捷方式(Shortcut)-&gt;属性窗口中找到<code>Icon</code>-&gt;下拉框找到并单击<code>Browse</code>-&gt;再次点击弹出窗口的<code>Browse</code>-&gt;在<code>Application Folder</code>下找到需要的图标文件(.ico)-&gt;点击Ok添加完成。</li>
-<li>所有快捷方式或者.exe只要属性窗口有<code>Icon</code>都可以参照上述步骤修改图标。<br><span id="jump3"></span></li>
-</ul>
-<h2 id="修改Setup项目属性"><a href="#修改Setup项目属性" class="headerlink" title="修改Setup项目属性"></a>修改Setup项目属性</h2><ul>
+<li>所有快捷方式或者.exe只要属性窗口有<code>Icon</code>都可以参照上述步骤修改图标。 <span id="jump3"></span> ## 修改Setup项目属性</li>
 <li>点击<code>Setup</code>项目，查看属性窗口</li>
 <li>注意<code>Author</code>, <code>Manufacturer</code>,<code>ProductCode</code>,<code>TargetPlatform</code>,<code>Title</code></li>
 <li>尤其注意<code>TargetPlatform</code>,默认为<code>x86</code>,如果项目生成的是<code>x64</code>版本的需要修改，否则会报警告。</li>
 <li>还有一项属性为了更好的兼容,可以修改也可以不修改。</li>
 <li>步骤: 右键<code>Setup</code>项目-&gt;点击属性-&gt;点击<code>Prerequisites</code>-&gt;勾选<code>Microsoft .NET Framework 4.6.1 (x86和x64)</code>-&gt;点击确定</li>
 </ul>
-<h2 id="生成Setup项目"><a href="#生成Setup项目" class="headerlink" title="生成Setup项目"></a>生成Setup项目</h2><ul>
+<h2 id="生成setup项目">生成Setup项目</h2>
+<ul>
 <li>右键项目名生成</li>
 <li>会生成<code>Setup.exe</code>和<code>Setup.msi</code>文件</li>
 <li><code>Setup.exe</code>相当于<code>Setup.msi</code>的一个连接,使用<code>Setup.exe</code>安装时需要确保两个文件在同一目录下。</li>

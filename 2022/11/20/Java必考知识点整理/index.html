@@ -16,12 +16,12 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="线程的生命周期线程的生命周期包含5个阶段，包括：新建、就绪、运行、阻塞、死亡。  新建：对象由Thread类或者子类声明并创建，此时对象拥有相应的内存空间和其他资源；  就绪：在对象调用线程的start()方法后，这时候线程处于等待CPU分配资源阶段;  运行：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run方法定义了线程的操作和功能;  阻塞：在运行状态的时候，可能因为某些原因导致运">
+    <meta name="description" content="线程的生命周期 线程的生命周期包含5个阶段，包括：新建、就绪、运行、阻塞、死亡。  新建：对象由Thread类或者子类声明并创建，此时对象拥有相应的内存空间和其他资源； 就绪：在对象调用线程的start()方法后，这时候线程处于等待CPU分配资源阶段; 运行：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run方法定义了线程的操作和功能; 阻塞：在运行状态的时候，可能因为某些原">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java必考知识点整理">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/11/20/Java%E5%BF%85%E8%80%83%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="线程的生命周期线程的生命周期包含5个阶段，包括：新建、就绪、运行、阻塞、死亡。  新建：对象由Thread类或者子类声明并创建，此时对象拥有相应的内存空间和其他资源；  就绪：在对象调用线程的start()方法后，这时候线程处于等待CPU分配资源阶段;  运行：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run方法定义了线程的操作和功能;  阻塞：在运行状态的时候，可能因为某些原因导致运">
+<meta property="og:description" content="线程的生命周期 线程的生命周期包含5个阶段，包括：新建、就绪、运行、阻塞、死亡。  新建：对象由Thread类或者子类声明并创建，此时对象拥有相应的内存空间和其他资源； 就绪：在对象调用线程的start()方法后，这时候线程处于等待CPU分配资源阶段; 运行：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run方法定义了线程的操作和功能; 阻塞：在运行状态的时候，可能因为某些原">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190721043347273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjM4NDA4NQ==,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2022-11-20T06:34:28.000Z">
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.2k 字
+          6.1k 字
         
       </span>
     
@@ -287,74 +287,73 @@
             
               <div class="markdown-body">
                 
-                <h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><p>线程的生命周期包含5个阶段，包括：新建、就绪、运行、阻塞、死亡。</p>
+                <h2 id="线程的生命周期">线程的生命周期</h2>
+<p>线程的生命周期包含5个阶段，包括：新建、就绪、运行、阻塞、死亡。</p>
 <ul>
-<li><p>新建：对象由Thread类或者子类声明并创建，此时对象拥有相应的内存空间和其他资源；</p>
-</li>
-<li><p>就绪：在对象调用线程的start()方法后，这时候线程处于等待CPU分配资源阶段;</p>
-</li>
-<li><p>运行：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run方法定义了线程的操作和功能;</p>
-</li>
-<li><p>阻塞：在运行状态的时候，可能因为某些原因导致运行状态的线程变成了阻塞状态，比如sleep()、wait()之后线程就处于了阻塞状态，这个时候需要其他机制将处于阻塞状态的线程唤醒，比如调用notify或者notifyAll()方法。唤醒的线程不会立刻执行run方法，它们要再次等待CPU分配资源进入运行状态;</p>
-</li>
-<li><p>死亡：如果线程正常执行完毕后或线程被提前强制性的终止或出现异常导致结束，那么线程就要被销毁，释放资源;</p>
-</li>
+<li><p>新建：对象由Thread类或者子类声明并创建，此时对象拥有相应的内存空间和其他资源；</p></li>
+<li><p>就绪：在对象调用线程的start()方法后，这时候线程处于等待CPU分配资源阶段;</p></li>
+<li><p>运行：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run方法定义了线程的操作和功能;</p></li>
+<li><p>阻塞：在运行状态的时候，可能因为某些原因导致运行状态的线程变成了阻塞状态，比如sleep()、wait()之后线程就处于了阻塞状态，这个时候需要其他机制将处于阻塞状态的线程唤醒，比如调用notify或者notifyAll()方法。唤醒的线程不会立刻执行run方法，它们要再次等待CPU分配资源进入运行状态;</p></li>
+<li><p>死亡：如果线程正常执行完毕后或线程被提前强制性的终止或出现异常导致结束，那么线程就要被销毁，释放资源;</p></li>
 </ul>
-<h2 id="重载与覆盖"><a href="#重载与覆盖" class="headerlink" title="重载与覆盖"></a>重载与覆盖</h2><table>
+<h2 id="重载与覆盖">重载与覆盖</h2>
+<table>
 <thead>
-<tr>
-<th align="center">区别</th>
-<th align="center">覆盖</th>
-<th align="center">重载</th>
+<tr class="header">
+<th style="text-align: center;">区别</th>
+<th style="text-align: center;">覆盖</th>
+<th style="text-align: center;">重载</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">实现</td>
-<td align="center">子类对父类方法的重写</td>
-<td align="center">同一个类中建立多个同名方法</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">实现</td>
+<td style="text-align: center;">子类对父类方法的重写</td>
+<td style="text-align: center;">同一个类中建立多个同名方法</td>
 </tr>
-<tr>
-<td align="center">参数</td>
-<td align="center">与父类同名同参</td>
-<td align="center">与别的方法同名不同参</td>
+<tr class="even">
+<td style="text-align: center;">参数</td>
+<td style="text-align: center;">与父类同名同参</td>
+<td style="text-align: center;">与别的方法同名不同参</td>
 </tr>
-<tr>
-<td align="center">权限</td>
-<td align="center">子类不能覆盖父类的private权限</td>
-<td align="center">无</td>
+<tr class="odd">
+<td style="text-align: center;">权限</td>
+<td style="text-align: center;">子类不能覆盖父类的private权限</td>
+<td style="text-align: center;">无</td>
 </tr>
-<tr>
-<td align="center">返回值</td>
-<td align="center">与父类方法一致</td>
-<td align="center">无</td>
+<tr class="even">
+<td style="text-align: center;">返回值</td>
+<td style="text-align: center;">与父类方法一致</td>
+<td style="text-align: center;">无</td>
 </tr>
-</tbody></table>
-<h3 id="发生重载的条件"><a href="#发生重载的条件" class="headerlink" title="发生重载的条件"></a>发生重载的条件</h3><ul>
+</tbody>
+</table>
+<h3 id="发生重载的条件">发生重载的条件</h3>
+<ul>
 <li>对于类的方法（包括从父类中继承的方法），方法名相同，参数列表不同的方法之间就构成了重载关系。这里有两个问题需要注意：</li>
 </ul>
-<ol>
+<ol type="1">
 <li>什么叫参数列表不同？是指三样东西：<strong>参数的类型，参数的个数，参数的顺序</strong>，这三者只要有一个不同就叫做参数列表不同。</li>
 <li>重载关系只能发生在同一个类中吗？非也。这时候你要深刻理解继承，要知道一个子类所拥有的成员除了自己显式写出来的以外，还有父类遗传下来的。所以子类中的某个方法和父类中继承下来的方法也可以发生重载的关系。</li>
 </ol>
-<h3 id="发生覆盖的条件："><a href="#发生覆盖的条件：" class="headerlink" title="发生覆盖的条件："></a>发生覆盖的条件：</h3><ol>
-<li><p><strong>“三同一不低”</strong> 子类和父类的<strong>方法名称，参数列表，返回类型</strong>必须<strong>完全相同</strong>，而且子类方法的访问修饰符的权限不能比父类低。</p>
-</li>
-<li><p>子类方法不能抛出比父类方法更多的异常。即子类方法所抛出的异常必须和父类方法所<strong>抛出的异常一致</strong>，或者是其子类什么也不抛出；</p>
-</li>
-<li><p>被覆盖的方法不能是<strong>final类型</strong>的。因为final修饰的方法是无法覆盖的。</p>
-</li>
-<li><p>被覆盖的方法不能为<strong>private</strong>。否则在其子类中只是新定义了一个方法，并没有对其进行覆盖。</p>
-</li>
-<li><p>被覆盖的方法不能为<strong>static</strong>。所以如果父类中的方法为静态的，而子类中的方法不是静态的，但是两个方法除了这一点外其他都满足覆盖条件，那么会发生编译错误。反之亦然。即使父类和子类中的方法都是静态的，并且满足覆盖条件，但是仍然不会发生覆盖，因为静态方法是在编译的时候把静态方法和类的引用类型进行匹配。</p>
-</li>
+<h3 id="发生覆盖的条件">发生覆盖的条件：</h3>
+<ol type="1">
+<li><p><strong>“三同一不低”</strong> 子类和父类的<strong>方法名称，参数列表，返回类型</strong>必须<strong>完全相同</strong>，而且子类方法的访问修饰符的权限不能比父类低。</p></li>
+<li><p>子类方法不能抛出比父类方法更多的异常。即子类方法所抛出的异常必须和父类方法所<strong>抛出的异常一致</strong>，或者是其子类什么也不抛出；</p></li>
+<li><p>被覆盖的方法不能是<strong>final类型</strong>的。因为final修饰的方法是无法覆盖的。</p></li>
+<li><p>被覆盖的方法不能为<strong>private</strong>。否则在其子类中只是新定义了一个方法，并没有对其进行覆盖。</p></li>
+<li><p>被覆盖的方法不能为<strong>static</strong>。所以如果父类中的方法为静态的，而子类中的方法不是静态的，但是两个方法除了这一点外其他都满足覆盖条件，那么会发生编译错误。反之亦然。即使父类和子类中的方法都是静态的，并且满足覆盖条件，但是仍然不会发生覆盖，因为静态方法是在编译的时候把静态方法和类的引用类型进行匹配。</p></li>
 </ol>
-<h2 id="面向对象编程的基本特性"><a href="#面向对象编程的基本特性" class="headerlink" title="面向对象编程的基本特性"></a>面向对象编程的基本特性</h2><h3 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h3><ul>
+<h2 id="面向对象编程的基本特性">面向对象编程的基本特性</h2>
+<h3 id="继承性">继承性</h3>
+<ul>
 <li>程序中的继承性是指子类拥有父类的全部特征和行为，这是类之间的一种关系。Java 只支持<strong>单继承</strong>。</li>
 </ul>
-<h3 id="封装性"><a href="#封装性" class="headerlink" title="封装性"></a>封装性</h3><ul>
+<h3 id="封装性">封装性</h3>
+<ul>
 <li>封装是将<strong>代码及其处理的数据绑定在一起</strong>的一种编程机制，该机制保证了程序和数据都不受外部干扰且不被误用。封装的目的在于<strong>保护信息</strong>，使用它的主要优点如下。</li>
 </ul>
-<ol>
+<ol type="1">
 <li>保护类中的信息，它可以阻止在外部定义的代码随意访问内部代码和数据。</li>
 <li>隐藏细节信息，一些不需要程序员修改和使用的信息，比如取款机中的键盘，用户只需要知道按哪个键实现什么操作就可以，至于它内部是如何运行的，用户不需要知道。</li>
 <li>有助于建立各个系统之间的松耦合关系，提高系统的独立性。当一个系统的实现方式发生变化时，只要它的接口不变，就不会影响其他系统的使用。例如 U 盘，不管里面的存储方式怎么改变，只要 U 盘上的 USB 接口不变，就不会影响用户的正常操作。</li>
@@ -363,252 +362,226 @@
 <ul>
 <li>Java 语言的基本封装单位是<strong>类</strong>。由于类的用途是封装复杂性，所以类的内部有隐藏实现复杂性的机制。Java 提供了<strong>私有和公有</strong>的访问模式，类的公有接口代表外部的用户应该知道或可以知道的每件东西，私有的方法数据只能通过该类的成员代码来访问，这就可以确保不会发生不希望的事情。</li>
 </ul>
-<h3 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h3><ul>
+<h3 id="多态性">多态性</h3>
+<ul>
 <li>面向对象的多态性，即“<strong>一个接口，多个方法</strong>”。多态性体现在父类中定义的属性和方法被子类继承后，可以具有不同的属性或表现方式。多态性允许一个接口被多个同类使用，弥补了单继承的不足。</li>
 </ul>
-<h2 id="面向抽象编程"><a href="#面向抽象编程" class="headerlink" title="面向抽象编程"></a>面向抽象编程</h2><ul>
+<h2 id="面向抽象编程">面向抽象编程</h2>
+<ul>
 <li>指当设计某种重要的类时，不让该类面向具体的类，而是面向抽象类，即设计类中的重要数据是抽象类声明的对象，而不是具体类声明的对象。</li>
 </ul>
-<h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><ul>
+<h2 id="开闭原则">开闭原则</h2>
+<ul>
 <li>对扩展开放，对修改关闭。</li>
 </ul>
-<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<h2 id="线程同步">线程同步</h2>
+<h3 id="概念">概念</h3>
+<ul>
 <li><p>是解决两个或者多个线程同时访问同一个变量，并且至少有一个线程需要修改这个变量时，如何确保不发生冲突和混乱问题的办法。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3></li>
-<li><p>给若干个线程需要同时调用的方法添加<code>synchronized</code>修饰，即对其进行加锁。<font color=red>注意:同时调用的方法内需要对变量具有修改操作，且此变量为共有的变量，即只有涉及到共公变量多线程修改的时候才需要加锁</font></p>
-</li>
-<li><p>补充了解<code>Lock</code>接口</p>
-</li>
+<h3 id="实现">实现</h3></li>
+<li><p>给若干个线程需要同时调用的方法添加<code>synchronized</code>修饰，即对其进行加锁。<font color=red>注意:同时调用的方法内需要对变量具有修改操作，且此变量为共有的变量，即只有涉及到共公变量多线程修改的时候才需要加锁</font></p></li>
+<li><p>补充了解<code>Lock</code>接口</p></li>
 </ul>
-<h3 id="牢记"><a href="#牢记" class="headerlink" title="牢记"></a>牢记</h3><ul>
+<h3 id="牢记">牢记</h3>
+<ul>
 <li>关于线程同步，需要牢牢记住的第一点是：线程同步就是线程排队。同步就是排队。线程同步的目的就是避免线程“同步”执行。这可真是个无聊的绕口令。</li>
 <li>关于线程同步，需要牢牢记住的第二点是 “共享”这两个字。只有共享资源的读写访问才需要同步。如果不是共享资源，那么就根本没有同步的必要。</li>
 <li>关于线程同步，需要牢牢记住的第三点是，只有“变量”才需要同步访问。如果共享的资源是固定不变的，那么就相当于“常量”，线程同时读取常量也不需要同步。至少一个线程修改共享资源，这样的情况下，线程之间就需要同步。</li>
 <li>关于线程同步，需要牢牢记住的第四点是：多个线程访问共享资源的代码有可能是同一份代码，也有可能是不同的代码；无论是否执行同一份代码，只要这些线程的代码访问同一份可变的共享资源，这些线程之间就需要同步。</li>
 </ul>
 <blockquote>
-<p>参考资料<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6f98f03430eb">Java之多线程同步 - 简书</a></p>
+<p>参考资料 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6f98f03430eb">Java之多线程同步 - 简书</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/findbetterme/p/10794410.html">Java中线程同步的理解 - FindBetterMe - 博客园</a></p>
 </blockquote>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><ul>
-<li><p>接口（英文：Interface），在JAVA编程语言中是一个抽象类型，是抽象方法的集合，接口通常以interface来声明。一个类通过继承接口的方式，从而来继承接口的抽象方法。</p>
-</li>
-<li><p>接口并不是类，编写接口的方式和类很相似，但是它们属于不同的概念。类描述对象的属性和方法。接口则包含类要实现的方法。</p>
-</li>
-<li><p>除非实现接口的类是抽象类，否则该类要定义接口中的所有方法。</p>
-</li>
-<li><p>接口无法被实例化，但是可以被实现。一个实现接口的类，必须实现接口内所描述的所有方法，否则就必须声明为抽象类。另外，在 Java 中，接口类型可用来声明一个变量，他们可以成为一个空指针，或是被绑定在一个以此接口实现的对象。</p>
-</li>
+<h2 id="接口">接口</h2>
+<ul>
+<li><p>接口（英文：Interface），在JAVA编程语言中是一个抽象类型，是抽象方法的集合，接口通常以interface来声明。一个类通过继承接口的方式，从而来继承接口的抽象方法。</p></li>
+<li><p>接口并不是类，编写接口的方式和类很相似，但是它们属于不同的概念。类描述对象的属性和方法。接口则包含类要实现的方法。</p></li>
+<li><p>除非实现接口的类是抽象类，否则该类要定义接口中的所有方法。</p></li>
+<li><p>接口无法被实例化，但是可以被实现。一个实现接口的类，必须实现接口内所描述的所有方法，否则就必须声明为抽象类。另外，在 Java 中，接口类型可用来声明一个变量，他们可以成为一个空指针，或是被绑定在一个以此接口实现的对象。</p></li>
 </ul>
-<h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><h3 id="Java语言支持的变量类型有："><a href="#Java语言支持的变量类型有：" class="headerlink" title="Java语言支持的变量类型有："></a>Java语言支持的变量类型有：</h3><ul>
+<h2 id="变量类型">变量类型</h2>
+<h3 id="java语言支持的变量类型有">Java语言支持的变量类型有：</h3>
+<ul>
 <li>类变量：独立于方法之外的变量，<strong>用 static 修饰</strong>。(又称静态成员变量)</li>
 <li>实例变量：独立于方法之外的变量，不过<strong>没有 static 修饰</strong>。</li>
 <li>局部变量：类的方法中的变量。</li>
 </ul>
-<h3 id="实例变量和类变量的区别"><a href="#实例变量和类变量的区别" class="headerlink" title="实例变量和类变量的区别"></a>实例变量和类变量的区别</h3><ul>
+<h3 id="实例变量和类变量的区别">实例变量和类变量的区别</h3>
+<ul>
 <li>不同对象的实例变量不同</li>
 <li>所有对象共享类变量</li>
 <li>通过类名直接访问类变量</li>
 </ul>
 <p><font color=red>注：类变量似乎破坏了分装性，其实不然，当对象调用实例方法时，该方法中出现的类变量也是该对象的变量，只不过这个变量和所有的其他对象共享而已。</font></p>
-<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><h3 id="三个常用类"><a href="#三个常用类" class="headerlink" title="三个常用类"></a>三个常用类</h3><p>java.util.regex 包主要包括以下三个类：</p>
+<h2 id="正则表达式">正则表达式</h2>
+<h3 id="三个常用类">三个常用类</h3>
+<p>java.util.regex 包主要包括以下三个类：</p>
 <ul>
-<li><p><strong>Pattern 类</strong>：<br>  pattern 对象是一个正则表达式的编译表示。Pattern 类没有公共构造方法。要创建一个 Pattern 对象，你必须首先调用其公共静态编译方法，它返回一个 Pattern 对象。该方法接受一个正则表达式作为它的第一个参数。</p>
-</li>
-<li><p><strong>Matcher 类</strong>：<br>  Matcher 对象是对输入字符串进行解释和匹配操作的引擎。与Pattern 类一样，Matcher 也没有公共构造方法。你需要调用 Pattern 对象的 matcher 方法来获得一个 Matcher 对象。</p>
-</li>
-<li><p><strong>PatternSyntaxException</strong>：<br>  PatternSyntaxException 是一个非强制异常类，它表示一个正则表达式模式中的语法错误。</p>
-</li>
+<li><p><strong>Pattern 类</strong>： pattern 对象是一个正则表达式的编译表示。Pattern 类没有公共构造方法。要创建一个 Pattern 对象，你必须首先调用其公共静态编译方法，它返回一个 Pattern 对象。该方法接受一个正则表达式作为它的第一个参数。</p></li>
+<li><p><strong>Matcher 类</strong>： Matcher 对象是对输入字符串进行解释和匹配操作的引擎。与Pattern 类一样，Matcher 也没有公共构造方法。你需要调用 Pattern 对象的 matcher 方法来获得一个 Matcher 对象。</p></li>
+<li><p><strong>PatternSyntaxException</strong>： PatternSyntaxException 是一个非强制异常类，它表示一个正则表达式模式中的语法错误。</p></li>
 </ul>
-<h3 id="捕获组"><a href="#捕获组" class="headerlink" title="捕获组"></a>捕获组</h3><ul>
-<li><p>捕获组是把多个字符当一个单独单元进行处理的方法，它通过对括号内的字符分组来创建。<br>  例如，正则表达式 (123) 创建了单一分组，组里包含”1”，”2”，和”3”。</p>
-</li>
-<li><p>捕获组是通过从左至右计算其开括号来编号<br>  例如，正则表达式 ( A ( B ( C ) ) ),则分为( A (B( C ) ) ),( B ( C ) ),( C )<br>  <strong>计算心得</strong>：从左向右，依次根据<strong>左侧括号匹配右侧括号</strong>，则括号内的字符为一组。</p>
-</li>
-<li><p>可以通过调用 matcher 对象的 groupCount 方法来查看表达式有多少个分组。groupCount 方法返回一个 int 值，表示matcher对象当前有多个捕获组。</p>
-</li>
-<li><p>还有一个特殊的组（group(0)），它总是代表整个表达式。该组不包括在 groupCount 的返回值中。</p>
-</li>
+<h3 id="捕获组">捕获组</h3>
+<ul>
+<li><p>捕获组是把多个字符当一个单独单元进行处理的方法，它通过对括号内的字符分组来创建。 例如，正则表达式 (123) 创建了单一分组，组里包含"1"，"2"，和"3"。</p></li>
+<li><p>捕获组是通过从左至右计算其开括号来编号 例如，正则表达式 ( A ( B ( C ) ) ),则分为( A (B( C ) ) ),( B ( C ) ),( C ) <strong>计算心得</strong>：从左向右，依次根据<strong>左侧括号匹配右侧括号</strong>，则括号内的字符为一组。</p></li>
+<li><p>可以通过调用 matcher 对象的 groupCount 方法来查看表达式有多少个分组。groupCount 方法返回一个 int 值，表示matcher对象当前有多个捕获组。</p></li>
+<li><p>还有一个特殊的组（group(0)），它总是代表整个表达式。该组不包括在 groupCount 的返回值中。</p></li>
 </ul>
-<h3 id="正则表达式语法"><a href="#正则表达式语法" class="headerlink" title="正则表达式语法"></a>正则表达式语法</h3><ul>
-<li><p>在其他语言中(Perl,JS,PHP,Python,Ruby等)，<code>\</code>表示：我想要在正则表达式中插入一个普通的（字面上的）反斜杠，请不要给它任何特殊的意义。</p>
-</li>
-<li><p>在 Java 中，<code>\\</code> 表示：我要插入一个正则表达式的反斜线，所以其后的字符具有特殊的意义。<br><font color=red>注：在Java中需要两个</font><code>\\</code><font color=red>表示一个</font><code>\</code><font color=red>这与C++,Go类似。</font></p>
-</li>
+<h3 id="正则表达式语法">正则表达式语法</h3>
+<ul>
+<li><p>在其他语言中(Perl,JS,PHP,Python,Ruby等)，<code>\</code>表示：我想要在正则表达式中插入一个普通的（字面上的）反斜杠，请不要给它任何特殊的意义。</p></li>
+<li><p>在 Java 中，<code>\\</code> 表示：我要插入一个正则表达式的反斜线，所以其后的字符具有特殊的意义。 <font color=red>注：在Java中需要两个</font><code>\\</code><font color=red>表示一个</font><code>\</code><font color=red>这与C++,Go类似。</font></p></li>
 </ul>
 <blockquote>
-<p>参考资料<br><a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-regular-expressions.html">Java 正则表达式 | 菜鸟教程</a></p>
+<p>参考资料 <a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-regular-expressions.html">Java 正则表达式 | 菜鸟教程</a></p>
 </blockquote>
-<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="加载驱动"><a href="#加载驱动" class="headerlink" title="加载驱动"></a>加载驱动</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//驱动程序名称</span><br><span class="hljs-type">String</span> <span class="hljs-variable">driver</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>;<br><span class="hljs-comment">//加载驱动</span><br>Class.forName(driver);<br></code></pre></td></tr></table></figure>
-
-<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//声明Connection对象</span><br><span class="hljs-type">Connection</span> <span class="hljs-variable">con</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><span class="hljs-comment">//URL指向要访问的数据库名</span><br><span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/javastudy(此处为自己的数据库名)?serverTimezone=UTC&quot;</span>;<br><span class="hljs-comment">//用户名</span><br>String user=<span class="hljs-string">&quot;xxx&quot;</span>;<br><span class="hljs-comment">//密码</span><br>String password=<span class="hljs-string">&quot;xxx&quot;</span>;<br><span class="hljs-comment">//getConnection()方法，连接MySQL数据库！！</span><br>con = DriverManager.getConnection(url, user, password);<br><span class="hljs-keyword">if</span> (!con.isClosed())<br>    System.out.println(<span class="hljs-string">&quot;Succeeded connecting to the Database!&quot;</span>);<br></code></pre></td></tr></table></figure>
-
-<h3 id="创建查询"><a href="#创建查询" class="headerlink" title="创建查询"></a>创建查询</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//创建PreparedStatement对象执行sql语句</span><br><span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">statement</span> <span class="hljs-operator">=</span> con.prepareStatement(<span class="hljs-string">&quot;select * from score where id = ?;&quot;</span>);<br><span class="hljs-comment">//给sql语句中的？赋值(从1开始依次往后)</span><br>statement.setString(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;123&quot;</span>);<br><span class="hljs-comment">//执行sql语句并返回结果集</span><br><span class="hljs-type">ResultSet</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> statement.executeQuery();<br></code></pre></td></tr></table></figure>
-
-<h3 id="处理结果集"><a href="#处理结果集" class="headerlink" title="处理结果集"></a>处理结果集</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//定义存放查询返回结果的变量,类型与获取方式有关。</span><br>String id;<br><span class="hljs-keyword">while</span>(res.next())&#123;<br>    id = res.getString(<span class="hljs-string">&quot;id&quot;</span>) <span class="hljs-comment">//根据属性名返回结果集中的数据</span><br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="释放结果集，关闭连接"><a href="#释放结果集，关闭连接" class="headerlink" title="释放结果集，关闭连接"></a>释放结果集，关闭连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//释放结果集</span><br>res.close();<br><span class="hljs-comment">//关闭连接</span><br>con.close();<br></code></pre></td></tr></table></figure>
-
-<h2 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h2><h3 id="类图基础属性"><a href="#类图基础属性" class="headerlink" title="类图基础属性"></a>类图基础属性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">-表示<span class="hljs-keyword">private</span><br>#表示<span class="hljs-keyword">protected</span><br>~表示<span class="hljs-keyword">default</span>,也就是包权限<br>_下划线表示<span class="hljs-keyword">static</span><br>斜体表示抽象<br></code></pre></td></tr></table></figure>
-
-<h3 id="类与类之间的关系"><a href="#类与类之间的关系" class="headerlink" title="类与类之间的关系"></a>类与类之间的关系</h3><ul>
+<h2 id="数据库">数据库</h2>
+<h3 id="加载驱动">加载驱动</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//驱动程序名称</span><br><span class="hljs-type">String</span> <span class="hljs-variable">driver</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;com.mysql.jdbc.Driver&quot;</span>;<br><span class="hljs-comment">//加载驱动</span><br>Class.forName(driver);<br></code></pre></td></tr></table></figure>
+<h3 id="连接数据库">连接数据库</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//声明Connection对象</span><br><span class="hljs-type">Connection</span> <span class="hljs-variable">con</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><span class="hljs-comment">//URL指向要访问的数据库名</span><br><span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/javastudy(此处为自己的数据库名)?serverTimezone=UTC&quot;</span>;<br><span class="hljs-comment">//用户名</span><br>String user=<span class="hljs-string">&quot;xxx&quot;</span>;<br><span class="hljs-comment">//密码</span><br>String password=<span class="hljs-string">&quot;xxx&quot;</span>;<br><span class="hljs-comment">//getConnection()方法，连接MySQL数据库！！</span><br>con = DriverManager.getConnection(url, user, password);<br><span class="hljs-keyword">if</span> (!con.isClosed())<br>    System.out.println(<span class="hljs-string">&quot;Succeeded connecting to the Database!&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="创建查询">创建查询</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//创建PreparedStatement对象执行sql语句</span><br><span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">statement</span> <span class="hljs-operator">=</span> con.prepareStatement(<span class="hljs-string">&quot;select * from score where id = ?;&quot;</span>);<br><span class="hljs-comment">//给sql语句中的？赋值(从1开始依次往后)</span><br>statement.setString(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;123&quot;</span>);<br><span class="hljs-comment">//执行sql语句并返回结果集</span><br><span class="hljs-type">ResultSet</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> statement.executeQuery();<br></code></pre></td></tr></table></figure>
+<h3 id="处理结果集">处理结果集</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//定义存放查询返回结果的变量,类型与获取方式有关。</span><br>String id;<br><span class="hljs-keyword">while</span>(res.next())&#123;<br>    id = res.getString(<span class="hljs-string">&quot;id&quot;</span>) <span class="hljs-comment">//根据属性名返回结果集中的数据</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="释放结果集关闭连接">释放结果集，关闭连接</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//释放结果集</span><br>res.close();<br><span class="hljs-comment">//关闭连接</span><br>con.close();<br></code></pre></td></tr></table></figure>
+<h2 id="uml类图">UML类图</h2>
+<h3 id="类图基础属性">类图基础属性</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">-表示<span class="hljs-keyword">private</span><br>#表示<span class="hljs-keyword">protected</span><br>~表示<span class="hljs-keyword">default</span>,也就是包权限<br>_下划线表示<span class="hljs-keyword">static</span><br>斜体表示抽象<br></code></pre></td></tr></table></figure>
+<h3 id="类与类之间的关系">类与类之间的关系</h3>
+<ul>
 <li>在UML类图中，常见的有以下几种关系:</li>
 </ul>
-<ol>
-<li><p>泛化（Generalization）</p>
-</li>
-<li><p>实现（Realization）</p>
-</li>
-<li><p>关联（Association）</p>
-</li>
-<li><p>聚合（Aggregation）</p>
-</li>
-<li><p>组合（Composition）</p>
-</li>
-<li><p>依赖（Dependency）</p>
-</li>
+<ol type="1">
+<li><p>泛化（Generalization）</p></li>
+<li><p>实现（Realization）</p></li>
+<li><p>关联（Association）</p></li>
+<li><p>聚合（Aggregation）</p></li>
+<li><p>组合（Composition）</p></li>
+<li><p>依赖（Dependency）</p></li>
 </ol>
-<h3 id="泛化"><a href="#泛化" class="headerlink" title="泛化"></a>泛化</h3><h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><ul>
+<h3 id="泛化">泛化</h3>
+<h4 id="继承">继承</h4>
+<ul>
 <li>表示方法：实线+空心三角形</li>
 </ul>
-<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><ul>
+<h4 id="实现-1">实现</h4>
+<ul>
 <li>表示方法：虚线+空心三角形</li>
 </ul>
-<h2 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h2><h3 id="常用组件"><a href="#常用组件" class="headerlink" title="常用组件"></a>常用组件</h3><h4 id="顶层容器"><a href="#顶层容器" class="headerlink" title="顶层容器"></a>顶层容器</h4><ul>
+<h2 id="gui">GUI</h2>
+<h3 id="常用组件">常用组件</h3>
+<h4 id="顶层容器">顶层容器</h4>
+<ul>
 <li>JFrame 框架，一般被继承</li>
 </ul>
-<h4 id="中间容器"><a href="#中间容器" class="headerlink" title="中间容器"></a>中间容器</h4><ul>
-<li><p>JPanel 普通面板，<strong>最常用</strong></p>
-</li>
-<li><p>JTabbedPane 选项卡面板，<strong>用于需要切换界面</strong></p>
-</li>
+<h4 id="中间容器">中间容器</h4>
+<ul>
+<li><p>JPanel 普通面板，<strong>最常用</strong></p></li>
+<li><p>JTabbedPane 选项卡面板，<strong>用于需要切换界面</strong></p></li>
 </ul>
-<h4 id="控件"><a href="#控件" class="headerlink" title="控件"></a>控件</h4><ul>
-<li><p>JLabel 标签</p>
-</li>
-<li><p>JButton 按钮</p>
-</li>
-<li><p>JTextField 文本框，一般用于做输入框</p>
-</li>
-<li><p>JTextArea 文本域，一般用于做显示框</p>
-</li>
-<li><p>JMenu 菜单</p>
-</li>
-<li><p>JMenuItem 菜单项</p>
-</li>
+<h4 id="控件">控件</h4>
+<ul>
+<li><p>JLabel 标签</p></li>
+<li><p>JButton 按钮</p></li>
+<li><p>JTextField 文本框，一般用于做输入框</p></li>
+<li><p>JTextArea 文本域，一般用于做显示框</p></li>
+<li><p>JMenu 菜单</p></li>
+<li><p>JMenuItem 菜单项</p></li>
 </ul>
-<h3 id="常用布局"><a href="#常用布局" class="headerlink" title="常用布局"></a>常用布局</h3><h4 id="FlowLayout"><a href="#FlowLayout" class="headerlink" title="FlowLayout"></a>FlowLayout</h4><ul>
-<li><p>流式布局，从左向右排列，排满一行则换行</p>
-</li>
-<li><p>是JPanel的默认布局</p>
-</li>
+<h3 id="常用布局">常用布局</h3>
+<h4 id="flowlayout">FlowLayout</h4>
+<ul>
+<li><p>流式布局，从左向右排列，排满一行则换行</p></li>
+<li><p>是JPanel的默认布局</p></li>
 </ul>
-<h4 id="GridLayout"><a href="#GridLayout" class="headerlink" title="GridLayout"></a>GridLayout</h4><ul>
+<h4 id="gridlayout">GridLayout</h4>
+<ul>
 <li>网格布局，将面板按行列划分为相等的网格</li>
 </ul>
-<h4 id="CardLayout"><a href="#CardLayout" class="headerlink" title="CardLayout"></a>CardLayout</h4><ul>
-<li><p>卡片布局，将面板层叠放入容器</p>
-</li>
-<li><p>可以用来实现类似卡片面板的切换功能</p>
-</li>
+<h4 id="cardlayout">CardLayout</h4>
+<ul>
+<li><p>卡片布局，将面板层叠放入容器</p></li>
+<li><p>可以用来实现类似卡片面板的切换功能</p></li>
 </ul>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><h4 id="关于容器"><a href="#关于容器" class="headerlink" title="关于容器"></a>关于容器</h4><ul>
-<li><p>setTitle() 设置标题</p>
-</li>
-<li><p>setSize() 设置窗口大小，(宽，高)</p>
-</li>
-<li><p>setVisible() 设置容器是否可见，true&#x2F;false</p>
-</li>
-<li><p>setLayout()  设置布局，常和布局一起使用</p>
-</li>
-<li><p>setDefaultCloseOperation(EXIT_ON_CLOSE)  设置关闭操作</p>
-</li>
-<li><p>add() 添加容器，控件等</p>
-</li>
+<h3 id="常用方法">常用方法</h3>
+<h4 id="关于容器">关于容器</h4>
+<ul>
+<li><p>setTitle() 设置标题</p></li>
+<li><p>setSize() 设置窗口大小，(宽，高)</p></li>
+<li><p>setVisible() 设置容器是否可见，true/false</p></li>
+<li><p>setLayout() 设置布局，常和布局一起使用</p></li>
+<li><p>setDefaultCloseOperation(EXIT_ON_CLOSE) 设置关闭操作</p></li>
+<li><p>add() 添加容器，控件等</p></li>
 </ul>
-<h4 id="关于控件"><a href="#关于控件" class="headerlink" title="关于控件"></a>关于控件</h4><ul>
-<li><p>getText() 获取文字</p>
-</li>
-<li><p>setText() 设置文字</p>
-</li>
-<li><p>append() 文本域追加文字</p>
-</li>
+<h4 id="关于控件">关于控件</h4>
+<ul>
+<li><p>getText() 获取文字</p></li>
+<li><p>setText() 设置文字</p></li>
+<li><p>append() 文本域追加文字</p></li>
 </ul>
-<h4 id="监听事件"><a href="#监听事件" class="headerlink" title="监听事件"></a>监听事件</h4><ul>
+<h4 id="监听事件">监听事件</h4>
+<ul>
 <li><p>ActionListener 接口</p>
 <ul>
 <li>重写ActionPerformed(ActionEvent e)函数</li>
-</ul>
-</li>
+</ul></li>
 <li><p>KeyListener 接口</p>
 <ul>
-<li><p>keyTyped(KeyEvent e)</p>
-</li>
-<li><p>keyPressed(KeyEvent e)</p>
-</li>
-<li><p>keyReleased(KeyEvent e)</p>
-</li>
-</ul>
-</li>
+<li><p>keyTyped(KeyEvent e)</p></li>
+<li><p>keyPressed(KeyEvent e)</p></li>
+<li><p>keyReleased(KeyEvent e)</p></li>
+</ul></li>
 <li><p>FocusListener 接口</p>
 <ul>
-<li><p>focusGained(FocusEvent e)</p>
-</li>
-<li><p>focusLost(FocusEvent e)</p>
-</li>
+<li><p>focusGained(FocusEvent e)</p></li>
+<li><p>focusLost(FocusEvent e)</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><ul>
+<h2 id="网络编程">网络编程</h2>
+<ul>
 <li><p>服务器端</p>
 <ul>
-<li><p>ServerSocket类</p>
-</li>
-<li><p>构造函数ServerSocket(port) 端口</p>
-</li>
-<li><p>方法 accept() 返回一个Socket对象</p>
-</li>
-</ul>
-</li>
+<li><p>ServerSocket类</p></li>
+<li><p>构造函数ServerSocket(port) 端口</p></li>
+<li><p>方法 accept() 返回一个Socket对象</p></li>
+</ul></li>
 <li><p>客户端</p>
 <ul>
-<li><p>Socket类</p>
-</li>
-<li><p>构造函数Socket(ip, port) 服务器ip和端口</p>
-</li>
-</ul>
-</li>
+<li><p>Socket类</p></li>
+<li><p>构造函数Socket(ip, port) 服务器ip和端口</p></li>
+</ul></li>
 <li><p>传输</p>
 <ul>
-<li><p>DataInputStream(socket.getInputStream()) 通过此方法定义输入流对象</p>
-</li>
-<li><p>DataOutputStream(socket.getOutputStream()) 通过此方法定义输出流对象</p>
-</li>
-<li><p>readUTF() 从服务器&#x2F;客户端接收数据</p>
-</li>
-<li><p>writeUTF() 向服务器&#x2F;客户端发送数据</p>
-</li>
+<li><p>DataInputStream(socket.getInputStream()) 通过此方法定义输入流对象</p></li>
+<li><p>DataOutputStream(socket.getOutputStream()) 通过此方法定义输出流对象</p></li>
+<li><p>readUTF() 从服务器/客户端接收数据</p></li>
+<li><p>writeUTF() 向服务器/客户端发送数据</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="I-x2F-O流"><a href="#I-x2F-O流" class="headerlink" title="I&#x2F;O流"></a>I&#x2F;O流</h2><p><img src="https://img-blog.csdnimg.cn/20190721043347273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjM4NDA4NQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="I/O流总结"></p>
+<h2 id="io流">I/O流</h2>
+<figure>
+<img src="https://img-blog.csdnimg.cn/20190721043347273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjM4NDA4NQ==,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="I/O流总结" /><figcaption aria-hidden="true">I/O流总结</figcaption>
+</figure>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhaoyanjun6/article/details/54292148">Java IO流学习总结一：输入输出流_赵彦军-CSDN博客</a></p>
 </blockquote>
-<h2 id="MVC结构"><a href="#MVC结构" class="headerlink" title="MVC结构"></a>MVC结构</h2><h3 id="MVC，即-Model-模型、View-视图，及-Controller-控制器"><a href="#MVC，即-Model-模型、View-视图，及-Controller-控制器" class="headerlink" title="MVC，即 Model 模型、View 视图，及 Controller 控制器"></a>MVC，即 Model 模型、View 视图，及 Controller 控制器</h3><ul>
+<h2 id="mvc结构">MVC结构</h2>
+<h3 id="mvc即-model-模型view-视图及-controller-控制器">MVC，即 Model 模型、View 视图，及 Controller 控制器</h3>
+<ul>
 <li>View：视图，为用户提供使用界面，与用户直接进行交互。</li>
-<li>Model：模型，承载数据，并对用户提交请求进行计算的模块。其分为两类：<br>一类称为数据承载 Bean：实体类，专门用户承载业务数据的，如 Student、User 等<br>一类称为业务处理 Bean：指 Service 或 Dao 对象，专门用于处理用户提交请求的。</li>
+<li>Model：模型，承载数据，并对用户提交请求进行计算的模块。其分为两类： 一类称为数据承载 Bean：实体类，专门用户承载业务数据的，如 Student、User 等 一类称为业务处理 Bean：指 Service 或 Dao 对象，专门用于处理用户提交请求的。</li>
 <li>Controller：控制器，用于将用户请求转发给相应的 Model 进行处理，并根据 Model 的计算结果向用户提供相应响应。</li>
 </ul>
-<h3 id="MVC-架构程序的工作流程"><a href="#MVC-架构程序的工作流程" class="headerlink" title="MVC 架构程序的工作流程"></a>MVC 架构程序的工作流程</h3><ol>
-<li><p>用户通过 View 页面向服务端提出请求，可以是表单请求、超链接请求、AJAX 请求等</p>
-</li>
-<li><p>服务端 Controller 控制器接收到请求后对请求进行解析，找到相应的 Model 对用户请求进行处理</p>
-</li>
-<li><p>Model 处理后，将处理结果再交给 Controller</p>
-</li>
-<li><p>Controller 在接到处理结果后，根据处理结果找到要作为向客户端发回的响应 View 页面。页面经渲染（数据填充）后，再发送给客户端。</p>
-</li>
+<h3 id="mvc-架构程序的工作流程">MVC 架构程序的工作流程</h3>
+<ol type="1">
+<li><p>用户通过 View 页面向服务端提出请求，可以是表单请求、超链接请求、AJAX 请求等</p></li>
+<li><p>服务端 Controller 控制器接收到请求后对请求进行解析，找到相应的 Model 对用户请求进行处理</p></li>
+<li><p>Model 处理后，将处理结果再交给 Controller</p></li>
+<li><p>Controller 在接到处理结果后，根据处理结果找到要作为向客户端发回的响应 View 页面。页面经渲染（数据填充）后，再发送给客户端。</p></li>
 </ol>
 
                 
