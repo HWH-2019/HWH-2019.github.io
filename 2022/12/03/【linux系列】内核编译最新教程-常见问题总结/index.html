@@ -16,12 +16,12 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="编译环境  虚拟机： VMware workstation pro 16 虚拟机操作系统： ubuntu-20.04.3-desktop-amd64 原系统内核版本：5.11.0-46-generic 内核源码版本：5.11.1 ### 环境准备 安装VMware虚拟机并创建虚拟机 安装Ubuntu系统 下载内核源码  新编译的内核源码版本建议和原系统内核版本相近(大版本一致)">
+    <meta name="description" content="编译环境  虚拟机： VMware workstation pro 16 虚拟机操作系统： ubuntu-20.04.3-desktop-amd64 原系统内核版本：5.11.0-46-generic 内核源码版本：5.11.1  环境准备  安装VMware虚拟机并创建虚拟机 安装Ubuntu系统 下载内核源码  新编译的内核源码版本建议和原系统内核版本相近(大版本一致">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【linux系列】内核编译最新教程+常见问题总结">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/12/03/%E3%80%90linux%E7%B3%BB%E5%88%97%E3%80%91%E5%86%85%E6%A0%B8%E7%BC%96%E8%AF%91%E6%9C%80%E6%96%B0%E6%95%99%E7%A8%8B-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="编译环境  虚拟机： VMware workstation pro 16 虚拟机操作系统： ubuntu-20.04.3-desktop-amd64 原系统内核版本：5.11.0-46-generic 内核源码版本：5.11.1 ### 环境准备 安装VMware虚拟机并创建虚拟机 安装Ubuntu系统 下载内核源码  新编译的内核源码版本建议和原系统内核版本相近(大版本一致)">
+<meta property="og:description" content="编译环境  虚拟机： VMware workstation pro 16 虚拟机操作系统： ubuntu-20.04.3-desktop-amd64 原系统内核版本：5.11.0-46-generic 内核源码版本：5.11.1  环境准备  安装VMware虚拟机并创建虚拟机 安装Ubuntu系统 下载内核源码  新编译的内核源码版本建议和原系统内核版本相近(大版本一致">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/c2e9b73fc0a4448ca8447939159789e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/53d259b602ad4378b5ada1cf36d096d2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/ac1b9c5bf77a4b3c851f8f7b0a245025.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/d2f5ef8020da4f5d8aad24f2ed0182c0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="article:published_time" content="2022-12-03T12:20:20.000Z">
-<meta property="article:modified_time" content="2022-12-03T12:26:40.748Z">
+<meta property="article:modified_time" content="2022-12-04T11:58:04.257Z">
 <meta property="article:author" content="HWH">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Kernel">
@@ -245,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          2.9k 字
         
       </span>
     
@@ -304,7 +304,10 @@
 <li>虚拟机： <code>VMware workstation pro 16</code></li>
 <li>虚拟机操作系统： <code>ubuntu-20.04.3-desktop-amd64</code></li>
 <li>原系统内核版本：<code>5.11.0-46-generic</code></li>
-<li>内核源码版本：<code>5.11.1</code> ### 环境准备</li>
+<li>内核源码版本：<code>5.11.1</code></li>
+</ul>
+<h3 id="环境准备">环境准备</h3>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122522464">安装VMware虚拟机并创建虚拟机</a></li>
 <li>安装Ubuntu系统</li>
 <li><a target="_blank" rel="noopener" href="https://cdn.kernel.org/pub/linux/kernel/">下载内核源码</a>
