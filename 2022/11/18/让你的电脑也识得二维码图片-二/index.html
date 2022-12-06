@@ -24,7 +24,7 @@
 <meta property="og:description" content="继续 之前写了一份能够让电脑识别二维码图片的脚本，详细参见《让你的电脑也识得二维码图片（一）》 虽然已经可以做到比较方便的识别电脑上的二维码，但是还是需要将二维码图片下载到本地，然后才能识别，这就比较麻烦，正所谓没有最懒只有更懒，懒是人类进步的源泉。我便想能不能不用下载到本地就可以识别，并且让出现在所有场景下的二维码均可识别。 尝试了一些思路，都比较复杂，不易实现。 主要问题 获取图片 要">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-18T12:10:40.000Z">
-<meta property="article:modified_time" content="2022-11-18T12:13:28.909Z">
+<meta property="article:modified_time" content="2022-12-06T02:41:09.583Z">
 <meta property="article:author" content="HWH">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Shell">
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          823 字
+          859 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          7 分钟
+          8 分钟
         
       </span>
     
@@ -297,14 +297,24 @@
 <h3 id="获取图片">获取图片</h3>
 <p>要实现不下载就识别，如何获取到图片是一个问题，目前二维码出现在各种网页，软件之中。 网页的话可以尝试插件，比如<a target="_blank" rel="noopener" href="https://crxdoc-zh.appspot.com/extensions/devguide">chrome插件</a>。直接在浏览器中调用识别二维码的api对二维码进行识别。但本人不会，下次一定。 而软件中的就很难处理(你不可能强行修改软件)，你只有下载下来。</p>
 <h2 id="新的思路">新的思路</h2>
-<p>今天由QQ截图突然想到，可以直接从屏幕中截取出二维码进行识别，于是尝试着写一个类似QQ截图的软件然后保存到本地，搞到一半意识到，这太麻烦了，而且终归是保存到了本地，和下载没有区别，放弃。 但是QQ截图，其实并没有保存图片到本地，而是将图片保存到了剪切板中，想到这我突然产生了新的思路： &gt;从剪切板中获取二维码图像然后进行识别</p>
+<p>今天由QQ截图突然想到，可以直接从屏幕中截取出二维码进行识别，于是尝试着写一个类似QQ截图的软件然后保存到本地，搞到一半意识到，这太麻烦了，而且终归是保存到了本地，和下载没有区别，放弃。 但是QQ截图，其实并没有保存图片到本地，而是将图片保存到了剪切板中，想到这我突然产生了新的思路：</p>
+<blockquote>
+<p>从剪切板中获取二维码图像然后进行识别</p>
+</blockquote>
 <h2 id="实现">实现</h2>
-<p>CSDN上搜索了一下发现了PIL中的ImageGrab模块 调用此模块 &gt;from PIL import ImageGrab</p>
-<p>从剪切板获取 &gt;image = ImageGrab.grabclipboard()</p>
+<p>CSDN上搜索了一下发现了PIL中的ImageGrab模块 调用此模块</p>
+<blockquote>
+<p>from PIL import ImageGrab</p>
+</blockquote>
+<p>从剪切板获取</p>
+<blockquote>
+<p>image = ImageGrab.grabclipboard()</p>
+</blockquote>
 <p>然后就好了。</p>
 <h2 id="右键">右键</h2>
-<p>还是想用右键菜单操作，这次仍需要更改注册表，但位置和内容都不同，之前是针对所有图片的右键菜单，这次针对在不选中文件或文件夹情况下的右键菜单。 因此打开注册表编辑器，到计算机_CLASSES_ROOT，新建名为 识别剪切板二维码 的项，再在此项下新建 command 项，修改数值数据为： &gt;D:_demo.bat</p>
-<p>由于gcb_demo.py的执行无需传参，因此只需要指明路径即可。 .bat文件中也无需接收参数。</p>
+<p>还是想用右键菜单操作，这次仍需要更改注册表，但位置和内容都不同，之前是针对所有图片的右键菜单，这次针对在不选中文件或文件夹情况下的右键菜单。 因此打开注册表编辑器，到计算机<code>\HKEY_CLASSES_ROOT\Directory\Background\shell\</code>路径下，新建名为 识别剪切板二维码 的项，再在此项下新建 command 项，修改数值数据为：<code>D:\Python\test\gcb_demo.bat</code></p>
+<p>由于gcb_demo.py的执行无需传参，因此只需要指明路径即可。</p>
+<p>.bat文件中也无需接收参数。</p>
 <h2 id="最后">最后</h2>
 <p>二维码识别功能还有待加强 源码放在<a target="_blank" rel="noopener" href="https://gitee.com/HWHfile/recognize-qrcode/tree/master/Recognize%20Qrcode-grabclipboard">Gitee</a></p>
 
