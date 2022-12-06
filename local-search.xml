@@ -40,11 +40,11 @@
     
     <categories>
       
-      <category>Summarize</category>
-      
       <category>Tutorial</category>
       
       <category>Solutions</category>
+      
+      <category>Summarize</category>
       
     </categories>
     
@@ -219,11 +219,11 @@
     
     <tags>
       
-      <tag>Java</tag>
-      
       <tag>Eclipse</tag>
       
       <tag>Java Web</tag>
+      
+      <tag>Java</tag>
       
     </tags>
     
