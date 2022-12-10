@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/site.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="HWH">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="写在前面  今天用到了 Jdbc 进行数据库的一些操作，要写很多重复连接关闭的代码，刚好最近在学设计模式，就突发奇想浅浅的用一下设计模式，给它封装一下吧 写的很简单，也可能有很多不足的地方，欢迎评论指出哦。 只是设计模式的一个练习，不一定实用，大家且看看吧。  实现说明 核心  链式调用 建造者模式 接口回调  相关说明 链式调用  链式调用: chained in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现 Jdbc 优雅的链式调用">
+<meta property="og:url" content="https://hwh-2019.github.io/2022/12/10/%E5%AE%9E%E7%8E%B0-Jdbc-%E4%BC%98%E9%9B%85%E7%9A%84%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8/index.html">
+<meta property="og:site_name" content="HWH&#39;s Blogs">
+<meta property="og:description" content="写在前面  今天用到了 Jdbc 进行数据库的一些操作，要写很多重复连接关闭的代码，刚好最近在学设计模式，就突发奇想浅浅的用一下设计模式，给它封装一下吧 写的很简单，也可能有很多不足的地方，欢迎评论指出哦。 只是设计模式的一个练习，不一定实用，大家且看看吧。  实现说明 核心  链式调用 建造者模式 接口回调  相关说明 链式调用  链式调用: chained in">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-10T12:56:08.000Z">
+<meta property="article:modified_time" content="2022-12-10T12:58:37.749Z">
+<meta property="article:author" content="HWH">
+<meta property="article:tag" content="Jdbc">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>实现 Jdbc 优雅的链式调用 - HWH&#39;s Blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hwh-2019.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HWH&#39;s Blogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="实现 Jdbc 优雅的链式调用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-10 20:56" pubdate>
+          2022年12月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">实现 Jdbc 优雅的链式调用</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="写在前面">写在前面</h3>
+<ul>
+<li>今天用到了 <code>Jdbc</code> 进行数据库的一些操作，要写很多重复连接关闭的代码，刚好最近在学设计模式，就突发奇想浅浅的用一下设计模式，给它封装一下吧</li>
+<li>写的很简单，也可能有很多不足的地方，欢迎评论指出哦。</li>
+<li>只是设计模式的一个练习，不一定实用，大家且看看吧。</li>
+</ul>
+<h3 id="实现说明">实现说明</h3>
+<h4 id="核心">核心</h4>
+<ul>
+<li>链式调用</li>
+<li>建造者模式</li>
+<li>接口回调</li>
+</ul>
+<h4 id="相关说明">相关说明</h4>
+<h5 id="链式调用">链式调用</h5>
+<ul>
+<li>链式调用: <code>chained invocation</code>(链式调用）或者<code>Method chaining</code>，这种风格的AP设计叫做<code>fluent API</code>或者<code>Fluent interface</code></li>
+<li>常用于<code>Builder Pattern</code>(建造者模式)。</li>
+</ul>
+<h5 id="建造者模式">建造者模式</h5>
+<ul>
+<li>建造者模式是设计模式的一种，将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</li>
+</ul>
+<h5 id="接口回调">接口回调</h5>
+<ul>
+<li>接口回调是指：可以把使用某一接口的类创建的对象的引用赋给该接口声明的接口变量，那么该接口变量就可以调用被类实现的接口的方法。</li>
+<li>实际上，当接口变量调用被类实现的接口中的方法时，就是通知相应的对象调用接口的方法，这一过程称为对象功能的接口回调。</li>
+</ul>
+<h3 id="源码部分">源码部分</h3>
+<ul>
+<li>如何使用话已经总结在代码开头的注释了，连同方法作用也一并整理了。</li>
+<li>好了直接看源码如下：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.huang.util;<br><br><span class="hljs-keyword">import</span> java.sql.*;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 描述：Jdbc 工具类 实现Jdbc的快速使用，链式调用</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 方法：Builder() -- 构建 jdbc 基本属性</span><br><span class="hljs-comment"> *      setUrl() -- 设置 jdbc url</span><br><span class="hljs-comment"> *      setName() -- 设置 jdbc 用户名</span><br><span class="hljs-comment"> *      setPwd() -- 设置 jdbc 密码</span><br><span class="hljs-comment"> *      -------------------------</span><br><span class="hljs-comment"> *      connect() -- 连接 初始化 Connection 对象</span><br><span class="hljs-comment"> *      -------------------------</span><br><span class="hljs-comment"> *      setSql() -- 设置 sql 语句, 初始化 PreparedStatement 对象</span><br><span class="hljs-comment"> *      -------------------------(待更新)</span><br><span class="hljs-comment"> *      setParamString() -- 设置 sql 语句中对应参数 字符串类型</span><br><span class="hljs-comment"> *      setParamInt() -- 设置 SQL 语句中对应参数 整型</span><br><span class="hljs-comment"> *      -------------------------(待更新)</span><br><span class="hljs-comment"> *      execute() -- 插入，删除语句执行</span><br><span class="hljs-comment"> *      executeQuery() -- 查询语句执行</span><br><span class="hljs-comment"> *      executeUpdate() -- 更新语句执行</span><br><span class="hljs-comment"> *      -------------------------</span><br><span class="hljs-comment"> *      setCallBack() -- 设置回调函数</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 使用：new JdbcUtil.Builder()</span><br><span class="hljs-comment"> *                 .connect()</span><br><span class="hljs-comment"> *                 .setSql(&quot;select * from user where email = ? and password = ?;&quot;)</span><br><span class="hljs-comment"> *                 .setParamString(1, email)</span><br><span class="hljs-comment"> *                 .setParamString(2, password)</span><br><span class="hljs-comment"> *                 .setCallBack(new CallBack() &#123;</span><br><span class="hljs-comment"> *                     <span class="hljs-doctag">@Override</span></span><br><span class="hljs-comment"> *                     public void executeResult(ResultSet resultSet) &#123;</span><br><span class="hljs-comment"> *                         super.executeResult(resultSet);</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> *                     &#125;</span><br><span class="hljs-comment"> *                 &#125;)</span><br><span class="hljs-comment"> * 作者：HWH</span><br><span class="hljs-comment"> * 日期：2022-4-12 14:29</span><br><span class="hljs-comment"> * 邮箱：huangwenhuan2019@outlook.com</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JdbcUtil</span> &#123;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 接口回调</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ICallBack</span>&#123;<br>        <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeResult</span><span class="hljs-params">(ResultSet resultSet)</span>;<br>        <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeResult</span><span class="hljs-params">(<span class="hljs-type">int</span> result)</span>;<br>        <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeResult</span><span class="hljs-params">(<span class="hljs-type">boolean</span> result)</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CallBack</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ICallBack</span>&#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeResult</span><span class="hljs-params">(<span class="hljs-type">int</span> result)</span> &#123;<br><br>        &#125;<br><br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeResult</span><span class="hljs-params">(<span class="hljs-type">boolean</span> result)</span> &#123;<br><br>        &#125;<br><br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeResult</span><span class="hljs-params">(ResultSet resultSet)</span> &#123;<br><br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Builder</span>&#123;<br>        <span class="hljs-keyword">private</span> String url;<br>        <span class="hljs-keyword">private</span> String name;<br>        <span class="hljs-keyword">private</span> String pwd;<br>        <span class="hljs-keyword">private</span> Connection connection;<br>        <span class="hljs-keyword">private</span> PreparedStatement preparedStatement;<br>        <span class="hljs-keyword">private</span> CallBack callBack;<br><br><br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 构建 jdbc 基本属性</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-title function_">Builder</span><span class="hljs-params">()</span>&#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                Class.forName(<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>            <span class="hljs-comment">//获取连接</span><br>            url = <span class="hljs-string">&quot;jdbc:mysql://localhost:3306/webservice?serverTimezone=GMT&quot;</span>;<br>            name = <span class="hljs-string">&quot;root&quot;</span>;<br>            pwd = <span class="hljs-string">&quot;15715293569&quot;</span>;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 设置 jdbc url</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@param</span> url jdbc 的 url</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@return</span> Builder 对象</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> Builder <span class="hljs-title function_">setUrl</span><span class="hljs-params">(String url)</span> &#123;<br>            <span class="hljs-built_in">this</span>.url = url;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 设置 jdbc 用户名</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@param</span> name jdbc 的 用户名</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@return</span> Builder 对象</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> Builder <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span> &#123;<br>            <span class="hljs-built_in">this</span>.name = name;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 设置 jdbc 密码</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@param</span> pwd jdbc 的 密码</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@return</span> Builder 对象</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> Builder <span class="hljs-title function_">setPwd</span><span class="hljs-params">(String pwd)</span> &#123;<br>            <span class="hljs-built_in">this</span>.pwd = pwd;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 连接 初始化 Connection 对象</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@return</span> Builder 对象</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> Builder <span class="hljs-title function_">connect</span><span class="hljs-params">()</span>&#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                connection = DriverManager.getConnection(url, name, pwd);<br>            &#125; <span class="hljs-keyword">catch</span> (SQLException throwables) &#123;<br>                throwables.printStackTrace();<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 设置 sql 语句, 初始化 PreparedStatement 对象</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@param</span> sql sql 语句 字符串</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@return</span> Builder 对象</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> Builder <span class="hljs-title function_">setSql</span><span class="hljs-params">(String sql)</span>&#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-keyword">if</span>(connection==<span class="hljs-literal">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Exception</span>(<span class="hljs-string">&quot;connection is null, please invoke connect() to create it.&quot;</span>);<br>                preparedStatement = connection.prepareStatement(sql);<br>            &#125; <span class="hljs-keyword">catch</span> (Exception throwables) &#123;<br>                throwables.printStackTrace();<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 设置 sql 语句中对应参数 字符串类型</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@param</span> index 参数索引</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@param</span> value 参数值</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@return</span> Builder 对象</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> Builder <span class="hljs-title function_">setParamString</span><span class="hljs-params">(<span class="hljs-type">int</span> index,String value)</span>&#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-keyword">if</span>(preparedStatement!=<span class="hljs-literal">null</span>)&#123;<br>                    preparedStatement.setString(index,value);<br>                &#125;<span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Exception</span>(<span class="hljs-string">&quot;preparedStatement is null, please invoke the setSql() to create it.&quot;</span>);<br>                &#125;<br>            &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                e.getStackTrace();<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * setParamInt() -- 设置 SQL 语句中对应参数 整型</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@param</span> index 参数索引</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@param</span> value 参数值</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@return</span> Builder 对象</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> Builder <span class="hljs-title function_">setParamInt</span><span class="hljs-params">(<span class="hljs-type">int</span> index,<span class="hljs-type">int</span> value)</span>&#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-keyword">if</span>(preparedStatement!=<span class="hljs-literal">null</span>)&#123;<br>                    preparedStatement.setInt(index,value);<br>                &#125;<span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Exception</span>(<span class="hljs-string">&quot;preparedStatement is null, please invoke the setSql() to create it.&quot;</span>);<br>                &#125;<br>            &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                e.getStackTrace();<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 插入，删除语句执行</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">execute</span><span class="hljs-params">()</span>&#123;<br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>            <span class="hljs-keyword">try</span> &#123;<br>                result = preparedStatement.execute();<br>                callBack.executeResult(result);<br>                preparedStatement.close();<br>                connection.close();<br>            &#125; <span class="hljs-keyword">catch</span> (SQLException throwables) &#123;<br>                throwables.printStackTrace();<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 查询语句执行</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeQuery</span><span class="hljs-params">()</span>&#123;<br>            <span class="hljs-type">ResultSet</span> <span class="hljs-variable">resultSet</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>            <span class="hljs-keyword">try</span> &#123;<br>                resultSet = preparedStatement.executeQuery();<br>                callBack.executeResult(resultSet);<br>                resultSet.close();<br>                preparedStatement.close();<br>                connection.close();<br>            &#125; <span class="hljs-keyword">catch</span> (SQLException throwables) &#123;<br>                throwables.printStackTrace();<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 更新语句执行</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">executeUpdate</span><span class="hljs-params">()</span>&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">try</span> &#123;<br>                result = preparedStatement.executeUpdate();<br>                callBack.executeResult(result);<br>                preparedStatement.close();<br>                connection.close();<br>            &#125; <span class="hljs-keyword">catch</span> (SQLException throwables) &#123;<br>                throwables.printStackTrace();<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 设置回调函数</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@param</span> callBack 回调函数</span><br><span class="hljs-comment">         * <span class="hljs-doctag">@return</span> Builder 对象</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">public</span> Builder <span class="hljs-title function_">setCallBack</span><span class="hljs-params">(CallBack callBack)</span>&#123;<br>            <span class="hljs-built_in">this</span>.callBack = callBack;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>        &#125;<br><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="写在最后">写在最后</h3>
+<ul>
+<li>感觉对于一般的数据库操作已经覆盖了，当然还有很多其他的方法没有实现，可以在必要的时候添加。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Summarize/" class="category-chain-item">Summarize</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Jdbc/">#Jdbc</a>
+      
+        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">#设计模式</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>实现 Jdbc 优雅的链式调用</div>
+      <div>https://hwh-2019.github.io/2022/12/10/实现-Jdbc-优雅的链式调用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>HWH</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年12月10日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/12/10/%E8%A7%A3%E5%86%B3-WebService-%E8%BF%94%E5%9B%9E-DataSet-XML-%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98/" title="解决 WebService 返回 DataSet XML 数据解析问题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">解决 WebService 返回 DataSet XML 数据解析问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/10/Ubuntu%E4%B8%AD-cmake-%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7%EF%BC%8C%E8%A7%A3%E5%86%B3CMake-3-10-or-higher-is-required/" title="Ubuntu中 cmake 版本升级，解决CMake 3.10 or higher is required">
+                        <span class="hidden-mobile">Ubuntu中 cmake 版本升级，解决CMake 3.10 or higher is required</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/codeBLang.js"></script>
+<script src="/js/codeBlockFunction.js"></script>
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
