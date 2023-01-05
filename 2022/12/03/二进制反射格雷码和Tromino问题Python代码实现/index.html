@@ -16,16 +16,13 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实现n位二进制反射格雷码（采用递归的减治法） 算法设计思想  n+1 位格雷码的前 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按顺序排列，再在每个串前加一个前缀 0 构成。 n+1 位格雷码的后 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按逆序排列，再在每个串前加一个前缀 1 构成。  具体">
+    <meta name="description" content="实现n位二进制反射格雷码（采用递归的减治法） 算法设计思想  n+1 位格雷码的前 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按顺序排列，再在每个串前加一个前缀 0 构成。 n+1 位格雷码的后 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按逆序排列，再在每个串前加一个前缀 1 构成。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二进制反射格雷码和Tromino问题Python代码实现">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/12/03/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8F%8D%E5%B0%84%E6%A0%BC%E9%9B%B7%E7%A0%81%E5%92%8CTromino%E9%97%AE%E9%A2%98Python%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="实现n位二进制反射格雷码（采用递归的减治法） 算法设计思想  n+1 位格雷码的前 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按顺序排列，再在每个串前加一个前缀 0 构成。 n+1 位格雷码的后 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按逆序排列，再在每个串前加一个前缀 1 构成。  具体">
+<meta property="og:description" content="实现n位二进制反射格雷码（采用递归的减治法） 算法设计思想  n+1 位格雷码的前 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按顺序排列，再在每个串前加一个前缀 0 构成。 n+1 位格雷码的后 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按逆序排列，再在每个串前加一个前缀 1 构成。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2359b32a0f7641109115e1f885c96c30.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/ee0b2c21b37c43e68a6a9cc4eb586eff.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/70fb425d55544b6293732869fa3fbb40.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="article:published_time" content="2022-12-03T11:22:34.000Z">
 <meta property="article:modified_time" content="2022-12-03T11:31:35.765Z">
 <meta property="article:author" content="HWH">
@@ -33,7 +30,6 @@
 <meta property="article:tag" content="Binary Gray Code">
 <meta property="article:tag" content="Tromino">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2359b32a0f7641109115e1f885c96c30.png">
   
   
   
@@ -295,11 +291,16 @@
             
               <div class="markdown-body">
                 
-                <h2 id="实现n位二进制反射格雷码采用递归的减治法">实现n位二进制反射格雷码（采用递归的减治法）</h2>
+                <h2
+id="实现n位二进制反射格雷码采用递归的减治法">实现n位二进制反射格雷码（采用递归的减治法）</h2>
 <h3 id="算法设计思想">算法设计思想</h3>
 <ul>
-<li><p>n+1 位格雷码的前 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按顺序排列，再在每个串前加一个前缀 0 构成。</p></li>
-<li><p>n+1 位格雷码的后 2^n 个二进制串，可以由依此算法生成的 n 位格雷码(总共 2^n 个 n 位二进制串)按逆序排列，再在每个串前加一个前缀 1 构成。</p></li>
+<li><p>n+1 位格雷码的前 2^n 个二进制串，可以由依此算法生成的 n
+位格雷码(总共 2^n 个 n 位二进制串)按顺序排列，再在每个串前加一个前缀 0
+构成。</p></li>
+<li><p>n+1 位格雷码的后 2^n 个二进制串，可以由依此算法生成的 n
+位格雷码(总共 2^n 个 n 位二进制串)按逆序排列，再在每个串前加一个前缀 1
+构成。</p></li>
 </ul>
 <h3 id="具体步骤描述">具体步骤描述</h3>
 <ul>
@@ -318,13 +319,19 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">二进制反射格雷码 -- 递归实现</span><br><span class="hljs-string">输入：二进制反射格雷码位数n</span><br><span class="hljs-string">输出：对应位数的二进制反射格雷码</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;黄文焕 3190608027&quot;</span>)<br>n = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;输入要生成的反射格雷码的位数：&quot;</span>))<br><br><br><span class="hljs-comment"># 二进制反射格雷码递归函数定义</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">BRGC_Recursion</span>(<span class="hljs-params">n</span>):<br>    <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> [<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>]<br>    <span class="hljs-keyword">else</span>:<br>        res = BRGC_Recursion(n - <span class="hljs-number">1</span>)<br><br>        <span class="hljs-comment"># 复制res</span><br>        res_cpy = res.copy()<br>        <span class="hljs-comment"># 翻转res_cpy</span><br>        res_cpy.reverse()<br>        <span class="hljs-comment"># 在res中每一项字串前拼接 &#x27;0&#x27;</span><br>        <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(res):<br>            res[i] = <span class="hljs-string">&#x27;0&#x27;</span> + v<br>        <span class="hljs-comment"># 在res_copy中每一项字串前拼接 &#x27;1&#x27;</span><br>        <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(res_cpy):<br>            res_cpy[i] = <span class="hljs-string">&#x27;1&#x27;</span> + v<br>        <span class="hljs-comment"># 返回res和res_copy拼接后的列表</span><br>        <span class="hljs-keyword">return</span> res + res_cpy<br><br><br><span class="hljs-comment"># 输出生成的二进制反射格雷码</span><br><span class="hljs-built_in">print</span>(BRGC_Recursion(n))<br></code></pre></td></tr></table></figure>
 <h3 id="运行结果截图">运行结果截图</h3>
 <figure>
-<img src="https://img-blog.csdnimg.cn/2359b32a0f7641109115e1f885c96c30.png" srcset="/img/loading.gif" lazyload alt="运行结果" /><figcaption aria-hidden="true">运行结果</figcaption>
+<img
+src="https://img-blog.csdnimg.cn/2359b32a0f7641109115e1f885c96c30.png" srcset="/img/loading.gif" lazyload
+alt="运行结果" />
+<figcaption aria-hidden="true">运行结果</figcaption>
 </figure>
-<h2 id="实现n位二进制反射格雷码非递归算法实现">实现n位二进制反射格雷码（非递归算法实现）</h2>
+<h2
+id="实现n位二进制反射格雷码非递归算法实现">实现n位二进制反射格雷码（非递归算法实现）</h2>
 <h3 id="算法设计思想-1">算法设计思想</h3>
 <ul>
 <li><p>以全 0 的 n 位串开始。</p></li>
-<li><p>对于 i = 1,2,3 ,···, 2^(n-1), 则通过翻转前一位串中的第 b 位来生成第 i 个位串，前这里 b 是 i 的二进制表示中最低位 1 的位置</p></li>
+<li><p>对于 i = 1,2,3 ,···, 2^(n-1), 则通过翻转前一位串中的第 b
+位来生成第 i 个位串，前这里 b 是 i 的二进制表示中最低位 1
+的位置</p></li>
 </ul>
 <h3 id="具体步骤描述-1">具体步骤描述</h3>
 <ul>
@@ -342,9 +349,13 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">二进制反射格雷码 -- 非递归实现</span><br><span class="hljs-string">输入：二进制反射格雷码位数n</span><br><span class="hljs-string">输出：对应位数的二进制反射格雷码</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;黄文焕 3190608027&quot;</span>)<br>n = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;输入要生成的反射格雷码的位数：&quot;</span>))<br><br><span class="hljs-comment"># 初始化结果列表中的第一个字串，为n个0</span><br>res = [<span class="hljs-string">&#x27;0&#x27;</span>*n]<br><span class="hljs-comment"># 设置结束为2的n次方</span><br>end = <span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, n)<br><span class="hljs-comment"># 从1到end-1</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, end):<br>    <span class="hljs-comment"># 将i转换成二进制字串,去掉 &#x27;0b&#x27; 前缀</span><br>    i_bin = <span class="hljs-built_in">bin</span>(i).replace(<span class="hljs-string">&#x27;0b&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>)<br>    <span class="hljs-comment"># 并在i_bin前拼接 n-len(i_bin)长度个 &#x27;0&#x27;</span><br>    i_bin = <span class="hljs-string">&#x27;0&#x27;</span> * (n - <span class="hljs-built_in">len</span>(i_bin)) + i_bin<br>    <span class="hljs-comment"># 将结果列表中最后一个字串转换成列表str</span><br>    <span class="hljs-built_in">str</span> = <span class="hljs-built_in">list</span>(res[i-<span class="hljs-number">1</span>])<br>    <span class="hljs-comment"># 在i_bin中从右向左寻找字符 &#x27;1&#x27;并返回对应索引</span><br>    index = i_bin.rfind(<span class="hljs-string">&#x27;1&#x27;</span>)<br>    <span class="hljs-comment"># 将str中对应索引的字符修改，如果为 &#x27;1&#x27; 则换为 &#x27;0&#x27;，否则换为 &#x27;1&#x27;</span><br>    <span class="hljs-built_in">str</span>[index] = <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">str</span>[index] == <span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;1&#x27;</span><br>    <span class="hljs-comment"># 将str重新拼接成字符串，并添加入res列表</span><br>    res.append(<span class="hljs-string">&#x27;&#x27;</span>.join(<span class="hljs-built_in">str</span>))<br><br><span class="hljs-comment"># 输出生成的二进制反射格雷码</span><br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></table></figure>
 <h3 id="运行结果截图-1">运行结果截图</h3>
 <figure>
-<img src="https://img-blog.csdnimg.cn/ee0b2c21b37c43e68a6a9cc4eb586eff.png" srcset="/img/loading.gif" lazyload alt="运行结果" /><figcaption aria-hidden="true">运行结果</figcaption>
+<img
+src="https://img-blog.csdnimg.cn/ee0b2c21b37c43e68a6a9cc4eb586eff.png" srcset="/img/loading.gif" lazyload
+alt="运行结果" />
+<figcaption aria-hidden="true">运行结果</figcaption>
 </figure>
-<h2 id="分治法实现2n2n棋盘覆盖问题棋盘用二维数组表示缺失方块0填充l型骨牌用相同整数填充">分治法实现2^n*2^n棋盘覆盖问题，棋盘用二维数组表示，缺失方块0填充，L型骨牌用相同整数填充。</h2>
+<h2
+id="分治法实现2n2n棋盘覆盖问题棋盘用二维数组表示缺失方块0填充l型骨牌用相同整数填充">分治法实现2^n*2^n棋盘覆盖问题，棋盘用二维数组表示，缺失方块0填充，L型骨牌用相同整数填充。</h2>
 <h3 id="算法设计思想-2">算法设计思想</h3>
 <ul>
 <li><p>将棋盘依次划分为四个象限，k所在象限继续划分。</p></li>
@@ -357,15 +368,20 @@
 <li><p>输入 n 和 k 在棋盘中的坐标</p></li>
 <li><p>初始化棋盘</p></li>
 <li><p>将棋盘分为四个象限，k 所在的象限直接递归调用 Tromino</p></li>
-<li><p>对于 k 不在的三个象限，将划分轴原点附近的剩余三个点，标志为L型骨牌(以相同的数字表示)</p></li>
-<li><p>k不在的象限继续划分，并将之前标志为 L型骨牌的点 看做缺失点 k</p></li>
+<li><p>对于 k
+不在的三个象限，将划分轴原点附近的剩余三个点，标志为L型骨牌(以相同的数字表示)</p></li>
+<li><p>k不在的象限继续划分，并将之前标志为 L型骨牌的点 看做缺失点
+k</p></li>
 <li><p>依次类推，当划分棋盘大小size等于1时结束</p></li>
 </ul>
 <h3 id="实现源码-2">实现源码</h3>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入 numpy 包</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 输入n和k在棋盘中的坐标</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;黄文焕 3190608027&quot;</span>)<br>n = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;输入n：&quot;</span>))<br>k_x, k_y = <span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>, <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;输入k所在的坐标：&quot;</span>).split())<br><br><span class="hljs-comment"># 初始化棋盘</span><br>size = <span class="hljs-built_in">pow</span>(<span class="hljs-number">2</span>, n)<br>arr = np.ones((size, size))<br>arr_x, arr_y = arr.shape<br>arr[k_x][k_y] = <span class="hljs-number">0</span><br><br><span class="hljs-comment"># 用于标注L形骨牌</span><br>num = <span class="hljs-number">1</span><br><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">参数说明：</span><br><span class="hljs-string">    k_x, k_y -- k所在坐标</span><br><span class="hljs-string">    arr_x, arr_y -- 起点坐标</span><br><span class="hljs-string">    size -- 棋盘大小</span><br><span class="hljs-string">算法思路：</span><br><span class="hljs-string">    将棋盘依次划分为四个象限，k所在象限继续划分。</span><br><span class="hljs-string">    k不在的剩余三个象限，将划分轴原点附近的剩余三个点，标志为L型骨牌</span><br><span class="hljs-string">    k不在的象限继续划分，并将之前标志为L型骨牌的点看做缺失点k</span><br><span class="hljs-string">    依次类推，当划分棋盘大小size等于1时结束</span><br><span class="hljs-string">输入案例：</span><br><span class="hljs-string">    输入n：3</span><br><span class="hljs-string">    输入k所在的坐标：1 1</span><br><span class="hljs-string">输出案例：</span><br><span class="hljs-string">    [[ 9.  9.  8.  8.  4.  4.  3.  3.]</span><br><span class="hljs-string">     [ 9.  0.  7.  8.  4.  2.  2.  3.]</span><br><span class="hljs-string">     [10.  7.  7. 11.  5.  5.  2.  6.]</span><br><span class="hljs-string">     [10. 10. 11. 11.  1.  5.  6.  6.]</span><br><span class="hljs-string">     [14. 14. 13.  1.  1. 19. 18. 18.]</span><br><span class="hljs-string">     [14. 12. 13. 13. 19. 19. 17. 18.]</span><br><span class="hljs-string">     [15. 12. 12. 16. 20. 17. 17. 21.]</span><br><span class="hljs-string">     [15. 15. 16. 16. 20. 20. 21. 21.]]</span><br><span class="hljs-string"></span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-comment"># 定义Tromino递归函数</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">Tromino</span>(<span class="hljs-params">k_x, k_y, arr_x, arr_y, size</span>):<br>    <span class="hljs-keyword">if</span> size == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span><br>    D_size = <span class="hljs-built_in">int</span>(size / <span class="hljs-number">2</span>)<br>    <span class="hljs-comment"># 使用全局定义的num</span><br>    <span class="hljs-keyword">global</span> num<br>    temp = num<br>    num += <span class="hljs-number">1</span><br><br>    <span class="hljs-comment"># 第一象限</span><br>    <span class="hljs-keyword">if</span> k_x &lt; arr_x + D_size <span class="hljs-keyword">and</span> k_y &gt;=arr_y + D_size:<br>        Tromino(k_x, k_y, arr_x, arr_y + D_size, D_size)<br>    <span class="hljs-keyword">else</span>:<br>        arr[arr_x + D_size - <span class="hljs-number">1</span>][arr_y + D_size] = temp<br>        Tromino(arr_x + D_size - <span class="hljs-number">1</span>, arr_y + D_size, arr_x, arr_y + D_size, D_size)<br><br>    <span class="hljs-comment"># 第二象限</span><br>    <span class="hljs-keyword">if</span> k_x &lt; arr_x + D_size <span class="hljs-keyword">and</span> k_y &lt; arr_y + D_size:<br>        Tromino(k_x, k_y, arr_x, arr_y, D_size)<br>    <span class="hljs-keyword">else</span>:<br>        arr[arr_x + D_size - <span class="hljs-number">1</span>][arr_y + D_size - <span class="hljs-number">1</span>] = temp<br>        Tromino(arr_x + D_size - <span class="hljs-number">1</span>, arr_y + D_size - <span class="hljs-number">1</span>, arr_x, arr_y, D_size)<br><br>    <span class="hljs-comment"># 第三象限</span><br>    <span class="hljs-keyword">if</span> k_x &gt;= arr_x + D_size <span class="hljs-keyword">and</span> k_y &lt; arr_y + D_size:<br>        Tromino(k_x, k_y, arr_x + D_size, arr_y, D_size)<br>    <span class="hljs-keyword">else</span>:<br>        arr[arr_x + D_size][arr_y + D_size - <span class="hljs-number">1</span>] = temp<br>        Tromino(arr_x + D_size, arr_y + D_size - <span class="hljs-number">1</span>, arr_x + D_size, arr_y, D_size)<br><br>    <span class="hljs-comment"># 第四象限</span><br>    <span class="hljs-keyword">if</span> k_x &gt;=arr_x + D_size <span class="hljs-keyword">and</span> k_y &gt;=arr_y + D_size:<br>        Tromino(k_x, k_y, arr_x + D_size, arr_y + D_size, D_size)<br>    <span class="hljs-keyword">else</span>:<br>        arr[arr_x + D_size][arr_y + D_size] = temp<br>        Tromino(arr_x + D_size, arr_y + D_size, arr_x + D_size, arr_y + D_size, D_size)<br><br><br><span class="hljs-comment"># 调用Tromino函数</span><br>Tromino(k_x, k_y, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, size)<br><br><span class="hljs-comment"># 输出标注完成的棋盘</span><br><span class="hljs-built_in">print</span>(arr)<br></code></pre></td></tr></table></figure>
 <h3 id="运行结果截图-2">运行结果截图</h3>
 <figure>
-<img src="https://img-blog.csdnimg.cn/70fb425d55544b6293732869fa3fbb40.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt="运行结果" /><figcaption aria-hidden="true">运行结果</figcaption>
+<img
+src="https://img-blog.csdnimg.cn/70fb425d55544b6293732869fa3fbb40.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload
+alt="运行结果" />
+<figcaption aria-hidden="true">运行结果</figcaption>
 </figure>
 
                 

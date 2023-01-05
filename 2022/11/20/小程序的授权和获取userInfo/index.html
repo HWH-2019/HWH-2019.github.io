@@ -312,14 +312,17 @@
 <li>为了让已授权的用户在使用时无需重复授权，在app.js中使用</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-attr">getStorageUserInfo</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> that = <span class="hljs-variable language_">this</span>;<br>    <span class="hljs-comment">//进入页面获取是否授权----------------------------</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) &#123;<br>      wx.<span class="hljs-title function_">getSetting</span>(&#123;<br>        <span class="hljs-title function_">success</span>(<span class="hljs-params">res</span>) &#123;<span class="hljs-comment">//authSetting用户授权结果</span><br>          <span class="hljs-comment">//scope.userInfo</span><br>          <span class="hljs-keyword">if</span> (res.<span class="hljs-property">authSetting</span>[<span class="hljs-string">&#x27;scope.userInfo&#x27;</span>]) &#123;<span class="hljs-comment">//授权过</span><br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;授权过信息&#x27;</span>);<br>            <span class="hljs-comment">//获取本地存储中的userInfo</span><br>            <span class="hljs-keyword">let</span> userInfo = wx.<span class="hljs-title function_">getStorageSync</span>(<span class="hljs-string">&#x27;userInfo&#x27;</span>);<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(userInfo)<br>            <span class="hljs-comment">//判断是否存在useInfo，如果存在则存储到globalData.userInfo中</span><br>            <span class="hljs-keyword">if</span> (userInfo != <span class="hljs-string">&quot;&quot;</span>) &#123;<br>              that.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span> = userInfo<br>            &#125;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(that.<span class="hljs-property">globalData</span>.<span class="hljs-property">userInfo</span>)<br>          &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;没有授权&#x27;</span>)<br>          &#125;<br>          <span class="hljs-comment">//对执行成功的数据传送</span><br>          <span class="hljs-title function_">resolve</span>(<span class="hljs-string">&quot;调用成功&quot;</span>)<br>        &#125;<br>      &#125;)<br>    &#125;)<br><br>  &#125;,<br>  <span class="hljs-attr">globalData</span>: &#123;<br>    <span class="hljs-attr">userInfo</span>: <span class="hljs-literal">null</span><br>  &#125;<br></code></pre></td></tr></table></figure>
-<h3 id="无法使用wx.getuserinfo或者wx.getuserprofile获取userinfo">无法使用<code>wx.getUserInfo</code>或者<code>wx.getUserProfile</code>获取userInfo</h3>
+<h3
+id="无法使用wx.getuserinfo或者wx.getuserprofile获取userinfo">无法使用<code>wx.getUserInfo</code>或者<code>wx.getUserProfile</code>获取userInfo</h3>
 <ul>
 <li><p><code>wx.getUserInfo()</code>仅能获取到匿名数据，这是在官方修改函数后导致的。</p></li>
 <li><p>我采用将userInfo数据存入本地，每个小程序允许有10M的本地存储，用来解决<code>wx.getUserProfile()</code>函数只能在用户操作下调用(前面有讲过)，在js中无法直接调用的问题。</p></li>
 <li><p>小程序的本地数据存取可以参考下面的文章</p></li>
 </ul>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pp8080/p/12019757.html">微信小程序中怎么存setStorage - 酷爱。 - 博客园</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/pp8080/p/12019757.html">微信小程序中怎么存setStorage
+- 酷爱。 - 博客园</a></p>
 </blockquote>
 <h3 id="执行顺序问题">执行顺序问题</h3>
 <ul>
@@ -327,7 +330,9 @@
 <li><p>此处我采用Promise写法以解决这个问题(Promise写法可以参考下面的文章)</p></li>
 </ul>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012693479/article/details/98214802">小程序 ES6 Promise用法讲解_u012693479的博客-CSDN博客_小程序promise详解</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/u012693479/article/details/98214802">小程序
+ES6 Promise用法讲解_u012693479的博客-CSDN博客_小程序promise详解</a></p>
 </blockquote>
 <ul>
 <li>下面看onLoad函数中的调用</li>
@@ -337,13 +342,17 @@
 <li><code>app</code>是在全局添加<code>var app = getApp()</code>而来的，这样使得在其他界面可以使用app.js中的全局变量和函数，即<code>globalData</code>和<code>getStorageUserInfo()</code>，使用方法可以参考这篇文章</li>
 </ul>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiangtengteng/p/10531297.html">微信小程序 如何使用globalData - 姜腾腾 - 博客园</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/jiangtengteng/p/10531297.html">微信小程序
+如何使用globalData - 姜腾腾 - 博客园</a></p>
 </blockquote>
 <ul>
 <li>对于上面的问题还有两种办法可以解决，可以参考下面的文章</li>
 </ul>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shipskunkun/p/11802379.html">小程序Page里的函数比app.js先执行的解决办法 - shipskunkun - 博客园</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/shipskunkun/p/11802379.html">小程序Page里的函数比app.js先执行的解决办法
+- shipskunkun - 博客园</a></p>
 </blockquote>
 
                 

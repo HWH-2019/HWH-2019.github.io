@@ -323,12 +323,16 @@
 <li>布尔类型 (Logical)： boolean</li>
 </ol>
 <ul>
-<li><strong>引用（复合）数据类型</strong> interface 数组 class Vector Date HashMap … … String Unicode字符集16位 0~65535</li>
+<li><strong>引用（复合）数据类型</strong> interface 数组 class Vector
+Date HashMap … … String Unicode字符集16位 0~65535</li>
 </ul>
 <h2 id="简单数据类型优先级和转换">简单数据类型优先级和转换</h2>
 <ul>
-<li><p><strong>简单类型数据的优先级</strong> byte,short,char &lt; int &lt; long &lt; float &lt; double (由低到高）</p></li>
-<li><p><strong>自动类型转换</strong> 当两个简单数据类型的数据进行二元运算，要先将两个操作数转换成同一类型的数据，再进行运算。 自动类型转换规则：</p></li>
+<li><p><strong>简单类型数据的优先级</strong> byte,short,char &lt; int
+&lt; long &lt; float &lt; double (由低到高）</p></li>
+<li><p><strong>自动类型转换</strong>
+当两个简单数据类型的数据进行二元运算，要先将两个操作数转换成同一类型的数据，再进行运算。
+自动类型转换规则：</p></li>
 </ul>
 <table>
 <thead>
@@ -362,7 +366,10 @@
 </tbody>
 </table>
 <ul>
-<li><strong>强制类型转换</strong> 高优先级数据要转换成低优先级数据，需用强制类型转换。 强制类型转换一般存在数据精度损失。 强制类型转换格式： 目标类型 目标变量名=（目标类型）原变量名</li>
+<li><strong>强制类型转换</strong>
+高优先级数据要转换成低优先级数据，需用强制类型转换。
+强制类型转换一般存在数据精度损失。 强制类型转换格式： 目标类型
+目标变量名=（目标类型）原变量名</li>
 </ul>
 <h2 id="运算符">运算符</h2>
 <ul>
@@ -443,7 +450,8 @@
 </tr>
 </tbody>
 </table>
-<p>注：对于&gt;&gt;,&lt;&lt;,&gt;&gt;&gt;详解请参见<a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/113813970">《彻底搞懂Java中的＞＞,＜＜,＞＞＞》</a></p>
+<p>注：对于&gt;&gt;,&lt;&lt;,&gt;&gt;&gt;详解请参见<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/113813970">《彻底搞懂Java中的＞＞,＜＜,＞＞＞》</a></p>
 <ul>
 <li><strong>赋值运算符</strong></li>
 </ul>
@@ -545,11 +553,14 @@
 </tbody>
 </table>
 <ul>
-<li><strong>条件运算符</strong> ? : 运算符 格式：条件表达式 ？表达式1：表达式2 含义：如果<条件表达式>为真，则执行<表达式1>，否则，<执行表达式2></li>
+<li><strong>条件运算符</strong> ? : 运算符 格式：条件表达式
+？表达式1：表达式2
+含义：如果<条件表达式>为真，则执行<表达式1>，否则，<执行表达式2></li>
 </ul>
 <h2 id="inputoutput-statement">input/output statement</h2>
 <ul>
-<li><strong>input statement</strong> 标准的输入设备是键盘库 java.util.Scanner (after JDK1.5)</li>
+<li><strong>input statement</strong> 标准的输入设备是键盘库
+java.util.Scanner (after JDK1.5)</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//导入库</span><br><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-comment">//import java.util.Scanner也行</span><br><br><span class="hljs-comment">//创建对象</span><br>Scanner Input=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br><br><span class="hljs-comment">//调用方法</span><br>Input.nextInt()      <span class="hljs-comment">//read int data</span><br>Input.nextByte()	 <span class="hljs-comment">//read byte data</span><br></code></pre></td></tr></table></figure>
 <h2 id="流程控制语句">流程控制语句</h2>
@@ -560,11 +571,14 @@
 <li><strong>if</strong>语句</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(<span class="hljs-type">boolean</span>-expression)<br>	statement;<br></code></pre></td></tr></table></figure>
-<p>功能：当boolean-expression为“真”时，执行statement 。 2. <strong>if else</strong>语句 格式：</p>
+<p>功能：当boolean-expression为“真”时，执行statement 。 2. <strong>if
+else</strong>语句 格式：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(<span class="hljs-type">boolean</span>-expression)<br>	 statement1；<br><span class="hljs-keyword">else</span> statement2；<br></code></pre></td></tr></table></figure>
-<p>功能：当 boolean-expression为“真”时，执行statement1； 否则，执行statement 2。 3. <strong>switch</strong>语句</p>
+<p>功能：当 boolean-expression为“真”时，执行statement1；
+否则，执行statement 2。 3. <strong>switch</strong>语句</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">switch</span>(expression)&#123;<br>      <span class="hljs-keyword">case</span> value1：statement1;<br>           <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> value2：statement2;<br>           <span class="hljs-keyword">break</span>;<br>         ┆         ┆<br>      <span class="hljs-keyword">case</span> valueN：statementN;<br>           <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">default</span> : defaultStatement;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>功能：将expression的值与value1~valueN匹配，如果匹配则执行对应的statement，然后退出；否则 执行defaultStatement。</p>
+<p>功能：将expression的值与value1~valueN匹配，如果匹配则执行对应的statement，然后退出；否则
+执行defaultStatement。</p>
 <ul>
 <li><strong>循环语句</strong></li>
 </ul>
@@ -583,14 +597,18 @@
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">initialization<br><span class="hljs-keyword">do</span>&#123;　　　<br>	<span class="hljs-comment">//body;　      　</span><br>iteration;<br>&#125;<span class="hljs-keyword">while</span>(termination);<br></code></pre></td></tr></table></figure>
 <p>功能：首先对循环条件（通常为i）进行initialization（初始化），然后执行循环体里的语句，然后执行termination（判断是否终止循环），最后执行iteration（循环条件i改变）</p>
-<p>注：<strong>while</strong>和<strong>do while</strong>语句的区别在于执行循环体和执行termination的顺序。</p>
+<p>注：<strong>while</strong>和<strong>do
+while</strong>语句的区别在于执行循环体和执行termination的顺序。</p>
 <ul>
 <li><strong>跳转语句</strong></li>
 </ul>
 <ol type="1">
-<li><p><strong>break</strong>语句 格式：break； 功能：终止当前循环体，转移到循环语句的下一条语句或标号处执行。</p></li>
-<li><p><strong>continue</strong>语句 格式：continue； 功能： 跳过当前循环体的剩余语句，转移到下一次循环或标号处执行。</p></li>
-<li><p><strong>return</strong>语句 格式：return [返回值]； 功能：终止方法或程序的执行，将控制返回调用者。</p></li>
+<li><p><strong>break</strong>语句 格式：break；
+功能：终止当前循环体，转移到循环语句的下一条语句或标号处执行。</p></li>
+<li><p><strong>continue</strong>语句 格式：continue； 功能：
+跳过当前循环体的剩余语句，转移到下一次循环或标号处执行。</p></li>
+<li><p><strong>return</strong>语句 格式：return [返回值]；
+功能：终止方法或程序的执行，将控制返回调用者。</p></li>
 </ol>
 <h2 id="数组和向量">数组和向量</h2>
 <h3 id="数组">数组</h3>
@@ -598,7 +616,8 @@
 <li><p><strong>一维数组的声明</strong> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">arrayType  arrayName[];<br><br>arrayType []arrayName;<br></code></pre></td></tr></table></figure></p></li>
 <li><p><strong>一维数组的创建</strong></p>
 <p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//数组元素为简单数据类型</span><br><br>	<span class="hljs-comment">//静态初始化</span><br> 	arrayType  arrayName[]=&#123;element1[,element2…]&#125;;<br>	arrayType  []arrayName=&#123;element1[,element2…]&#125;;<br>	<span class="hljs-comment">//例如</span><br>	<span class="hljs-type">int</span> [] samllPrimes=&#123;<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">11</span>,<span class="hljs-number">13</span>&#125;;<br><br><span class="hljs-comment">//动态初始化</span><br>arrayName= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[arrayLength];<br><span class="hljs-comment">//声明与初始化合并</span><br>arrayType arrayName= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[arrayLength];<br><span class="hljs-comment">//例如</span><br><span class="hljs-type">int</span> arr[]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>]<br><br><span class="hljs-comment">//数组元素为复合数据类型</span><br><br><span class="hljs-comment">//创建数组元素</span><br>arrayName= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[arrayLength];<br><span class="hljs-comment">//为数组元素开辟存储空间</span><br>arrayName[i]= <span class="hljs-keyword">new</span> <span class="hljs-title class_">arrayType</span>[paramList]<br><span class="hljs-comment">//例如</span><br>String  stringArray[];<br>   stringArray=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[<span class="hljs-number">3</span>];<br>   stringArray[<span class="hljs-number">0</span>]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(″Welcome″);<br>   stringArray[<span class="hljs-number">1</span>]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(″To″);<br>   stringArray[<span class="hljs-number">2</span>]=<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(″Zhnejiang″);<br></code></pre></td></tr></table></figure></p></li>
-<li><p><strong>数组操作</strong> 引用数组元素，下标从0开始 数组复制 使用系统类的方法 ( System.arraycopy )。 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">  	<span class="hljs-comment">/*</span><br><span class="hljs-comment">  	*sourceArray             		被复制的数组的数组名</span><br><span class="hljs-comment">  	*sourcePosition      			被复制的数组的起始位置</span><br><span class="hljs-comment">  	*destinationArray  				新数组的数组名</span><br><span class="hljs-comment">  	*destinationposition 			新数组储存复制的数组的起始位置</span><br><span class="hljs-comment">  	*numberOfEntriesToCopy 			需要被复制的元素个数</span><br><span class="hljs-comment">  	*/</span><br>  	<span class="hljs-comment">//导入所需的库</span><br>  	<span class="hljs-keyword">import</span> java.io.*;<br><br>System.arraycopy( sourceArray, sourcePosition,<br>destinationArray, destinationposition, numberOfEntriesToCopy)<br></code></pre></td></tr></table></figure></p></li>
+<li><p><strong>数组操作</strong> 引用数组元素，下标从0开始 数组复制
+使用系统类的方法 ( System.arraycopy )。 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">  	<span class="hljs-comment">/*</span><br><span class="hljs-comment">  	*sourceArray             		被复制的数组的数组名</span><br><span class="hljs-comment">  	*sourcePosition      			被复制的数组的起始位置</span><br><span class="hljs-comment">  	*destinationArray  				新数组的数组名</span><br><span class="hljs-comment">  	*destinationposition 			新数组储存复制的数组的起始位置</span><br><span class="hljs-comment">  	*numberOfEntriesToCopy 			需要被复制的元素个数</span><br><span class="hljs-comment">  	*/</span><br>  	<span class="hljs-comment">//导入所需的库</span><br>  	<span class="hljs-keyword">import</span> java.io.*;<br><br>System.arraycopy( sourceArray, sourcePosition,<br>destinationArray, destinationposition, numberOfEntriesToCopy)<br></code></pre></td></tr></table></figure></p></li>
 </ol>
 <h3 id="向量">向量</h3>
 <ul>
@@ -645,8 +664,11 @@ D --&gt; 增量大于0
 <ul>
 <li>可在向量的任意位置插入不同类型的对象，无需考虑对象的类型，也无需考虑向量的容量。</li>
 <li>向量只能存储对象，不能直接存储简单数据类型。</li>
-<li>适合向量的场合: 频繁进行对象的插入和删除工作 需要处理的对象数目不定 列表成员全部都是对象，或者可以方便的用对象表示 需要很快确定列表内是否存在某一特定对象，并且需要很快了解到对象的存放位置</li>
-<li>适合数组的场合: 所需处理的对象数目大致可以确定 所需处理的是简单数据类型</li>
+<li>适合向量的场合: 频繁进行对象的插入和删除工作 需要处理的对象数目不定
+列表成员全部都是对象，或者可以方便的用对象表示
+需要很快确定列表内是否存在某一特定对象，并且需要很快了解到对象的存放位置</li>
+<li>适合数组的场合: 所需处理的对象数目大致可以确定
+所需处理的是简单数据类型</li>
 </ul>
 
                 

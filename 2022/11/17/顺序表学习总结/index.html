@@ -16,21 +16,19 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="顺序表 顺序表，全名顺序存储结构，是线性表中的一种。 顺序表遵循线性表的存储逻辑关系为“一对一”的数据的特点。同时，顺序表对数据的物理存储结构也有特殊的要求：存储数据前需要申请一块足够大的物理空间，数据依次存入空间中，不留间隙。 例如，使用顺序表存储集合{1，2，3，4，5}，数据的最终存储状态如下图：  理解顺序表的存储结构时，可以参考数组的存储结构。 ## 顺序表的建立 ### 理论">
+    <meta name="description" content="顺序表 顺序表，全名顺序存储结构，是线性表中的一种。 顺序表遵循线性表的存储逻辑关系为“一对一”的数据的特点。同时，顺序表对数据的物理存储结构也有特殊的要求：存储数据前需要申请一块足够大的物理空间，数据依次存入空间中，不留间隙。 例如，使用顺序表存储集合{1，2，3，4，5}，数据的最终存储状态如下图：  理解顺序表的存储结构时，可以参考数组的存储结构。 ## 顺序表的建立 ### 理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="顺序表学习总结">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/11/17/%E9%A1%BA%E5%BA%8F%E8%A1%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="顺序表 顺序表，全名顺序存储结构，是线性表中的一种。 顺序表遵循线性表的存储逻辑关系为“一对一”的数据的特点。同时，顺序表对数据的物理存储结构也有特殊的要求：存储数据前需要申请一块足够大的物理空间，数据依次存入空间中，不留间隙。 例如，使用顺序表存储集合{1，2，3，4，5}，数据的最终存储状态如下图：  理解顺序表的存储结构时，可以参考数组的存储结构。 ## 顺序表的建立 ### 理论">
+<meta property="og:description" content="顺序表 顺序表，全名顺序存储结构，是线性表中的一种。 顺序表遵循线性表的存储逻辑关系为“一对一”的数据的特点。同时，顺序表对数据的物理存储结构也有特殊的要求：存储数据前需要申请一块足够大的物理空间，数据依次存入空间中，不留间隙。 例如，使用顺序表存储集合{1，2，3，4，5}，数据的最终存储状态如下图：  理解顺序表的存储结构时，可以参考数组的存储结构。 ## 顺序表的建立 ### 理">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200818202543171.png#pic_center">
 <meta property="article:published_time" content="2022-11-17T14:55:10.000Z">
 <meta property="article:modified_time" content="2022-12-04T05:49:51.727Z">
 <meta property="article:author" content="HWH">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200818202543171.png#pic_center">
   
   
   
@@ -293,10 +291,16 @@
               <div class="markdown-body">
                 
                 <h2 id="顺序表">顺序表</h2>
-<p>顺序表，全名顺序存储结构，是<a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/108021474">线性表</a>中的一种。</p>
+<p>顺序表，全名顺序存储结构，是<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/108021474">线性表</a>中的一种。</p>
 <p>顺序表遵循线性表的存储逻辑关系为“一对一”的数据的特点。同时，顺序表对数据的物理存储结构也有特殊的要求：存储数据前需要申请一块足够大的物理空间，数据依次存入空间中，不留间隙。</p>
 <p>例如，使用顺序表存储集合{1，2，3，4，5}，数据的最终存储状态如下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/20200818202543171.png#pic_center" srcset="/img/loading.gif" lazyload alt="顺序存储结构示意图" /> 理解顺序表的存储结构时，可以参考数组的存储结构。 ## 顺序表的建立 ### 理论 #### 定义数据表 首先，我们需要明确顺序表的建立所需的组成部分。 <pre><code class=" mermaid">graph LR
+<p><img
+src="https://img-blog.csdnimg.cn/20200818202543171.png#pic_center" srcset="/img/loading.gif" lazyload
+alt="顺序存储结构示意图" />
+理解顺序表的存储结构时，可以参考数组的存储结构。 ## 顺序表的建立 ###
+理论 #### 定义数据表 首先，我们需要明确顺序表的建立所需的组成部分。
+<pre><code class=" mermaid">graph LR
 A(顺序表)--&gt;B(一段连续的物理空间)
 A--&gt; C(保存顺序表中元素个数的length,当前长度)
 A--&gt; D(保存顺序表最大存储元素个数的size,存储容量)
@@ -318,7 +322,8 @@ A--&gt; D(保存顺序表最大存储元素个数的size,存储容量)
 <li>分别给size和length赋初值</li>
 </ol>
 <h3 id="实践">实践</h3>
-<p>明确理论之后，我们就开始建立一个顺序表。 注：此处我采用C++模板编写</p>
+<p>明确理论之后，我们就开始建立一个顺序表。
+注：此处我采用C++模板编写</p>
 <h4 id="定义顺序表">定义顺序表</h4>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Table</span> &#123;<br><span class="hljs-keyword">private</span>:<br>	T* head;	<span class="hljs-comment">//声明一个长度不确定的数组,也叫“动态数组”</span><br>	<span class="hljs-type">int</span> length;	<span class="hljs-comment">//声明一个length保存顺序表的长度</span><br>	<span class="hljs-type">int</span> size;	<span class="hljs-comment">//声明一个size保存顺序表分配的存储容量</span><br><span class="hljs-comment">//顺序表的一些常规操作声明，目前可以不关注</span><br><span class="hljs-comment">//只是大致的功能，自己创建时可以自行修改。</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">Table</span>(<span class="hljs-type">int</span> size);	<span class="hljs-comment">//顺序表的初始化</span><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(T value)</span></span>;	<span class="hljs-comment">//尾部添加数据</span><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(T value, <span class="hljs-type">int</span> pos)</span></span>; <span class="hljs-comment">//中间插入数据</span><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">del</span><span class="hljs-params">(T value)</span></span>;	<span class="hljs-comment">//删除指定数据</span><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">change</span><span class="hljs-params">(T value, <span class="hljs-type">int</span> pos)</span></span>;	<span class="hljs-comment">//改变指定位置的数据</span><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span>;	<span class="hljs-comment">//显示表中全部数据</span><br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">query</span><span class="hljs-params">(T value)</span></span>;	<span class="hljs-comment">//查询数据</span><br>	T <span class="hljs-keyword">operator</span>[](<span class="hljs-type">int</span> i); <span class="hljs-comment">//[]操作符重载</span><br>&#125;;<br></code></pre></td></tr></table></figure>
 <h4 id="初始化顺序表-1">初始化顺序表</h4>
@@ -358,7 +363,8 @@ A--&gt; D(保存顺序表最大存储元素个数的size,存储容量)
 <p><strong>步骤</strong>：遍历输出</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-type">void</span> Table&lt;T&gt;::<span class="hljs-built_in">show</span>() &#123;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; length;i++) &#123;<br>		cout &lt;&lt; head[i] &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;<br>	&#125;<br>	cout &lt;&lt; endl;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="查询数据">查询数据</h4>
-<p>注： 可以使用多种算法实现查找，比如说二分查找算法，插值查找算法等。 这里使用 顺序查找算法 <strong>步骤</strong>：遍历匹配目标数据</p>
+<p>注： 可以使用多种算法实现查找，比如说二分查找算法，插值查找算法等。
+这里使用 顺序查找算法 <strong>步骤</strong>：遍历匹配目标数据</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-type">int</span> Table&lt;T&gt;::<span class="hljs-built_in">query</span>(T values) &#123;<br>	<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; length; i++) &#123;<br>		<span class="hljs-keyword">if</span> (head[i] == values) &#123;<br>			<span class="hljs-keyword">return</span> i+<span class="hljs-number">1</span>;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 

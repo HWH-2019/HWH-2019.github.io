@@ -16,12 +16,12 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="写在前面  今天用到了 Jdbc 进行数据库的一些操作，要写很多重复连接关闭的代码，刚好最近在学设计模式，就突发奇想浅浅的用一下设计模式，给它封装一下吧 写的很简单，也可能有很多不足的地方，欢迎评论指出哦。 只是设计模式的一个练习，不一定实用，大家且看看吧。  实现说明 核心  链式调用 建造者模式 接口回调  相关说明 链式调用  链式调用: chained in">
+    <meta name="description" content="写在前面  今天用到了 Jdbc 进行数据库的一些操作，要写很多重复连接关闭的代码，刚好最近在学设计模式，就突发奇想浅浅的用一下设计模式，给它封装一下吧 写的很简单，也可能有很多不足的地方，欢迎评论指出哦。 只是设计模式的一个练习，不一定实用，大家且看看吧。  实现说明 核心  链式调用 建造者模式 接口回调  相关说明 链式调用  链式调用: chained">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实现 Jdbc 优雅的链式调用">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/12/10/%E5%AE%9E%E7%8E%B0-Jdbc-%E4%BC%98%E9%9B%85%E7%9A%84%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="写在前面  今天用到了 Jdbc 进行数据库的一些操作，要写很多重复连接关闭的代码，刚好最近在学设计模式，就突发奇想浅浅的用一下设计模式，给它封装一下吧 写的很简单，也可能有很多不足的地方，欢迎评论指出哦。 只是设计模式的一个练习，不一定实用，大家且看看吧。  实现说明 核心  链式调用 建造者模式 接口回调  相关说明 链式调用  链式调用: chained in">
+<meta property="og:description" content="写在前面  今天用到了 Jdbc 进行数据库的一些操作，要写很多重复连接关闭的代码，刚好最近在学设计模式，就突发奇想浅浅的用一下设计模式，给它封装一下吧 写的很简单，也可能有很多不足的地方，欢迎评论指出哦。 只是设计模式的一个练习，不一定实用，大家且看看吧。  实现说明 核心  链式调用 建造者模式 接口回调  相关说明 链式调用  链式调用: chained">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-10T12:56:08.000Z">
 <meta property="article:modified_time" content="2022-12-10T12:58:37.749Z">
@@ -292,7 +292,8 @@
                 
                 <h3 id="写在前面">写在前面</h3>
 <ul>
-<li>今天用到了 <code>Jdbc</code> 进行数据库的一些操作，要写很多重复连接关闭的代码，刚好最近在学设计模式，就突发奇想浅浅的用一下设计模式，给它封装一下吧</li>
+<li>今天用到了 <code>Jdbc</code>
+进行数据库的一些操作，要写很多重复连接关闭的代码，刚好最近在学设计模式，就突发奇想浅浅的用一下设计模式，给它封装一下吧</li>
 <li>写的很简单，也可能有很多不足的地方，欢迎评论指出哦。</li>
 <li>只是设计模式的一个练习，不一定实用，大家且看看吧。</li>
 </ul>
@@ -306,7 +307,8 @@
 <h4 id="相关说明">相关说明</h4>
 <h5 id="链式调用">链式调用</h5>
 <ul>
-<li>链式调用: <code>chained invocation</code>(链式调用）或者<code>Method chaining</code>，这种风格的AP设计叫做<code>fluent API</code>或者<code>Fluent interface</code></li>
+<li>链式调用:
+<code>chained invocation</code>(链式调用）或者<code>Method chaining</code>，这种风格的AP设计叫做<code>fluent API</code>或者<code>Fluent interface</code></li>
 <li>常用于<code>Builder Pattern</code>(建造者模式)。</li>
 </ul>
 <h5 id="建造者模式">建造者模式</h5>

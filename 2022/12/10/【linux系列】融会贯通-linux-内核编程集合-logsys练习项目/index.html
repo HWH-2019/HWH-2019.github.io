@@ -16,12 +16,12 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="logsys  This is a comprehensive exercise project for linux kernel modification, including adding system calls, modifying the xfs file system, adding block device drivers, timer usage and page fault">
+    <meta name="description" content="logsys  This is a comprehensive exercise project for linux kernel modification, including adding system calls, modifying the xfs file system, adding block device drivers, timer usage and page fau">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【linux系列】融会贯通 linux 内核编程集合 -- logsys练习项目">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/12/10/%E3%80%90linux%E7%B3%BB%E5%88%97%E3%80%91%E8%9E%8D%E4%BC%9A%E8%B4%AF%E9%80%9A-linux-%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B%E9%9B%86%E5%90%88-logsys%E7%BB%83%E4%B9%A0%E9%A1%B9%E7%9B%AE/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="logsys  This is a comprehensive exercise project for linux kernel modification, including adding system calls, modifying the xfs file system, adding block device drivers, timer usage and page fault">
+<meta property="og:description" content="logsys  This is a comprehensive exercise project for linux kernel modification, including adding system calls, modifying the xfs file system, adding block device drivers, timer usage and page fau">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-10T12:43:26.000Z">
 <meta property="article:modified_time" content="2022-12-10T12:51:54.804Z">
@@ -292,10 +292,21 @@
                 
                 <h1 id="logsys">logsys</h1>
 <ul>
-<li><p>This is <a target="_blank" rel="noopener" href="https://github.com/HWH-2019/logsys">a comprehensive exercise project for linux kernel modification</a>, including adding system calls, modifying the xfs file system, adding block device drivers, timer usage and page fault interrupt statistics.</p></li>
-<li><p>We have combined these five parts into a log management system, of course the effect is very simple, but I believe it is enough for an exercise.</p></li>
-<li><p>In addition to providing the source code of the final effect, a detailed tutorial on the operation of different modules is also specially prepared. Of course, in order to integrate it, we finally made some adjustments, but starting from the simplest, I believe you can understand the linux kernel better.</p></li>
-<li><p>这是<a target="_blank" rel="noopener" href="https://github.com/HWH-2019/logsys">linux内核修改的一个综合练习项目</a>，包含了添加系统调用、修改xfs文件系统、添加块设备驱动、定时器使用和缺页中断数统计。</p></li>
+<li><p>This is <a target="_blank" rel="noopener" href="https://github.com/HWH-2019/logsys">a
+comprehensive exercise project for linux kernel modification</a>,
+including adding system calls, modifying the xfs file system, adding
+block device drivers, timer usage and page fault interrupt
+statistics.</p></li>
+<li><p>We have combined these five parts into a log management system,
+of course the effect is very simple, but I believe it is enough for an
+exercise.</p></li>
+<li><p>In addition to providing the source code of the final effect, a
+detailed tutorial on the operation of different modules is also
+specially prepared. Of course, in order to integrate it, we finally made
+some adjustments, but starting from the simplest, I believe you can
+understand the linux kernel better.</p></li>
+<li><p>这是<a
+target="_blank" rel="noopener" href="https://github.com/HWH-2019/logsys">linux内核修改的一个综合练习项目</a>，包含了添加系统调用、修改xfs文件系统、添加块设备驱动、定时器使用和缺页中断数统计。</p></li>
 <li><p>我们将这五个部分融合成了一个日志管理系统，当然效果非常简陋，不过我相信用来作为练习已经够用了。</p></li>
 <li><p>除了提供了最终效果的源码外，还专门准备了不同模块操作的详细教程，当然为了融合起来我们最终做了一些调整，但是从最简单的开始我相信你能更加理解linux内核。</p></li>
 </ul>
@@ -308,28 +319,52 @@
 </ul>
 <h1 id="structure">Structure</h1>
 <ul>
-<li><strong>driver</strong> -- Contains a custom block device driver module</li>
-<li><strong>pagefault</strong> -- Contains a custom page fault interrupt statistics module</li>
+<li><strong>driver</strong> -- Contains a custom block device driver
+module</li>
+<li><strong>pagefault</strong> -- Contains a custom page fault interrupt
+statistics module</li>
 <li><strong>syscall</strong> -- Contains system call test files</li>
-<li><strong>xfs</strong> -- Most of the content in this folder comes from the linux kernel, we just modified part of the files</li>
-<li><strong>main.cpp</strong> -- The main program, including the use of system calls and user logic processing</li>
-<li><strong>start.sh</strong> -- Startup scripts, including preparation of various modules</li>
-<li><strong>clean.sh</strong> -- Clean up scripts, remove related modules</li>
+<li><strong>xfs</strong> -- Most of the content in this folder comes
+from the linux kernel, we just modified part of the files</li>
+<li><strong>main.cpp</strong> -- The main program, including the use of
+system calls and user logic processing</li>
+<li><strong>start.sh</strong> -- Startup scripts, including preparation
+of various modules</li>
+<li><strong>clean.sh</strong> -- Clean up scripts, remove related
+modules</li>
 </ul>
 <h1 id="tutorials">Tutorials</h1>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122534644?spm=1001.2014.3001.5501">Adding system calls(添加系统调用)</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122538992?spm=1001.2014.3001.5501">Modifying the xfs file system(修改xfs文件系统)</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122548221?spm=1001.2014.3001.5501">Adding block device drivers(添加块设备驱动)</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122559742">Page fault interrupt statistics(缺页中断数统计)</a></p></li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45762499/article/details/122566973">Timer usage(定时器使用)</a></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122534644?spm=1001.2014.3001.5501">Adding
+system calls(添加系统调用)</a></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122538992?spm=1001.2014.3001.5501">Modifying
+the xfs file system(修改xfs文件系统)</a></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122548221?spm=1001.2014.3001.5501">Adding
+block device drivers(添加块设备驱动)</a></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122559742">Page
+fault interrupt statistics(缺页中断数统计)</a></p></li>
+<li><p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45762499/article/details/122566973">Timer
+usage(定时器使用)</a></p></li>
 </ul>
 <h1 id="related">Related</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/HWH-2019/logsys">Project related source code(项目相关源码)</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122522464">Install and create a virtual machine(安装并创建虚拟机)</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122523076">Install Ubuntu under VMware virtual machine(VMware虚拟机下安装Ubuntu)</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122522326">The latest tutorial on kernel compilation + summary of common problems(内核编译最新教程+常见问题总结)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/HWH-2019/logsys">Project related source
+code(项目相关源码)</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122522464">Install
+and create a virtual machine(安装并创建虚拟机)</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122523076">Install
+Ubuntu under VMware virtual machine(VMware虚拟机下安装Ubuntu)</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122522326">The
+latest tutorial on kernel compilation + summary of common
+problems(内核编译最新教程+常见问题总结)</a></li>
 </ul>
 
                 

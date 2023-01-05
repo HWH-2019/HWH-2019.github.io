@@ -16,20 +16,18 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="引入 在了解内存对齐之前，我们先来做个简短的测试。 看看下面的代码输出的结果。 123456789101112131415#include&lt;iostream&gt;using std::cout;struct test&amp;#123;	int x;	char y;&amp;#125;;int main()&amp;#123;	test t;	cout&lt;&lt;sizeof(t); &#x2F;&#x2F;输出结果是多少？">
+    <meta name="description" content="引入 在了解内存对齐之前，我们先来做个简短的测试。 看看下面的代码输出的结果。 123456789101112131415#include&lt;iostream&gt;using std::cout;struct test&amp;#123;	int x;	char y;&amp;#125;;int main()&amp;#123;	test t;	cout&lt;&lt;sizeof(t); &#x2F;&#x2F;输出结果是多少">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内存对齐浅析">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/11/17/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%B5%85%E6%9E%90/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="引入 在了解内存对齐之前，我们先来做个简短的测试。 看看下面的代码输出的结果。 123456789101112131415#include&lt;iostream&gt;using std::cout;struct test&amp;#123;	int x;	char y;&amp;#125;;int main()&amp;#123;	test t;	cout&lt;&lt;sizeof(t); &#x2F;&#x2F;输出结果是多少？">
+<meta property="og:description" content="引入 在了解内存对齐之前，我们先来做个简短的测试。 看看下面的代码输出的结果。 123456789101112131415#include&lt;iostream&gt;using std::cout;struct test&amp;#123;	int x;	char y;&amp;#125;;int main()&amp;#123;	test t;	cout&lt;&lt;sizeof(t); &#x2F;&#x2F;输出结果是多少">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200716221214388.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="article:published_time" content="2022-11-17T13:39:20.000Z">
 <meta property="article:modified_time" content="2022-12-06T02:58:26.781Z">
 <meta property="article:author" content="HWH">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200716221214388.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
   
   
   
@@ -292,42 +290,64 @@
               <div class="markdown-body">
                 
                 <h2 id="引入">引入</h2>
-<p>在了解内存对齐之前，我们先来做个简短的测试。 看看下面的代码输出的结果。</p>
+<p>在了解内存对齐之前，我们先来做个简短的测试。
+看看下面的代码输出的结果。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> std::cout;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">test</span>&#123;<br>	<span class="hljs-type">int</span> x;<br>	<span class="hljs-type">char</span> y;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br><br>	test t;<br>	cout&lt;&lt;<span class="hljs-built_in">sizeof</span>(t); <span class="hljs-comment">//输出结果是多少？</span><br>	<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>如果你的答案是<strong>8</strong>，那么恭喜你答对了，不过相信很多人并不理解为什么是<strong>8</strong>，而不是<strong>5</strong>。按照正常思路，32位系统下，<strong>int</strong>占<strong>4</strong>个字节，<strong>char</strong>占<strong>1</strong>个字节，<strong>4+1=5</strong>,所以<strong>t</strong>占<strong>5</strong>个字节，<strong>sizeof</strong> 应该返回<strong>5</strong>，那为什么是<strong>8</strong>呢？ 这就涉及到了文章的主题，<strong><em>内存对齐</em></strong>。</p>
+<p>如果你的答案是<strong>8</strong>，那么恭喜你答对了，不过相信很多人并不理解为什么是<strong>8</strong>，而不是<strong>5</strong>。按照正常思路，32位系统下，<strong>int</strong>占<strong>4</strong>个字节，<strong>char</strong>占<strong>1</strong>个字节，<strong>4+1=5</strong>,所以<strong>t</strong>占<strong>5</strong>个字节，<strong>sizeof</strong>
+应该返回<strong>5</strong>，那为什么是<strong>8</strong>呢？
+这就涉及到了文章的主题，<strong><em>内存对齐</em></strong>。</p>
 <h2 id="内存对齐的原因">内存对齐的原因</h2>
 <p>原因主要分两部分，平台原因和性能原因。</p>
 <h3 id="平台原因">平台原因</h3>
-<p>因为现代计算机中内存的最小单位是<strong>byte</strong>，所以从理论上讲似乎对任何类型的变量的访问可以从任何地址开始。 但是实际上有些硬件平台对基本类型数据在内存中存放的位置有限制，它们会要求这些数据的首地址的值是<strong>某个数k（通常它为4或8）的倍数</strong> 。</p>
+<p>因为现代计算机中内存的最小单位是<strong>byte</strong>，所以从理论上讲似乎对任何类型的变量的访问可以从任何地址开始。
+但是实际上有些硬件平台对基本类型数据在内存中存放的位置有限制，它们会要求这些数据的首地址的值是<strong>某个数k（通常它为4或8）的倍数</strong>
+。</p>
 <h3 id="性能原因">性能原因</h3>
 <p>假如没有内存对齐机制，数据可以任意存放，现在一个<strong>int</strong>变量存放在从地址<strong>1</strong>开始的联系四个字节地址中，该处理器去取数据时，要先从<strong>0</strong>地址开始读取第一个<strong>4</strong>字节块,剔除不想要的字节（<strong>0</strong>地址）,然后从地址<strong>4</strong>开始读取下一个<strong>4</strong>字节块,同样剔除不要的数据（<strong>5，6，7</strong>地址）,最后留下的两块数据合并放入寄存器，这需要做很多工作。</p>
 <h2 id="内存对齐规则">内存对齐规则</h2>
 <blockquote>
-<p>每个特定平台上的编译器都有自己的默认“<strong>对齐系数</strong>”(也叫<strong>对齐模数</strong>)。程序员可以通过预编译命令#<strong>pragma pack(n)，n=1,2,4,8,16</strong>来改变这一系数，其中的<strong>n</strong>就是你要指定的“<strong>对齐系数</strong>”。</p>
+<p>每个特定平台上的编译器都有自己的默认“<strong>对齐系数</strong>”(也叫<strong>对齐模数</strong>)。程序员可以通过预编译命令#<strong>pragma
+pack(n)，n=1,2,4,8,16</strong>来改变这一系数，其中的<strong>n</strong>就是你要指定的“<strong>对齐系数</strong>”。</p>
 </blockquote>
 <p>有效对其值：是给定值<code>#pragma pack(n)</code>和结构体中<strong>最长数据类型长度中较小的</strong>那个。有效对齐值也叫<strong>对齐单位</strong>。</p>
 <h3 id="对齐规则">对齐规则</h3>
 <h4 id="数据成员对齐规则">1、数据成员对齐规则</h4>
 <blockquote>
-<p><strong>结构(struct)</strong>(或<strong>联合(union)</strong>)的数据成员，第一个数据成员放在<strong>offset</strong>为<strong>0</strong>的地方，以后每个数据成员的对齐按照#pragma pack指定的数值和这个数据成员自身长度中，<strong>比较小</strong>的那个进行。</p>
+<p><strong>结构(struct)</strong>(或<strong>联合(union)</strong>)的数据成员，第一个数据成员放在<strong>offset</strong>为<strong>0</strong>的地方，以后每个数据成员的对齐按照#pragma
+pack指定的数值和这个数据成员自身长度中，<strong>比较小</strong>的那个进行。</p>
 </blockquote>
 <h4 id="结构或联合的整体对齐规则">2、结构(或联合)的整体对齐规则</h4>
 <blockquote>
-<p>在数据成员完成各自对齐之后，<strong>结构(或联合)本身也要进行对齐</strong>，对齐将按照#pragma pack指定的数值和结构(或联合)最大数据成员长度中，<strong>比较小</strong>的那个进行。</p>
+<p>在数据成员完成各自对齐之后，<strong>结构(或联合)本身也要进行对齐</strong>，对齐将按照#pragma
+pack指定的数值和结构(或联合)最大数据成员长度中，<strong>比较小</strong>的那个进行。</p>
 </blockquote>
 <h4 id="结合12">3、结合1、2</h4>
 <blockquote>
-<p>当#pragma pack的<strong>n</strong>值<strong>等于或超过</strong>所有数据成员长度的时候，这个<strong>n</strong>值的大小将不产生任何效果。</p>
+<p>当#pragma
+pack的<strong>n</strong>值<strong>等于或超过</strong>所有数据成员长度的时候，这个<strong>n</strong>值的大小将不产生任何效果。</p>
 </blockquote>
 <h2 id="案例分析">案例分析</h2>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> std::cout;<br><span class="hljs-keyword">using</span> std::endl;<br><span class="hljs-keyword">struct</span><br>&#123;<br>   <span class="hljs-type">char</span> c1;<br>    <span class="hljs-type">int</span> i;<br>    <span class="hljs-type">char</span> c2;<br>&#125;x1;<br><br><br><span class="hljs-keyword">struct</span> &#123;<br>    <span class="hljs-type">char</span> c1;<br>    <span class="hljs-type">char</span> c2;<br>    <span class="hljs-type">int</span> i;<br>&#125;x2;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cout &lt;&lt; <span class="hljs-built_in">sizeof</span>(x1) &lt;&lt; endl;  <span class="hljs-comment">// 输出12</span><br>    cout &lt;&lt; <span class="hljs-built_in">sizeof</span>(x2) &lt;&lt; endl;  <span class="hljs-comment">// 输出8</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>以上测试都是在<strong>Win32</strong>环境下进行的，默认#<strong>pragma pack(4)</strong>，因此<strong>对齐单位</strong>为<strong>4</strong>。</p>
+<p>以上测试都是在<strong>Win32</strong>环境下进行的，默认#<strong>pragma
+pack(4)</strong>，因此<strong>对齐单位</strong>为<strong>4</strong>。</p>
 <p>以<strong>x1</strong>对象分析，首先使用<strong>对齐规则1</strong>，对<strong>x1</strong>的<strong>数据成员</strong>进行<strong>内存对齐</strong></p>
-<p>sizeof(c1) = 1 &lt; 4(<strong>对齐单位</strong>) 所以按照<strong>1</strong>字节对齐，占内存的第<strong>0</strong>单元。 sizeof(i) = 4 &lt; = 4(<strong>对齐单位</strong>) 相对于结构体首地址的偏移要为<strong>4</strong>的倍数，占内存的<strong>4,5,6,7</strong>单元。 sizeof(c2) = 1 &lt; 4(<strong>对齐单位</strong>) 相对于结构体首地址的偏移要为<strong>4</strong>的倍数，占内存的第<strong>8</strong>单元。</p>
+<p>sizeof(c1) = 1 &lt; 4(<strong>对齐单位</strong>)
+所以按照<strong>1</strong>字节对齐，占内存的第<strong>0</strong>单元。
+sizeof(i) = 4 &lt; = 4(<strong>对齐单位</strong>)
+相对于结构体首地址的偏移要为<strong>4</strong>的倍数，占内存的<strong>4,5,6,7</strong>单元。
+sizeof(c2) = 1 &lt; 4(<strong>对齐单位</strong>)
+相对于结构体首地址的偏移要为<strong>4</strong>的倍数，占内存的第<strong>8</strong>单元。</p>
 <p>接着，使用<strong>对齐规则2</strong>，对<strong>结构体整体</strong>进行<strong>内存对齐</strong>。</p>
-<p><strong>x1</strong>中变量i占用内存最大占<strong>4</strong>字节，而有效对齐单位也为<strong>4</strong>字节，两者较小值就是<strong>4</strong>字节。因此<strong>整体也是按照4字节对齐</strong>。由<strong>对齐规则1</strong>得到<strong>x1</strong>占<strong>9</strong>个字节，此处再按照<strong>对齐规则2</strong>进行整体的<strong>4</strong>字节对齐，所以整个结构体占用<strong>12</strong>个字节。<img src="https://img-blog.csdnimg.cn/20200716221214388.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="x1内存布局" /> <strong>x2</strong>对象的分析也是类似。 先套用<strong>对齐规则1</strong>，<strong>c1</strong>和<strong>c2</strong>都是按照<strong>1</strong>个字节对齐，分别占用内存的第<strong>0</strong>和<strong>1</strong>单元，<strong>i</strong>相对于结构体首地址的偏移要为<strong>4</strong>的倍数，占内存的<strong>4,5,6,7</strong>单元。 再套用<strong>对齐规则2</strong>，因此<strong>整体也是按照4字节对齐</strong>。由<strong>对齐规则1</strong>得到<strong>x2</strong>占<strong>8</strong>个字节，此处再按照<strong>对齐规则2</strong>进行整体的<strong>4</strong>字节对齐，所以整个结构体占用<strong>8</strong>个字节。</p>
+<p><strong>x1</strong>中变量i占用内存最大占<strong>4</strong>字节，而有效对齐单位也为<strong>4</strong>字节，两者较小值就是<strong>4</strong>字节。因此<strong>整体也是按照4字节对齐</strong>。由<strong>对齐规则1</strong>得到<strong>x1</strong>占<strong>9</strong>个字节，此处再按照<strong>对齐规则2</strong>进行整体的<strong>4</strong>字节对齐，所以整个结构体占用<strong>12</strong>个字节。<img
+src="https://img-blog.csdnimg.cn/20200716221214388.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload
+alt="x1内存布局" /> <strong>x2</strong>对象的分析也是类似。
+先套用<strong>对齐规则1</strong>，<strong>c1</strong>和<strong>c2</strong>都是按照<strong>1</strong>个字节对齐，分别占用内存的第<strong>0</strong>和<strong>1</strong>单元，<strong>i</strong>相对于结构体首地址的偏移要为<strong>4</strong>的倍数，占内存的<strong>4,5,6,7</strong>单元。
+再套用<strong>对齐规则2</strong>，因此<strong>整体也是按照4字节对齐</strong>。由<strong>对齐规则1</strong>得到<strong>x2</strong>占<strong>8</strong>个字节，此处再按照<strong>对齐规则2</strong>进行整体的<strong>4</strong>字节对齐，所以整个结构体占用<strong>8</strong>个字节。</p>
 <blockquote>
-<p>参考资料： <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/9537460?fr=aladdin">内存对齐_百度百科</a> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30007037">C/C++内存对齐详解 - 知乎</a></p>
+<p>参考资料： <a
+target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/9537460?fr=aladdin">内存对齐_百度百科</a>
+<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30007037">C/C++内存对齐详解 -
+知乎</a></p>
 </blockquote>
 
                 

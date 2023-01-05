@@ -16,21 +16,18 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="写在前面  最近在写 WebService 时，遇到了使用第三方的 WebService 生成客户端代码后，对于请求返回的 DataSet 数据类型无法正确解析的问题。 经过近一天的尝试终于解决此问题，在此记录并分享。 这里贴上常用的第三方 WebService，常用的 WebService  问题描述  使用 IntelliJ IDEA 2020.2.3 中提供的 Glassfi">
+    <meta name="description" content="写在前面  最近在写 WebService 时，遇到了使用第三方的 WebService 生成客户端代码后，对于请求返回的 DataSet 数据类型无法正确解析的问题。 经过近一天的尝试终于解决此问题，在此记录并分享。 这里贴上常用的第三方 WebService，常用的 WebService  问题描述  使用 IntelliJ IDEA 2020.2.3 中提供的 Gla">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决 WebService 返回 DataSet XML 数据解析问题">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/12/10/%E8%A7%A3%E5%86%B3-WebService-%E8%BF%94%E5%9B%9E-DataSet-XML-%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="写在前面  最近在写 WebService 时，遇到了使用第三方的 WebService 生成客户端代码后，对于请求返回的 DataSet 数据类型无法正确解析的问题。 经过近一天的尝试终于解决此问题，在此记录并分享。 这里贴上常用的第三方 WebService，常用的 WebService  问题描述  使用 IntelliJ IDEA 2020.2.3 中提供的 Glassfi">
+<meta property="og:description" content="写在前面  最近在写 WebService 时，遇到了使用第三方的 WebService 生成客户端代码后，对于请求返回的 DataSet 数据类型无法正确解析的问题。 经过近一天的尝试终于解决此问题，在此记录并分享。 这里贴上常用的第三方 WebService，常用的 WebService  问题描述  使用 IntelliJ IDEA 2020.2.3 中提供的 Gla">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/3f1c22052f8e42bebe208870e233810f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/57af88dc0d3e4339b3c00825b7e3d3cc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="article:published_time" content="2022-12-10T12:59:25.000Z">
 <meta property="article:modified_time" content="2022-12-10T13:00:12.635Z">
 <meta property="article:author" content="HWH">
 <meta property="article:tag" content="WebService">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/3f1c22052f8e42bebe208870e233810f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
   
   
   
@@ -294,24 +291,34 @@
                 
                 <h3 id="写在前面">写在前面</h3>
 <ul>
-<li>最近在写 WebService 时，遇到了使用第三方的 WebService 生成客户端代码后，对于请求返回的 DataSet 数据类型无法正确解析的问题。</li>
+<li>最近在写 WebService 时，遇到了使用第三方的 WebService
+生成客户端代码后，对于请求返回的 DataSet
+数据类型无法正确解析的问题。</li>
 <li>经过近一天的尝试终于解决此问题，在此记录并分享。</li>
-<li>这里贴上常用的第三方 WebService，<a target="_blank" rel="noopener" href="http://www.webxml.com.cn/zh_cn/web_services.aspx?offset=1">常用的 WebService</a></li>
+<li>这里贴上常用的第三方 WebService，<a
+target="_blank" rel="noopener" href="http://www.webxml.com.cn/zh_cn/web_services.aspx?offset=1">常用的
+WebService</a></li>
 </ul>
 <h3 id="问题描述">问题描述</h3>
 <ul>
-<li>使用 <code>IntelliJ IDEA 2020.2.3</code> 中提供的 <code>Glassfish /JAX-WS 2.2 RI / Metro 1.X/ JwSDP2.2</code> 方式生成客户端代码</li>
+<li>使用 <code>IntelliJ IDEA 2020.2.3</code> 中提供的
+<code>Glassfish /JAX-WS 2.2 RI / Metro 1.X/ JwSDP2.2</code>
+方式生成客户端代码</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/3f1c22052f8e42bebe208870e233810f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/3f1c22052f8e42bebe208870e233810f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>在调用请求返回的 DataSet 数据类型无法正确解析</li>
-<li>返回结果 <code>[[xs:schema: null], [diffgr:diffgram: null]]</code></li>
+<li>返回结果
+<code>[[xs:schema: null], [diffgr:diffgram: null]]</code></li>
 </ul>
 <h3 id="解决方法">解决方法</h3>
 <ul>
-<li>使用 <code>Axis</code> 生成客户端代码(<code>IntelliJ IDEA</code> 的可能存在问题，实在不行可以试试 <code>eclipse</code>)</li>
+<li>使用 <code>Axis</code> 生成客户端代码(<code>IntelliJ IDEA</code>
+的可能存在问题，实在不行可以试试 <code>eclipse</code>)</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/57af88dc0d3e4339b3c00825b7e3d3cc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/57af88dc0d3e4339b3c00825b7e3d3cc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>使用代理对象返回数据（此处以获取邮政编码为例）</li>
 </ul>
@@ -322,7 +329,8 @@
 </ul>
 <h3 id="写在最后">写在最后</h3>
 <ul>
-<li>我对 XML 的解析操作进行了封装，将其封装成一个工具类，具体代码如下：</li>
+<li>我对 XML
+的解析操作进行了封装，将其封装成一个工具类，具体代码如下：</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.huang.util;<br><br><span class="hljs-keyword">import</span> org.apache.axis.message.MessageElement;<br><span class="hljs-keyword">import</span> org.jdom2.Document;<br><span class="hljs-keyword">import</span> org.jdom2.Element;<br><span class="hljs-keyword">import</span> org.jdom2.JDOMException;<br><span class="hljs-keyword">import</span> org.jdom2.input.SAXBuilder;<br><br><span class="hljs-keyword">import</span> java.io.ByteArrayInputStream;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.InputStream;<br><span class="hljs-keyword">import</span> java.nio.charset.StandardCharsets;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 描述：WebService 返回 DataSet XML 数据解析</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 方法：DataSetXmlToListMap(MessageElement[] any,List&lt;String&gt; elemNames)</span><br><span class="hljs-comment"> *      -- 解析 any 中  elemNames 指定的数据</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 使用场景：WebService 采用 Axis 生成客户端代码，服务请求返回结果为 DataSet XML</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 作者：HWH</span><br><span class="hljs-comment"> * 日期：2022-4-24 20:42</span><br><span class="hljs-comment"> * 邮箱：huangwenhuan2019@outlook.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WebServiceXmlUtil</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 解析 any 中  elemNames 指定的数据</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> any MessageElement 数组对象</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> elemNames List&lt;String&gt; 为解析指定的字段名</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> List&lt;Map&lt;String,Object&gt;&gt; any 中  elemNames 指定的数据，其中 Map 键为小写的 elemNames 中的元素</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> JDOMException</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IOException</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;Map&lt;String,Object&gt;&gt; <span class="hljs-title function_">DataSetXmlToListMap</span><span class="hljs-params">(MessageElement[] any,List&lt;String&gt; elemNames)</span> <span class="hljs-keyword">throws</span> JDOMException, IOException &#123;<br>        <span class="hljs-type">List</span> <span class="hljs-variable">children</span> <span class="hljs-operator">=</span> any[<span class="hljs-number">1</span>].getChildren();<br>        List&lt;Map&lt;String, Object&gt;&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">SAXBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SAXBuilder</span>();<br>        <span class="hljs-keyword">for</span> (Object child : children) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> child.toString();<br>            <span class="hljs-type">InputStream</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayInputStream</span>(str.getBytes(StandardCharsets.UTF_8));<br>            <span class="hljs-type">Document</span> <span class="hljs-variable">doc</span> <span class="hljs-operator">=</span> sb.build(in);<br>            <span class="hljs-type">Element</span> <span class="hljs-variable">root</span> <span class="hljs-operator">=</span> doc.getRootElement(); <span class="hljs-comment">// 得到根元素</span><br>            List&lt;Element&gt; focs = root.getChildren();<br>            <span class="hljs-keyword">for</span> (Element o : focs) &#123;<br>                Map&lt;String, Object&gt; tmp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>                <span class="hljs-keyword">for</span>(String elemName : elemNames)&#123;<br>                    tmp.put(elemName.toLowerCase() , o.getChild(elemName).getText());<br>                &#125;<br>                list.add(tmp);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
 

@@ -16,29 +16,19 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="编译环境  虚拟机操作系统： ubuntu-20.04.3-desktop-amd64 原系统内核版本：5.11.0-46-generic 内核源码版本：5.11.1  修改任务 基础任务  采用内核编译法增加两个系统调用 一个系统调用把用户输入的字符串保存到 text.txt 中 一个系统调用把 text.txt 中的字符串读出 写个主程序调用两个系统调用  进阶任务">
+    <meta name="description" content="编译环境  虚拟机操作系统： ubuntu-20.04.3-desktop-amd64 原系统内核版本：5.11.0-46-generic 内核源码版本：5.11.1  修改任务 基础任务  采用内核编译法增加两个系统调用 一个系统调用把用户输入的字符串保存到 text.txt 中 一个系统调用把 text.txt 中的字符串读出 写个主程序调用两个系统调用  进阶任">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Linux系列】添加系统调用">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/12/03/%E3%80%90Linux%E7%B3%BB%E5%88%97%E3%80%91%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="编译环境  虚拟机操作系统： ubuntu-20.04.3-desktop-amd64 原系统内核版本：5.11.0-46-generic 内核源码版本：5.11.1  修改任务 基础任务  采用内核编译法增加两个系统调用 一个系统调用把用户输入的字符串保存到 text.txt 中 一个系统调用把 text.txt 中的字符串读出 写个主程序调用两个系统调用  进阶任务">
+<meta property="og:description" content="编译环境  虚拟机操作系统： ubuntu-20.04.3-desktop-amd64 原系统内核版本：5.11.0-46-generic 内核源码版本：5.11.1  修改任务 基础任务  采用内核编译法增加两个系统调用 一个系统调用把用户输入的字符串保存到 text.txt 中 一个系统调用把 text.txt 中的字符串读出 写个主程序调用两个系统调用  进阶任">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/72bc1b5f98ea4fd48bbc83bdb75c0337.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/22717168a74447a0a676db3750107a98.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/0423b3747a8b4b88964c631c5a901277.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2d41e6988023425c867d67bd83cc9ab9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/13035f98526d4d9996e37ee96c83becf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/4456233062114297ad8ee0e38ec9c4b8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/1a4e3b42ae964cc89ad19590a8f4caaf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/87e8890d75744ed6a589a59e9253e2a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/73d3143054214904848a7eb69f87852f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="article:published_time" content="2022-12-03T12:27:42.000Z">
 <meta property="article:modified_time" content="2022-12-10T12:27:39.798Z">
 <meta property="article:author" content="HWH">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/72bc1b5f98ea4fd48bbc83bdb75c0337.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
   
   
   
@@ -310,7 +300,8 @@
 <h4 id="基础任务">基础任务</h4>
 <ul>
 <li>采用内核编译法增加两个系统调用</li>
-<li>一个系统调用把用户输入的字符串保存到 <strong>text.txt</strong> 中</li>
+<li>一个系统调用把用户输入的字符串保存到 <strong>text.txt</strong>
+中</li>
 <li>一个系统调用把 <strong>text.txt</strong> 中的字符串读出</li>
 <li>写个主程序调用两个系统调用</li>
 </ul>
@@ -321,8 +312,10 @@
 </ul>
 <h3 id="修改准备">修改准备</h3>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://cdn.kernel.org/pub/linux/kernel/">下载内核源码</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122522326">掌握内核编译</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://cdn.kernel.org/pub/linux/kernel/">下载内核源码</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122522326">掌握内核编译</a></li>
 </ul>
 <h3 id="修改源码">修改源码</h3>
 <ul>
@@ -331,26 +324,30 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell">arch/x86/entry/syscalls/syscall_64.tbl      //设置系统调用号，如果是<span class="hljs-number">32</span>位就用syscall_32.tbl<br><br>include/linux/syscalls.h                     //系统调用的头文件<br><br>kernel/sys.c                                 //定义系统调用函数<br></code></pre></td></tr></table></figure>
 <h4 id="添加系统调用号">添加系统调用号</h4>
 <ul>
-<li>使用 <strong>gedit</strong> 打开 <strong>syscall_64.tbl</strong> 文件</li>
+<li>使用 <strong>gedit</strong> 打开 <strong>syscall_64.tbl</strong>
+文件</li>
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">sudo gedit arch/x86/entry/syscalls/syscall_64.tbl<br></code></pre></td></tr></table></figure>
 <ul>
 <li>根据规则在后面添加自己的系统调用号和系统调用名，如下图所示</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/72bc1b5f98ea4fd48bbc83bdb75c0337.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/72bc1b5f98ea4fd48bbc83bdb75c0337.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>这里我添加了两个系统调用分别是读和写</li>
 </ul>
 <h4 id="修改系统调用头文件">修改系统调用头文件</h4>
 <ul>
-<li>使用 <strong>gedit</strong> 打开 <strong>syscalls.h</strong> 文件</li>
+<li>使用 <strong>gedit</strong> 打开 <strong>syscalls.h</strong>
+文件</li>
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">sudo gedit include/linux/syscalls.h<br></code></pre></td></tr></table></figure>
 <ul>
 <li>添加对应系统调用的函数声明，如下图</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">asmlinkage <span class="hljs-type">long</span> <span class="hljs-title function_">sys_fwrite</span><span class="hljs-params">(<span class="hljs-type">int</span> strcount,<span class="hljs-type">char</span> __user* <span class="hljs-built_in">string</span>)</span>;<br>asmlinkage <span class="hljs-type">long</span> <span class="hljs-title function_">sys_fread</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>;<br></code></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/22717168a74447a0a676db3750107a98.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/22717168a74447a0a676db3750107a98.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <h4 id="修改系统调用函数定义">修改系统调用函数定义</h4>
 <ul>
 <li>使用 <strong>gedit</strong> 打开 <strong>sys.c</strong> 文件</li>
@@ -364,9 +361,11 @@
 <ul>
 <li>将两个函数定义写在 sys.c 文件的尾部</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/0423b3747a8b4b88964c631c5a901277.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/0423b3747a8b4b88964c631c5a901277.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <ul>
-<li>其中 <strong>SYSCALL_DEFINE</strong> 为系统定义，之后的数字代表系统调用参数的个数，其中第一个参数为系统调用函数的名称，需要与调用号定义(调用号定义第三个参)，声明(sys_xxx中xxx部分)一致。</li>
+<li>其中 <strong>SYSCALL_DEFINE</strong>
+为系统定义，之后的数字代表系统调用参数的个数，其中第一个参数为系统调用函数的名称，需要与调用号定义(调用号定义第三个参)，声明(sys_xxx中xxx部分)一致。</li>
 <li>注意系统调用定义时的参数书写格式。</li>
 </ul>
 <h3 id="编译安装内核">编译安装内核</h3>
@@ -389,14 +388,18 @@
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">sudo ./readAndWrite.o<br></code></pre></td></tr></table></figure>
 <ul>
-<li><p>执行结果，如下图 <img src="https://img-blog.csdnimg.cn/2d41e6988023425c867d67bd83cc9ab9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /><img src="https://img-blog.csdnimg.cn/13035f98526d4d9996e37ee96c83becf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p></li>
+<li><p>执行结果，如下图 <img
+src="https://img-blog.csdnimg.cn/2d41e6988023425c867d67bd83cc9ab9.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /><img
+src="https://img-blog.csdnimg.cn/13035f98526d4d9996e37ee96c83becf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p></li>
 <li><p>至此基础任务完成，接下来完成进阶任务</p></li>
 </ul>
 <h3 id="进阶任务-1">进阶任务</h3>
 <ul>
 <li><p>重新添加新的系统调用</p></li>
-<li><p>添加系统调用号 <img src="https://img-blog.csdnimg.cn/4456233062114297ad8ee0e38ec9c4b8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p></li>
-<li><p>添加系统调用函数声明 <img src="https://img-blog.csdnimg.cn/1a4e3b42ae964cc89ad19590a8f4caaf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p></li>
+<li><p>添加系统调用号 <img
+src="https://img-blog.csdnimg.cn/4456233062114297ad8ee0e38ec9c4b8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p></li>
+<li><p>添加系统调用函数声明 <img
+src="https://img-blog.csdnimg.cn/1a4e3b42ae964cc89ad19590a8f4caaf.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p></li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">asmlinkage <span class="hljs-type">long</span> <span class="hljs-title function_">sys_fsize</span><span class="hljs-params">(<span class="hljs-type">int</span> pathcount,<span class="hljs-type">char</span> __user * path)</span>;<br>asmlinkage <span class="hljs-type">long</span> <span class="hljs-title function_">sys_fwrite_advance</span><span class="hljs-params">(<span class="hljs-type">int</span> strcount,<span class="hljs-type">char</span> __user * <span class="hljs-built_in">string</span>,<span class="hljs-type">int</span> pathcount,<span class="hljs-type">char</span> __user * path)</span>;<br>asmlinkage <span class="hljs-type">long</span> <span class="hljs-title function_">sys_fread_advance</span><span class="hljs-params">(<span class="hljs-type">char</span> __user * res,<span class="hljs-type">int</span> pathcount,<span class="hljs-type">char</span> __user * path)</span>;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -414,8 +417,10 @@
 <li>在所需目录下新建所需文件</li>
 <li>编译运行，结果如下</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/87e8890d75744ed6a589a59e9253e2a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="https://img-blog.csdnimg.cn/73d3143054214904848a7eb69f87852f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/87e8890d75744ed6a589a59e9253e2a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/73d3143054214904848a7eb69f87852f.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="总结">总结</h3>
 <ul>
 <li>增加系统调用主要是修改三个文件，分别添加系统调用号、系统调用函数声明和系统调用函数定义</li>

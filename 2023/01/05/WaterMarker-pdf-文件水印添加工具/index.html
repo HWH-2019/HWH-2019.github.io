@@ -1,0 +1,837 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/site.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="HWH">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="写在前面  昨天想给 pdf 添加个水印，结果 wps 居然需要收费，果断选择写一个 pdf 文件水印添加工具 本工具能够自适应的为 pdf 文件每页添加水印 本工具完全由 Python 编写，支持脚本运行和编译器内执行 同时支持如下自定义  水印文字 (text) 水印透明度 (alpha) 水印字体 (font) 水印字体大小 (size) 水印旋转角度 (angle)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WaterMarker - pdf 文件水印添加工具">
+<meta property="og:url" content="https://hwh-2019.github.io/2023/01/05/WaterMarker-pdf-%E6%96%87%E4%BB%B6%E6%B0%B4%E5%8D%B0%E6%B7%BB%E5%8A%A0%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="HWH&#39;s Blogs">
+<meta property="og:description" content="写在前面  昨天想给 pdf 添加个水印，结果 wps 居然需要收费，果断选择写一个 pdf 文件水印添加工具 本工具能够自适应的为 pdf 文件每页添加水印 本工具完全由 Python 编写，支持脚本运行和编译器内执行 同时支持如下自定义  水印文字 (text) 水印透明度 (alpha) 水印字体 (font) 水印字体大小 (size) 水印旋转角度 (angle)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-05T01:48:38.000Z">
+<meta property="article:modified_time" content="2023-01-05T03:17:37.079Z">
+<meta property="article:author" content="HWH">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>WaterMarker - pdf 文件水印添加工具 - HWH&#39;s Blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"hwh-2019.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>HWH&#39;s Blogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="WaterMarker - pdf 文件水印添加工具"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-01-05 09:48" pubdate>
+          2023年1月5日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          39 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WaterMarker - pdf 文件水印添加工具</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="写在前面">写在前面</h3>
+<ul>
+<li>昨天想给 pdf 添加个水印，结果 wps 居然需要收费，果断选择写一个 pdf
+文件水印添加工具</li>
+<li>本工具能够自适应的为 pdf 文件每页添加水印</li>
+<li>本工具完全由 Python 编写，支持脚本运行和编译器内执行</li>
+<li>同时支持如下自定义
+<ul>
+<li>水印文字 (text)</li>
+<li>水印透明度 (alpha)</li>
+<li>水印字体 (font)</li>
+<li>水印字体大小 (size)</li>
+<li>水印旋转角度 (angle)</li>
+</ul></li>
+</ul>
+<h3 id="编写环境">编写环境</h3>
+<ul>
+<li>Python: 3.7.0</li>
+<li>pypdf2: 3.0.1</li>
+<li>reportlab: 3.6.12</li>
+</ul>
+<h3 id="核心代码分析">核心代码分析</h3>
+<h4 id="创建水印函数">创建水印函数</h4>
+<ul>
+<li>函数的签名如下</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">create_watermark</span>(<span class="hljs-params">content, width, height, args</span>)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>函数需传入四个参数
+<ul>
+<li>content: 水印文字</li>
+<li>width: pdf 当前页的宽</li>
+<li>height: pdf 当前页的高</li>
+<li>args: 命令行参数</li>
+</ul></li>
+<li>为了自适应 pdf
+每页，使得在不同大小的页面添加水印时均能够以合适的大小添加水印文字</li>
+<li>代码中计算了当前页面与标准 A4 页面宽高的比例</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 比例，用于自适应 pdf 页面大小</span><br>width = <span class="hljs-built_in">float</span>(width) * <span class="hljs-number">0.0352</span><br>height = <span class="hljs-built_in">float</span>(height) * <span class="hljs-number">0.0352</span><br>ratio_w = width / <span class="hljs-number">21</span><br>ratio_h = height / <span class="hljs-number">29.7</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>并在设置字体字号和绘制文本部分对相应数值进行修正</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 设置字体，默认采用 SimSun 字体</span><br>c.setFont(args.font, args.size * (ratio_w + ratio_h) / <span class="hljs-number">2</span>)<br><br><span class="hljs-comment"># 画几个文本,注意坐标系旋转的影响</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):<br>        <span class="hljs-comment"># 使用 比例 自适应水印文字位置</span><br>        a = <span class="hljs-number">10</span> * (i - <span class="hljs-number">1</span>) * ratio_w<br>        b = <span class="hljs-number">5</span> * (j - <span class="hljs-number">2</span>) * ratio_h<br>        c.drawString(a * cm, b * cm, content)<br></code></pre></td></tr></table></figure>
+<h4 id="添加水印函数">添加水印函数</h4>
+<ul>
+<li>函数的签名如下</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">add_watermark</span>(<span class="hljs-params">pdf_file_in, pdf_file_out, args</span>)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>函数需传入三个参数
+<ul>
+<li>pdf_file_in: 需添加水印文件的路径</li>
+<li>pdf_file_out: 添加水印后文件的输出路径</li>
+<li>args: 命令行参数</li>
+</ul></li>
+<li>使用 pypdf2 库中的 <code>PdfWriter</code> 类创建 pdf
+文件写出对象</li>
+<li>根据 pdf_file_in 读取 pdf 文件，并使用 <code>PdfReader</code> 类创建
+pdf 文件对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">pdf_output = PdfWriter()<br>input_stream = <span class="hljs-built_in">open</span>(pdf_file_in, <span class="hljs-string">&#x27;rb&#x27;</span>)<br>pdf_input = PdfReader(input_stream, strict=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
+<ul>
+<li>对每一页 pdf 分别添加水印</li>
+<li>每次获取每页的实际宽高，与前一页对比，若不一致则重新根据当前页面生成水印文件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 给每一页打水印</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(pageNum):<br>    page = pdf_input.pages[i]<br>    <span class="hljs-comment"># 获取当前页面实际宽高</span><br>    width = pdf_input.pages[i].mediabox.width<br>    height = pdf_input.pages[i].mediabox.height<br>    <span class="hljs-keyword">if</span> width != last_width <span class="hljs-keyword">or</span> height != last_height:<br>        pdf_file_mark = create_watermark(watermark_text, width, height, args)  <span class="hljs-comment"># 生成水印文件</span><br>        pdf_watermark = PdfReader(<span class="hljs-built_in">open</span>(pdf_file_mark, <span class="hljs-string">&#x27;rb&#x27;</span>), strict=<span class="hljs-literal">False</span>)  <span class="hljs-comment"># 读入水印pdf文件</span><br>        last_width = width<br>        last_height = height<br>    page.merge_page(pdf_watermark.pages[<span class="hljs-number">0</span>])<br>    page.compress_content_streams()  <span class="hljs-comment"># 压缩内容</span><br>    pdf_output.add_page(page)<br>pdf_output.write(<span class="hljs-built_in">open</span>(pdf_file_out, <span class="hljs-string">&#x27;wb&#x27;</span>))<br></code></pre></td></tr></table></figure>
+<h4 id="主函数">主函数</h4>
+<ul>
+<li>为实现脚本方式执行，使用 argparse
+库定义命令行解析器对象并添加命令行参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 定义命令行解析器对象</span><br>parser = argparse.ArgumentParser(description=<span class="hljs-string">&#x27;WaterMarker of argparse&#x27;</span>)<br><br><span class="hljs-comment"># 添加命令行参数</span><br>parser.add_argument(<span class="hljs-string">&#x27;--text&#x27;</span>, default=<span class="hljs-string">&#x27;watermark&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Text to add watermark&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;-F&#x27;</span>, <span class="hljs-string">&#x27;--file&#x27;</span>, default=<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;The path to the file to add the watermark to&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--font&#x27;</span>, default=<span class="hljs-string">&#x27;SimSun&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Font used for watermark text&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--size&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">30</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Font size used for watermark text, defaults to 30, &quot;</span><br>                                                         <span class="hljs-string">&quot;the size will adjust itself as the page changes&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--alpha&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">float</span>, default=<span class="hljs-number">0.1</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Transparency of watermark text, between 0.0 and 1.0&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;--angle&#x27;</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">int</span>, default=<span class="hljs-number">30</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;Rotate the canvas by the angle theta (in degrees)&quot;</span>)<br>parser.add_argument(<span class="hljs-string">&#x27;-O&#x27;</span>, <span class="hljs-string">&#x27;--output&#x27;</span>, default=<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&quot;File output path after adding watermark (including the &quot;</span><br>                                                       <span class="hljs-string">&quot;file name), the default is the original file directory&quot;</span>)<br><br><span class="hljs-comment"># 从命令行中结构化解析参数</span><br>args = parser.parse_args()<br></code></pre></td></tr></table></figure>
+<ul>
+<li>对命令行参数进行分析，以避免用户重复输入水印文字或者需添加水印的 pdf
+文件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 检查命令行参数 text 的值是否为默认值，是则要求用户输入水印文字，若用户输入空，则采用命令行参数的默认值</span><br><span class="hljs-comment"># 若命令行参数的值不为默认值，则跳过用户输入水印文字</span><br>text = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">if</span> args.text == <span class="hljs-string">&#x27;watermark&#x27;</span>:<br>    text = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入水印文字：&quot;</span>)<br>watermark_text = args.text <span class="hljs-keyword">if</span> text == <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">else</span> text<br><br><span class="hljs-comment"># 处理方式与上类似</span><br>pdf_file_in = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">if</span> args.file == <span class="hljs-string">&#x27;&#x27;</span>:<br>    pdf_file_in = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入文件路径：&quot;</span>).strip(<span class="hljs-string">&#x27;&quot;&#x27;</span>).strip(<span class="hljs-string">&#x27; &#x27;</span>)<br><span class="hljs-keyword">else</span>:<br>    pdf_file_in = args.file<br></code></pre></td></tr></table></figure>
+<ul>
+<li>同时对文件进行了限制，以确保传入文件为 pdf 格式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> os.path.splitext(pdf_file_in)[-<span class="hljs-number">1</span>] == <span class="hljs-string">&quot;.pdf&quot;</span>:<br>     pdf_file_in = pdf_file_in.replace(<span class="hljs-string">&#x27;\\&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>)<br>     <span class="hljs-comment"># 文件输出路径</span><br>     <span class="hljs-keyword">if</span> args.output == <span class="hljs-string">&#x27;&#x27;</span>:<br>         pdf_file_out = pdf_file_in.replace(<span class="hljs-string">&#x27;.pdf&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>) + <span class="hljs-string">&#x27;（添加水印）.pdf&#x27;</span><br>     <span class="hljs-keyword">else</span>:<br>         pdf_file_out = args.output.replace(<span class="hljs-string">&#x27;\\&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>)<br>     add_watermark(pdf_file_in, pdf_file_out, args)<br>     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;添加水印成功&quot;</span>)<br>     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;文件路径为: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(pdf_file_out.replace(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-string">&#x27;\\&#x27;</span>)))<br> <span class="hljs-keyword">else</span>:<br>     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;输入文件不为pdf格式!!!&quot;</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="使用案例">使用案例</h3>
+<ul>
+<li>由于支持使用脚本运行，以下内容将重点介绍脚本执行方式</li>
+</ul>
+<h4 id="脚本具体参数如下">脚本具体参数如下</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">optional arguments:<br>  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span><br>  --text TEXT           Text to add watermark<br>  -F FILE, --file FILE  The path to the file to add the watermark to<br>  --font FONT           Font used <span class="hljs-keyword">for</span> watermark text<br>  --size SIZE           Font size used <span class="hljs-keyword">for</span> watermark text, defaults to 30, the<br>                        size will adjust itself as the page changes<br>  --alpha ALPHA         Transparency of watermark text, between 0.0 and 1.0<br>  --angle ANGLE         Rotate the canvas by the angle theta (<span class="hljs-keyword">in</span> degrees)<br>  -O OUTPUT, --output OUTPUT<br>                        File output path after adding watermark (including the<br>                        file name), the default is the original file directory<br></code></pre></td></tr></table></figure>
+<h4 id="具体案例">具体案例</h4>
+<ul>
+<li>以下为具体使用案例，其中除 <code>-F</code> 和 <code>-O</code>
+参数外均为默认值</li>
+<li>若未使用 <code>--text</code> 或 <code>-F</code>
+参数将会要求用户手动输入</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python watermarker.py --text <span class="hljs-string">&quot;WaterMarker&quot;</span> -F <span class="hljs-string">&quot;C:\test.pdf&quot;</span> --font <span class="hljs-string">&quot;SimSun&quot;</span> --alpha 0.1 --size 30 --angle 30 -O <span class="hljs-string">&quot;./result.pdf&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="写在最后">写在最后</h3>
+<ul>
+<li>感谢大家阅读和使用，本工具源码已上传至 <a
+target="_blank" rel="noopener" href="https://github.com/HWH-2019/WaterMarker">github</a></li>
+<li>本工具采用 GPL2 开源协议，详细内容参见 <a
+target="_blank" rel="noopener" href="https://github.com/HWH-2019/WaterMarker/blob/main/LICENSE">协议</a></li>
+<li>若有更好的想法或者任何疑问，欢迎评论，或前往 github 提交
+issue，或通过邮件 <a href="mailto:huang_wen_huan@163.com"
+class="email">huang_wen_huan@163.com</a> 联系我，我将及时更新和回复</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Tutorial/" class="category-chain-item">Tutorial</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Tools/" class="category-chain-item">Tools</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>WaterMarker - pdf 文件水印添加工具</div>
+      <div>https://hwh-2019.github.io/2023/01/05/WaterMarker-pdf-文件水印添加工具/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>HWH</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年1月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/10/Ubuntu-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86-Linux-for-clash-proxychains/" title="Ubuntu 安装配置代理(Linux for clash + proxychains)">
+                        <span class="hidden-mobile">Ubuntu 安装配置代理(Linux for clash + proxychains)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('mermaid' in window) {
+        mermaid.init();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/codeBLang.js"></script>
+<script src="/js/codeBlockFunction.js"></script>
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

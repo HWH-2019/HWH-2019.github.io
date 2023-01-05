@@ -16,25 +16,19 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="写在前面 ORB-SLAM是一种多功能且精确的单目SLAM解决方案，能够在各种环境下实时计算摄像机轨迹和稀疏的3D场景重建，从小型手持序列到在多个城市驾驶的汽车块。它能够关闭大型环路，并实时地从宽基线进行全局重新定位。 注意：本次编译使用的环境是安装在虚拟机中的Ubuntu18.04，且ORB_SLAM是基于ROS运行的，因此请确保已安装好linux环境及ROS系统。 准备工作 1.虚拟机及">
+    <meta name="description" content="写在前面 ORB-SLAM是一种多功能且精确的单目SLAM解决方案，能够在各种环境下实时计算摄像机轨迹和稀疏的3D场景重建，从小型手持序列到在多个城市驾驶的汽车块。它能够关闭大型环路，并实时地从宽基线进行全局重新定位。 注意：本次编译使用的环境是安装在虚拟机中的Ubuntu18.04，且ORB_SLAM是基于ROS运行的，因此请确保已安装好linux环境及ROS系统。 准备工作 1.虚拟机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ORB_SLAM编译流程及相关报错处理">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/11/18/ORB-SLAM%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="写在前面 ORB-SLAM是一种多功能且精确的单目SLAM解决方案，能够在各种环境下实时计算摄像机轨迹和稀疏的3D场景重建，从小型手持序列到在多个城市驾驶的汽车块。它能够关闭大型环路，并实时地从宽基线进行全局重新定位。 注意：本次编译使用的环境是安装在虚拟机中的Ubuntu18.04，且ORB_SLAM是基于ROS运行的，因此请确保已安装好linux环境及ROS系统。 准备工作 1.虚拟机及">
+<meta property="og:description" content="写在前面 ORB-SLAM是一种多功能且精确的单目SLAM解决方案，能够在各种环境下实时计算摄像机轨迹和稀疏的3D场景重建，从小型手持序列到在多个城市驾驶的汽车块。它能够关闭大型环路，并实时地从宽基线进行全局重新定位。 注意：本次编译使用的环境是安装在虚拟机中的Ubuntu18.04，且ORB_SLAM是基于ROS运行的，因此请确保已安装好linux环境及ROS系统。 准备工作 1.虚拟机">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219094426398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219094558784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219095104204.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219100103228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219100345756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="article:published_time" content="2022-11-18T11:56:33.000Z">
 <meta property="article:modified_time" content="2022-12-06T02:53:27.020Z">
 <meta property="article:author" content="HWH">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210219094426398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center">
   
   
   
@@ -297,12 +291,19 @@
               <div class="markdown-body">
                 
                 <h2 id="写在前面">写在前面</h2>
-<p><a target="_blank" rel="noopener" href="http://webdiis.unizar.es/~raulmur/orbslam/">ORB-SLAM</a>是一种多功能且精确的单目SLAM解决方案，能够在各种环境下实时计算摄像机轨迹和稀疏的3D场景重建，从小型手持序列到在多个城市驾驶的汽车块。它能够关闭大型环路，并实时地从宽基线进行全局重新定位。 注意：本次编译使用的环境是安装在虚拟机中的Ubuntu18.04，且ORB_SLAM是基于ROS运行的，因此请确保已安装好linux环境及ROS系统。</p>
+<p><a
+target="_blank" rel="noopener" href="http://webdiis.unizar.es/~raulmur/orbslam/">ORB-SLAM</a>是一种多功能且精确的单目SLAM解决方案，能够在各种环境下实时计算摄像机轨迹和稀疏的3D场景重建，从小型手持序列到在多个城市驾驶的汽车块。它能够关闭大型环路，并实时地从宽基线进行全局重新定位。
+注意：本次编译使用的环境是安装在虚拟机中的Ubuntu18.04，且ORB_SLAM是基于ROS运行的，因此请确保已安装好linux环境及ROS系统。</p>
 <h2 id="准备工作">准备工作</h2>
-<h3 id="虚拟机及ros准备未使用虚拟机的可跳过此步">1.虚拟机及ROS准备(未使用虚拟机的可跳过此步)</h3>
-<p>安装虚拟机，并安装好Ubuntu18.04以及ROS系统，详细教程可参见<a target="_blank" rel="noopener" href="https://www.ngui.cc/51cto/show-23557.html">此处</a> 由于是在虚拟机中执行，需要让虚拟机连接到外接USB摄像头或者电脑本机摄像头，详细教程可参见<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43849277/article/details/109061739">此处</a></p>
+<h3
+id="虚拟机及ros准备未使用虚拟机的可跳过此步">1.虚拟机及ROS准备(未使用虚拟机的可跳过此步)</h3>
+<p>安装虚拟机，并安装好Ubuntu18.04以及ROS系统，详细教程可参见<a
+target="_blank" rel="noopener" href="https://www.ngui.cc/51cto/show-23557.html">此处</a>
+由于是在虚拟机中执行，需要让虚拟机连接到外接USB摄像头或者电脑本机摄像头，详细教程可参见<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43849277/article/details/109061739">此处</a></p>
 <h3 id="orb_slam所需环境准备">2.ORB_SLAM所需环境准备</h3>
-<p>首先安装好opencv，网上教程颇多可以自行查阅。 然后使用如下两个命令分别安装boost和eigen3</p>
+<p>首先安装好opencv，网上教程颇多可以自行查阅。
+然后使用如下两个命令分别安装boost和eigen3</p>
 <blockquote>
 <p>sudo apt-get install libboost-all-dev</p>
 <p>sudo apt-get install libeigen3-dev</p>
@@ -310,14 +311,17 @@
 <p>详细内容可参考ORB_SLAM提供的README.md文档</p>
 <h3 id="安装">3.安装</h3>
 <h4 id="源码下载">1.源码下载</h4>
-<p>访问<a target="_blank" rel="noopener" href="https://github.com/raulmur/ORB_SLAM">ORB_SLAM在github上的地址</a>下载源码。 或者在终端执行如下命令：</p>
+<p>访问<a
+target="_blank" rel="noopener" href="https://github.com/raulmur/ORB_SLAM">ORB_SLAM在github上的地址</a>下载源码。
+或者在终端执行如下命令：</p>
 <blockquote>
 <p>git clone https://github.com/raulmur/ORB_SLAM.git ORB_SLAM</p>
 </blockquote>
 <h4 id="添加环境变量">2.添加环境变量</h4>
 <p>将克隆ORB_SLAM的路径添加到ROS_PACKAGE_PATH环境变量。为此，请修改.bashrc并在底部添加以下行（替换PATH_TO_PARENT_OF_ORB_SLAM）</p>
 <blockquote>
-<p>export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:PATH_TO_PARENT_OF_ORB_SLAM</p>
+<p>export
+ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:PATH_TO_PARENT_OF_ORB_SLAM</p>
 </blockquote>
 <p>例如：如果ORB_SLAM文件夹在主文件夹中则将PATH_TO_PARENT_OF_ORB_SLAM替换为~/ORB_SLAM</p>
 <h4 id="编译g2o和dbow2库">3.编译g2o和DBoW2库</h4>
@@ -332,35 +336,57 @@
 </blockquote>
 <h2 id="编译orb_slam报错处理">编译ORB_SLAM报错处理</h2>
 <h3 id="缺少opencv2">1.缺少opencv2</h3>
-<p>报错如下图所示 <img src="https://img-blog.csdnimg.cn/20210219094426398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="缺少opencv2" /> 解决方法：删除manifest.xml文件中的 <code>&lt; depend package=“opencv2”/ &gt;</code> 行，如下图所示</p>
+<p>报错如下图所示 <img
+src="https://img-blog.csdnimg.cn/20210219094426398.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload
+alt="缺少opencv2" /> 解决方法：删除manifest.xml文件中的
+<code>&lt; depend package=“opencv2”/ &gt;</code> 行，如下图所示</p>
 <figure>
-<img src="https://img-blog.csdnimg.cn/20210219094558784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="修改manifest.xml" /><figcaption aria-hidden="true">修改manifest.xml</figcaption>
+<img
+src="https://img-blog.csdnimg.cn/20210219094558784.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload
+alt="修改manifest.xml" />
+<figcaption aria-hidden="true">修改manifest.xml</figcaption>
 </figure>
 <h3 id="缺少头文件">2.缺少头文件</h3>
 <p>出现类似如下错误：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"> In member function ‘<span class="hljs-type">void</span> ORB_SLAM::ORBextractor::<span class="hljs-built_in">ComputeKeyPoints</span>(std::vector&lt;std::vectorcv::KeyPoint &gt;&amp;)’:<br>/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc:<span class="hljs-number">607</span>:<span class="hljs-number">63</span>: error: ‘FAST’ <span class="hljs-function">was <span class="hljs-keyword">not</span> declared in <span class="hljs-keyword">this</span> scope</span><br><span class="hljs-function"><span class="hljs-title">FAST</span><span class="hljs-params">(cellImage,cellKeyPoints[i][j],fastTh,<span class="hljs-literal">true</span>)</span></span>;<br>^<br>/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc:<span class="hljs-number">616</span>:<span class="hljs-number">34</span>: error: ‘ORB’ <span class="hljs-function">has <span class="hljs-keyword">not</span> been declared</span><br><span class="hljs-function"><span class="hljs-title">if</span><span class="hljs-params">( scoreType == ORB::HARRIS_SCORE )</span></span><br><span class="hljs-function">^</span><br><span class="hljs-function">/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc:<span class="hljs-number">683</span>:<span class="hljs-number">17</span>: error: ‘KeyPointsFilter’ has not been declared</span><br><span class="hljs-function">KeyPointsFilter::retainBest(keysCell,nToRetain[i][j]);</span><br>^<br>/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc:<span class="hljs-number">699</span>:<span class="hljs-number">13</span>: error: ‘KeyPointsFilter’ <span class="hljs-function">has <span class="hljs-keyword">not</span> been declared</span><br><span class="hljs-function"><span class="hljs-title">KeyPointsFilter::retainBest</span><span class="hljs-params">(keypoints,nDesiredFeatures)</span></span>;<br>^<br>/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc: In member function ‘<span class="hljs-type">void</span> ORB_SLAM::ORBextractor::<span class="hljs-built_in">operator</span>()(cv::InputArray, cv::InputArray, std::vectorcv::KeyPoint&amp;, cv::OutputArray)’:<br>/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc:<span class="hljs-number">760</span>:<span class="hljs-number">82</span>: error: ‘GaussianBlur’ <span class="hljs-function">was <span class="hljs-keyword">not</span> declared in <span class="hljs-keyword">this</span> scope</span><br><span class="hljs-function"><span class="hljs-title">GaussianBlur</span><span class="hljs-params">(workingMat, workingMat, Size(<span class="hljs-number">7</span>, <span class="hljs-number">7</span>), <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, BORDER_REFLECT_101)</span></span>;<br>^<br>/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc: In member function ‘<span class="hljs-type">void</span> ORB_SLAM::ORBextractor::<span class="hljs-built_in">ComputePyramid</span>(cv::Mat, cv::Mat)’:<br>/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc:<span class="hljs-number">800</span>:<span class="hljs-number">78</span>: error: ‘INTER_LINEAR’ <span class="hljs-function">was <span class="hljs-keyword">not</span> declared in <span class="hljs-keyword">this</span> scope</span><br><span class="hljs-function"><span class="hljs-title">resize</span><span class="hljs-params">(mvImagePyramid[level<span class="hljs-number">-1</span>], mvImagePyramid[level], sz, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, INTER_LINEAR)</span></span>;<br>^<br>/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc:<span class="hljs-number">800</span>:<span class="hljs-number">90</span>: error: ‘resize’ <span class="hljs-function">was <span class="hljs-keyword">not</span> declared in <span class="hljs-keyword">this</span> scope</span><br><span class="hljs-function"><span class="hljs-title">resize</span><span class="hljs-params">(mvImagePyramid[level<span class="hljs-number">-1</span>], mvImagePyramid[level], sz, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, INTER_LINEAR)</span></span>;<br>^<br>/home/jy/catkin_ws/src/ORB_SLAM-master/src/ORBextractor.cc:<span class="hljs-number">803</span>:<span class="hljs-number">80</span>: error: ‘INTER_NEAREST’ <span class="hljs-function">was <span class="hljs-keyword">not</span> declared in <span class="hljs-keyword">this</span> scope</span><br><span class="hljs-function"><span class="hljs-title">resize</span><span class="hljs-params">(mvMaskPyramid[level<span class="hljs-number">-1</span>], mvMaskPyramid[level], sz, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, INTER_NEAREST)</span></span>;<br>^<br>make[<span class="hljs-number">2</span>]: *** [CMakeFiles/ORB_SLAM-master.dir/src/ORBextractor.cc.o] 错误 <span class="hljs-number">1</span><br>make[<span class="hljs-number">1</span>]: *** [CMakeFiles/ORB_SLAM-master.dir/all] 错误 <span class="hljs-number">2</span><br>make: *** [all] 错误 <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
 <p>解决方法：添加缺少的头文件，我的出错是ORBextractor.cc文件，修改如下：</p>
 <figure>
-<img src="https://img-blog.csdnimg.cn/20210219095104204.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="添加头文件" /><figcaption aria-hidden="true">添加头文件</figcaption>
+<img
+src="https://img-blog.csdnimg.cn/20210219095104204.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload
+alt="添加头文件" />
+<figcaption aria-hidden="true">添加头文件</figcaption>
 </figure>
 <h3 id="eigen3库的bug">3.Eigen3库的bug</h3>
 <p>如果出现如下报错：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">/usr/local/include/eigen3/Eigen/src/Core/util/StaticAssert.h:<span class="hljs-number">32</span>:<span class="hljs-number">40</span>: error: <span class="hljs-type">static</span> assertion failed:<br>YOU_MIXED_DIFFERENT_NUMERIC_TYPES__YOU_NEED_TO_USE_THE_CAST_METHOD_OF_MATRIXBASE_TO_CAST_NUMERIC_TYPES_EXPLICITLY<br> <span class="hljs-meta">#<span class="hljs-keyword">define</span> EIGEN_STATIC_ASSERT(X,MSG) static_assert(X,#MSG);</span><br></code></pre></td></tr></table></figure>
 <p>解决方法：打开Thirdparty/g2o/g2o/solvers/linear_solver_eigen.h，将以下代码：</p>
 <blockquote>
-<p>typedef Eigen::PermutationMatrix&lt;Eigen::Dynamic, Eigen::Dynamic, SparseMatrix::Index&gt; PermutationMatrix;</p>
+<p>typedef Eigen::PermutationMatrix&lt;Eigen::Dynamic, Eigen::Dynamic,
+SparseMatrix::Index&gt; PermutationMatrix;</p>
 </blockquote>
 <p>替换为：</p>
 <blockquote>
-<p>typedef Eigen::PermutationMatrix&lt;Eigen::Dynamic, Eigen::Dynamic, int&gt; PermutationMatrix;</p>
+<p>typedef Eigen::PermutationMatrix&lt;Eigen::Dynamic, Eigen::Dynamic,
+int&gt; PermutationMatrix;</p>
 </blockquote>
-<p>如下图所示： <img src="https://img-blog.csdnimg.cn/20210219100103228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="修改eigen" /></p>
-<h3 id="undefined-reference-to-symbol-_zn5boost6system15system_categoryev">4.undefined reference to symbol '_ZN5boost6system15system_categoryEv'</h3>
-<p>解决方法：如果出现此错误修改CMakeLists.txt文件如下所示： <img src="https://img-blog.csdnimg.cn/20210219100345756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload alt="修改CMakeLists.txt" /></p>
+<p>如下图所示： <img
+src="https://img-blog.csdnimg.cn/20210219100103228.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload
+alt="修改eigen" /></p>
+<h3
+id="undefined-reference-to-symbol-_zn5boost6system15system_categoryev">4.undefined
+reference to symbol '_ZN5boost6system15system_categoryEv'</h3>
+<p>解决方法：如果出现此错误修改CMakeLists.txt文件如下所示： <img
+src="https://img-blog.csdnimg.cn/20210219100345756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload
+alt="修改CMakeLists.txt" /></p>
 <h2 id="写在最后">写在最后</h2>
-<p>所有ORB_SLAM编译流程均参考ORB_SLAM提供的README.md文档，如有疑问可以详细阅读此文档，或者评论区指出。 参考文档：</p>
+<p>所有ORB_SLAM编译流程均参考ORB_SLAM提供的README.md文档，如有疑问可以详细阅读此文档，或者评论区指出。
+参考文档：</p>
 <blockquote>
-<p>https://github.com/raulmur/ORB_SLAM/blob/master/README.md https://www.ngui.cc/51cto/show-23557.html https://blog.csdn.net/weixin_43849277/article/details/109061739 https://www.geek-share.com/detail/2764681691.html https://blog.csdn.net/danmeng8068/article/details/83827245</p>
+<p>https://github.com/raulmur/ORB_SLAM/blob/master/README.md
+https://www.ngui.cc/51cto/show-23557.html
+https://blog.csdn.net/weixin_43849277/article/details/109061739
+https://www.geek-share.com/detail/2764681691.html
+https://blog.csdn.net/danmeng8068/article/details/83827245</p>
 </blockquote>
 
                 

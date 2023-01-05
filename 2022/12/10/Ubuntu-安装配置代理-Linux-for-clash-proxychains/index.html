@@ -16,16 +16,13 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="写在前面  这两天要装 FSL 软件发现第一步不挂代理是真的慢，所以决定研究一下怎么在 Linux 上挂代理 简单搜索后选择使用 Linux for clash 和 proxychains 解决代理问题 网上的教程很多但我试过之后大多会出现一些细节问题，而且千篇一律 所以整理一下挂代理的安装配置流程和细节 顺嘴提一句 clash 是真的好用  配置环境  虚拟机： VMware">
+    <meta name="description" content="写在前面  这两天要装 FSL 软件发现第一步不挂代理是真的慢，所以决定研究一下怎么在 Linux 上挂代理 简单搜索后选择使用 Linux for clash 和 proxychains 解决代理问题 网上的教程很多但我试过之后大多会出现一些细节问题，而且千篇一律 所以整理一下挂代理的安装配置流程和细节 顺嘴提一句 clash 是真的好用  配置环境  虚拟机： VMw">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu 安装配置代理(Linux for clash + proxychains)">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/12/10/Ubuntu-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86-Linux-for-clash-proxychains/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="写在前面  这两天要装 FSL 软件发现第一步不挂代理是真的慢，所以决定研究一下怎么在 Linux 上挂代理 简单搜索后选择使用 Linux for clash 和 proxychains 解决代理问题 网上的教程很多但我试过之后大多会出现一些细节问题，而且千篇一律 所以整理一下挂代理的安装配置流程和细节 顺嘴提一句 clash 是真的好用  配置环境  虚拟机： VMware">
+<meta property="og:description" content="写在前面  这两天要装 FSL 软件发现第一步不挂代理是真的慢，所以决定研究一下怎么在 Linux 上挂代理 简单搜索后选择使用 Linux for clash 和 proxychains 解决代理问题 网上的教程很多但我试过之后大多会出现一些细节问题，而且千篇一律 所以整理一下挂代理的安装配置流程和细节 顺嘴提一句 clash 是真的好用  配置环境  虚拟机： VMw">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/26626d768c7f4d5faea12ee68e9a0c38~tplv-k3u1fbpfcp-zoom-1.image">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4ad51b3f41bf4a689f3ff73361a45fb3~tplv-k3u1fbpfcp-zoom-1.image">
-<meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/78e9dc865f5642eba44af72935e75f30~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="article:published_time" content="2022-12-10T13:02:14.000Z">
 <meta property="article:modified_time" content="2022-12-11T03:27:48.260Z">
 <meta property="article:author" content="HWH">
@@ -33,7 +30,6 @@
 <meta property="article:tag" content="Clash">
 <meta property="article:tag" content="Proxychains">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/26626d768c7f4d5faea12ee68e9a0c38~tplv-k3u1fbpfcp-zoom-1.image">
   
   
   
@@ -297,8 +293,11 @@
                 
                 <h3 id="写在前面">写在前面</h3>
 <ul>
-<li>这两天要装 FSL 软件发现第一步不挂代理是真的慢，所以决定研究一下怎么在 Linux 上挂代理</li>
-<li>简单搜索后选择使用 <code>Linux for clash</code> 和 <code>proxychains</code> 解决代理问题</li>
+<li>这两天要装 FSL
+软件发现第一步不挂代理是真的慢，所以决定研究一下怎么在 Linux
+上挂代理</li>
+<li>简单搜索后选择使用 <code>Linux for clash</code> 和
+<code>proxychains</code> 解决代理问题</li>
 <li>网上的教程很多但我试过之后大多会出现一些细节问题，而且千篇一律</li>
 <li>所以整理一下挂代理的安装配置流程和细节</li>
 <li>顺嘴提一句 <code>clash</code> 是真的好用</li>
@@ -312,9 +311,14 @@
 <h3 id="clash-安装配置">Clash 安装配置</h3>
 <h4 id="linux-for-clash-下载">Linux for clash 下载</h4>
 <ul>
-<li>访问 <code>clash</code> 的<a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">版本发布页</a>选择合适的版本下载</li>
-<li>这里也提供我使用的 <a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases/download/v1.11.8/clash-linux-amd64-v1.11.8.gz">clash-linux-amd64-v1.11.8</a> 快速下载地址</li>
-<li>可以通过浏览器下载，也可以使用 <code>wget</code>下载，<code>clash</code> 很小可以自行选择下载方式，以下提供 <code>wget</code> 下载命令</li>
+<li>访问 <code>clash</code> 的<a
+target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">版本发布页</a>选择合适的版本下载</li>
+<li>这里也提供我使用的 <a
+target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases/download/v1.11.8/clash-linux-amd64-v1.11.8.gz">clash-linux-amd64-v1.11.8</a>
+快速下载地址</li>
+<li>可以通过浏览器下载，也可以使用
+<code>wget</code>下载，<code>clash</code>
+很小可以自行选择下载方式，以下提供 <code>wget</code> 下载命令</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://github.com/Dreamacro/clash/releases/download/v1.11.8/clash-linux-amd64-v1.11.8.gz<br></code></pre></td></tr></table></figure>
 <h4 id="linux-for-clash-安装">Linux for clash 安装</h4>
@@ -323,60 +327,83 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gzip -d clash-linux-amd64-v1.11.8.gz<br></code></pre></td></tr></table></figure>
 <ul>
-<li>解压后对 <code>clash-linux-amd64-v1.11.8</code> 文件赋予执行权限</li>
+<li>解压后对 <code>clash-linux-amd64-v1.11.8</code>
+文件赋予执行权限</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x clash-linux-amd64-v1.11.8<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>注意：双击提取后的文件名可能为clash-linux-amd64，对应更改后续命令即可</p>
 </blockquote>
 <ul>
-<li>使用 <code>mv</code> 命令将文件移动到指定目录，方便全局访问 <code>clash</code></li>
+<li>使用 <code>mv</code> 命令将文件移动到指定目录，方便全局访问
+<code>clash</code></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">mv</span> clash-linux-amd64-v1.11.8 /usr/local/bin/clash<br></code></pre></td></tr></table></figure>
 <ul>
-<li>终端执行 <code>clash -v</code> 命令检查 <code>clash</code> 能否正常运行，正常终端显示结果如下：</li>
+<li>终端执行 <code>clash -v</code> 命令检查 <code>clash</code>
+能否正常运行，正常终端显示结果如下：</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">Clash v1.11.8 linux amd64 with go1.19 Fri Aug 26 13:20:30 UTC 2022<br></code></pre></td></tr></table></figure>
 <h4 id="linux-for-clash-配置">Linux for clash 配置</h4>
 <ul>
-<li><code>clash</code> 运行需要依赖相应的 <code>YAML</code> 配置文件，默认读取 <code>$HOME/.config/clash/config.yaml</code></li>
-<li>当没有这份文件的时候，clash 会使用默认配置生成一份，所以我们可以直接运行一下 <code>clash</code> ，来获取模版，同时会自动下载 <code>Country.mmdb</code> 文件</li>
+<li><code>clash</code> 运行需要依赖相应的 <code>YAML</code>
+配置文件，默认读取 <code>$HOME/.config/clash/config.yaml</code></li>
+<li>当没有这份文件的时候，clash
+会使用默认配置生成一份，所以我们可以直接运行一下 <code>clash</code>
+，来获取模版，同时会自动下载 <code>Country.mmdb</code> 文件</li>
 <li>第一次在终端执行 <code>clash</code> 的结果如下：</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">INFO[0000] Can<span class="hljs-string">&#x27;t find config, create a initial config file</span><br><span class="hljs-string">INFO[0000] Can&#x27;</span>t find MMDB, start download<br>INFO[0000] Mixed(http+socks) proxy listening at: 127.0.0.1:7890<br></code></pre></td></tr></table></figure>
 <ul>
-<li>此时已获得配置文件的模板，但这模板并没有什么用，<code>yaml</code> 文件的内容往往需要代理方提供，这就需要去购买 <code>VPN</code></li>
-<li>大家可以自行找找，这里所需的 <code>VPN</code> 不能是基于软件（仅能在安装它所提供的软件后才可使用）的，而是可以提供订阅链接（即可以取得配置文件的）</li>
-<li>在取得相应的配置文件后将其改名为 <code>config.yaml</code> 并替换相应目录下的初始文件</li>
+<li>此时已获得配置文件的模板，但这模板并没有什么用，<code>yaml</code>
+文件的内容往往需要代理方提供，这就需要去购买 <code>VPN</code></li>
+<li>大家可以自行找找，这里所需的 <code>VPN</code>
+不能是基于软件（仅能在安装它所提供的软件后才可使用）的，而是可以提供订阅链接（即可以取得配置文件的）</li>
+<li>在取得相应的配置文件后将其改名为 <code>config.yaml</code>
+并替换相应目录下的初始文件</li>
 </ul>
 <h4 id="linux-for-clash-运行">Linux for clash 运行</h4>
 <ul>
-<li>在配置完成后即可在终端执行 <code>sudo clash</code> 运行，若无报错则运行成功</li>
-<li>运行后可以浏览器访问 <a target="_blank" rel="noopener" href="http://clash.razord.top/#/proxies">Clash控制台</a></li>
+<li>在配置完成后即可在终端执行 <code>sudo clash</code>
+运行，若无报错则运行成功</li>
+<li>运行后可以浏览器访问 <a
+target="_blank" rel="noopener" href="http://clash.razord.top/#/proxies">Clash控制台</a></li>
 <li>如果访问失败，打开设置-&gt;网络-&gt;网络代理，切换为手动，设置下图参数后</li>
 </ul>
 <figure>
-<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/26626d768c7f4d5faea12ee68e9a0c38~tplv-k3u1fbpfcp-zoom-1.image" srcset="/img/loading.gif" lazyload alt="代理配置参数" /><figcaption aria-hidden="true">代理配置参数</figcaption>
+<img
+src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/26626d768c7f4d5faea12ee68e9a0c38~tplv-k3u1fbpfcp-zoom-1.image" srcset="/img/loading.gif" lazyload
+alt="代理配置参数" />
+<figcaption aria-hidden="true">代理配置参数</figcaption>
 </figure>
 <ul>
 <li>访问成功后将进入如下界面：</li>
 </ul>
 <figure>
-<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4ad51b3f41bf4a689f3ff73361a45fb3~tplv-k3u1fbpfcp-zoom-1.image" srcset="/img/loading.gif" lazyload alt="clash控制台" /><figcaption aria-hidden="true">clash控制台</figcaption>
+<img
+src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4ad51b3f41bf4a689f3ff73361a45fb3~tplv-k3u1fbpfcp-zoom-1.image" srcset="/img/loading.gif" lazyload
+alt="clash控制台" />
+<figcaption aria-hidden="true">clash控制台</figcaption>
 </figure>
 <ul>
 <li>点击设置，检查<strong>允许来自局域网的连接</strong>是否开启</li>
 </ul>
 <figure>
-<img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/78e9dc865f5642eba44af72935e75f30~tplv-k3u1fbpfcp-zoom-1.image" srcset="/img/loading.gif" lazyload alt="设置页面" /><figcaption aria-hidden="true">设置页面</figcaption>
+<img
+src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/78e9dc865f5642eba44af72935e75f30~tplv-k3u1fbpfcp-zoom-1.image" srcset="/img/loading.gif" lazyload
+alt="设置页面" />
+<figcaption aria-hidden="true">设置页面</figcaption>
 </figure>
 <ul>
-<li>访问尝试外网网站，如 <a target="_blank" rel="noopener" href="https://www.google.com">Google</a></li>
-<li>至此 <code>Linux for clash</code> 已经安装配置好，接下来将介绍如何配置开启自启动，如果不需要的可以跳过下一小节</li>
+<li>访问尝试外网网站，如 <a
+target="_blank" rel="noopener" href="https://www.google.com">Google</a></li>
+<li>至此 <code>Linux for clash</code>
+已经安装配置好，接下来将介绍如何配置开启自启动，如果不需要的可以跳过下一小节</li>
 </ul>
 <h4 id="linux-for-clash-开机自启">Linux for clash 开机自启</h4>
 <ul>
-<li>自启动的话将 <code>clash</code> 托管给 <code>systemd</code> 来管理</li>
+<li>自启动的话将 <code>clash</code> 托管给 <code>systemd</code>
+来管理</li>
 <li>新建 <code>clash.service</code> 文件</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo gedit /etc/systemd/system/clash.service<br></code></pre></td></tr></table></figure>
@@ -393,10 +420,15 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo systemctl <span class="hljs-built_in">enable</span> clash<br>sudo systemctl start clash<br>sudo systemctl status clash<br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>clash</code> 运行起来之后，会在 <code>http://127.0.0.1:7890</code> 这个地址监听 <code>HTTP_PROXY</code> 服务</li>
-<li>接下来需要为 Linux 配置代理，使所有的 http 请求，都经由这个代理服务进出</li>
-<li>Linux 提供了专门的环境变量 <code>http_proxy</code> 和 <code>https_proxy</code> 进行相关配置</li>
-<li>采用以下命令设置并将其写入 <code>.bashrc</code> 文件中，使得每次开启终端都可以生效</li>
+<li><code>clash</code> 运行起来之后，会在
+<code>http://127.0.0.1:7890</code> 这个地址监听 <code>HTTP_PROXY</code>
+服务</li>
+<li>接下来需要为 Linux 配置代理，使所有的 http
+请求，都经由这个代理服务进出</li>
+<li>Linux 提供了专门的环境变量 <code>http_proxy</code> 和
+<code>https_proxy</code> 进行相关配置</li>
+<li>采用以下命令设置并将其写入 <code>.bashrc</code>
+文件中，使得每次开启终端都可以生效</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;export http_proxy=http://127.0.0.1:7890\nexport https_proxy=http://127.0.0.1:7890&quot;</span> &gt;&gt; ~/.bashrc<br></code></pre></td></tr></table></figure>
 <ul>
@@ -414,7 +446,8 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo gedit /etc/proxychains.conf<br></code></pre></td></tr></table></figure>
 <ul>
-<li>在文件最后改成相应的代理方式、地址和端口，根据 <code>clash</code> 的配置，修改如下：</li>
+<li>在文件最后改成相应的代理方式、地址和端口，根据 <code>clash</code>
+的配置，修改如下：</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">http	127.0.0.1 7890<br></code></pre></td></tr></table></figure>
 <h4 id="代理使用">代理使用</h4>
@@ -425,7 +458,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">proxychains curl -kIsS https://www.google.com<br></code></pre></td></tr></table></figure>
 <h3 id="写在最后">写在最后</h3>
 <ul>
-<li>目前上述方法已在 <code>Ubuntu 18.04</code> 和 <code>Ubuntu 16.04</code> 上测试完成</li>
+<li>目前上述方法已在 <code>Ubuntu 18.04</code> 和
+<code>Ubuntu 16.04</code> 上测试完成</li>
 <li>若有其他问题欢迎评论指出</li>
 </ul>
 
@@ -521,6 +555,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/01/05/WaterMarker-pdf-%E6%96%87%E4%BB%B6%E6%B0%B4%E5%8D%B0%E6%B7%BB%E5%8A%A0%E5%B7%A5%E5%85%B7/" title="WaterMarker - pdf 文件水印添加工具">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">WaterMarker - pdf 文件水印添加工具</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

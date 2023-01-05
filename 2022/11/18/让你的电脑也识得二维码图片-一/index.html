@@ -16,14 +16,13 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="开始 昨日突发奇想，想在电脑上实现二维码图片的识别解码。因此查了点资料决定用python的pyzbar包写一个二维码解码的脚本。 首先pip安装pyzbar库：  pip install pyzbar  掏出python写下了如下程序： 12345678910111213141516171819import osimport webbrowserfrom PIL import Imag">
+    <meta name="description" content="开始 昨日突发奇想，想在电脑上实现二维码图片的识别解码。因此查了点资料决定用python的pyzbar包写一个二维码解码的脚本。 首先pip安装pyzbar库：  pip install pyzbar  掏出python写下了如下程序： 12345678910111213141516171819import osimport webbrowserfrom PIL import Ima">
 <meta property="og:type" content="article">
 <meta property="og:title" content="让你的电脑也识得二维码图片(一)">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/11/18/%E8%AE%A9%E4%BD%A0%E7%9A%84%E7%94%B5%E8%84%91%E4%B9%9F%E8%AF%86%E5%BE%97%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%9B%BE%E7%89%87-%E4%B8%80/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="开始 昨日突发奇想，想在电脑上实现二维码图片的识别解码。因此查了点资料决定用python的pyzbar包写一个二维码解码的脚本。 首先pip安装pyzbar库：  pip install pyzbar  掏出python写下了如下程序： 12345678910111213141516171819import osimport webbrowserfrom PIL import Imag">
+<meta property="og:description" content="开始 昨日突发奇想，想在电脑上实现二维码图片的识别解码。因此查了点资料决定用python的pyzbar包写一个二维码解码的脚本。 首先pip安装pyzbar库：  pip install pyzbar  掏出python写下了如下程序： 12345678910111213141516171819import osimport webbrowserfrom PIL import Ima">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210219104257525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20210219105522355.png">
 <meta property="article:published_time" content="2022-11-18T12:02:25.000Z">
 <meta property="article:modified_time" content="2022-12-06T02:44:16.250Z">
@@ -32,7 +31,7 @@
 <meta property="article:tag" content="Shell">
 <meta property="article:tag" content="ORcode">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210219104257525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210219105522355.png">
   
   
   
@@ -295,7 +294,8 @@
               <div class="markdown-body">
                 
                 <h2 id="开始">开始</h2>
-<p>昨日突发奇想，想在电脑上实现二维码图片的识别解码。因此查了点资料决定用python的pyzbar包写一个二维码解码的脚本。 首先pip安装pyzbar库：</p>
+<p>昨日突发奇想，想在电脑上实现二维码图片的识别解码。因此查了点资料决定用python的pyzbar包写一个二维码解码的脚本。
+首先pip安装pyzbar库：</p>
 <blockquote>
 <p>pip install pyzbar</p>
 </blockquote>
@@ -303,19 +303,32 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> webbrowser<br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">from</span> pyzbar <span class="hljs-keyword">import</span> pyzbar<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">decode_qr_code</span>(<span class="hljs-params">code_img_path</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(code_img_path):<br>        <span class="hljs-keyword">raise</span> FileExistsError(code_img_path)<br>    <span class="hljs-keyword">return</span> pyzbar.decode(Image.<span class="hljs-built_in">open</span>(code_img_path), symbols=[pyzbar.ZBarSymbol.QRCODE])<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    src = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;输入二维码路径：&quot;</span>)<br>    results = decode_qr_code(src)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(results):<br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;http://&quot;</span> <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;https://&quot;</span> <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>):<br>            webbrowser.<span class="hljs-built_in">open</span>(results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>        <span class="hljs-built_in">print</span>(results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Can not recognize.&quot;</span>)<br></code></pre></td></tr></table></figure>
 <p>嗯，还不错，只需要运行python脚本输入二维码路径就可以打开识别了，而且做了分类，对于纯文本直接打印，对于网址则使用webbrowser使用默认浏览器打开网址。</p>
 <h2 id="改进">改进</h2>
-<p>虽然我觉得这个脚本还不错啦，可以实现二维码图片的识别解码了，但我觉得这个输入二维码图片路径不大方便（或许是我懒），还有就是每次运行都得找到这个python脚本，着实不大方便。 嗯，得想个办法无需找到python脚本就能直接执行，总不能放个python脚本在桌面吧太丑了。 突然我灵机一动想到了我们的右键菜单栏：</p>
+<p>虽然我觉得这个脚本还不错啦，可以实现二维码图片的识别解码了，但我觉得这个输入二维码图片路径不大方便（或许是我懒），还有就是每次运行都得找到这个python脚本，着实不大方便。
+嗯，得想个办法无需找到python脚本就能直接执行，总不能放个python脚本在桌面吧太丑了。
+突然我灵机一动想到了我们的右键菜单栏：</p>
 <figure>
-<img src="https://img-blog.csdnimg.cn/20210219104257525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload alt="右键菜单栏" /><figcaption aria-hidden="true">右键菜单栏</figcaption>
+<img
+src="https://img-blog.csdnimg.cn/20210219104257525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2gyNzYzMjQ2ODIz,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload
+alt="右键菜单栏" />
+<figcaption aria-hidden="true">右键菜单栏</figcaption>
 </figure>
-<p>这玩意儿多方便啊，只需要找到二维码图片，然后右击打开菜单栏，然后执行脚本文件就好啦。 立马动手查找资料，看到右键菜单栏添加项需要修改注册表，嗯，按下win+r 输入regedit回车打开注册表编辑器，到计算机<code>\HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\</code>目录下新建一个项叫Recognize Qrcode（自己取的名字，会显示到右键菜单栏中，上图中有），然后再在Recognize Qrcode/下新建一个command项，双击名称修改其中的数值数据，起初我填的是(注意是英文 ")：<code>D:\Python\test\demo.py "%1"</code></p>
-<p>退出注册表编辑器后右键图片确实可以出现新添加的Recognize Qrcode，但单击执行却提示：</p>
+<p>这玩意儿多方便啊，只需要找到二维码图片，然后右击打开菜单栏，然后执行脚本文件就好啦。
+立马动手查找资料，看到右键菜单栏添加项需要修改注册表，嗯，按下win+r
+输入regedit回车打开注册表编辑器，到计算机<code>\HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\</code>目录下新建一个项叫Recognize
+Qrcode（自己取的名字，会显示到右键菜单栏中，上图中有），然后再在Recognize
+Qrcode/下新建一个command项，双击名称修改其中的数值数据，起初我填的是(注意是英文
+")：<code>D:\Python\test\demo.py "%1"</code></p>
+<p>退出注册表编辑器后右键图片确实可以出现新添加的Recognize
+Qrcode，但单击执行却提示：</p>
 <p><img src="https://img-blog.csdnimg.cn/20210219105522355.png" srcset="/img/loading.gif" lazyload /></p>
-<p>哦豁，无法直接执行python脚本，查阅网上资料发现，可以写个.bat文件然后去执行python脚本，即将之前填写的数值数据改成(注意是英文 ")：<code>D:\Python\test\demo.bat "%1"</code></p>
+<p>哦豁，无法直接执行python脚本，查阅网上资料发现，可以写个.bat文件然后去执行python脚本，即将之前填写的数值数据改成(注意是英文
+")：<code>D:\Python\test\demo.bat "%1"</code></p>
 <p>然后偷学一点批处理命令写了个.bat文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off<br><span class="hljs-built_in">cd</span>  d:\Python\<span class="hljs-built_in">test</span><br>d:<br>python demo.py %*<br>pause<br></code></pre></td></tr></table></figure>
 <p>然后再次测试，果然能够成功通过右键菜单运行python脚本了。</p>
 <h2 id="再改进">再改进</h2>
-<p>虽然解决了去寻找python脚本的麻烦，但是还是得手动输入图片路径，这还是好麻烦，能不能在右键菜单运行python脚本的时候直接获取到图片的路径呢。 好的，继续查资料，查了半天还是把目光盯到了右键上，经过一番搜索，发现：</p>
+<p>虽然解决了去寻找python脚本的麻烦，但是还是得手动输入图片路径，这还是好麻烦，能不能在右键菜单运行python脚本的时候直接获取到图片的路径呢。
+好的，继续查资料，查了半天还是把目光盯到了右键上，经过一番搜索，发现：</p>
 <blockquote>
 <p>右键的同时系统是会提取到图片的路径的</p>
 </blockquote>
@@ -323,11 +336,15 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> webbrowser<br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">from</span> pyzbar <span class="hljs-keyword">import</span> pyzbar<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">decode_qr_code</span>(<span class="hljs-params">code_img_path</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(code_img_path):<br>        <span class="hljs-keyword">raise</span> FileExistsError(code_img_path)<br>    <span class="hljs-keyword">return</span> pyzbar.decode(Image.<span class="hljs-built_in">open</span>(code_img_path), symbols=[pyzbar.ZBarSymbol.QRCODE])<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-comment"># 修改此处直接从系统得到了路径</span><br>    src = sys.argv[<span class="hljs-number">1</span>].replace(<span class="hljs-string">&#x27;\\&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>).replace(<span class="hljs-string">&#x27;&quot;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>)<br>    results = decode_qr_code(src)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(results):<br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;http://&quot;</span> <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;https://&quot;</span> <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>):<br>            webbrowser.<span class="hljs-built_in">open</span>(results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>        <span class="hljs-built_in">print</span>(results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Can not recognize.&quot;</span>)<br></code></pre></td></tr></table></figure>
 <p>测试运行成功。</p>
 <h2 id="再加个小功能">再加个小功能</h2>
-<p>既然右键的时候系统已经能获取到路径了，这不给我们平时复制文件路径提供了一个新思路嘛，按照如上流程可以写一个在右键菜单栏中直接获取到文件路径的脚本，将获取到的路径发送到剪切板中（提一句windows的剪切板真香，建议win+v打开）。 为了测试这个想法，我在这个二维码解码的脚本中也加入了这个功能。 使用subprocess将获取到的路径发到剪切板中：</p>
+<p>既然右键的时候系统已经能获取到路径了，这不给我们平时复制文件路径提供了一个新思路嘛，按照如上流程可以写一个在右键菜单栏中直接获取到文件路径的脚本，将获取到的路径发送到剪切板中（提一句windows的剪切板真香，建议win+v打开）。
+为了测试这个想法，我在这个二维码解码的脚本中也加入了这个功能。
+使用subprocess将获取到的路径发到剪切板中：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> subprocess<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> webbrowser<br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">from</span> pyzbar <span class="hljs-keyword">import</span> pyzbar<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">decode_qr_code</span>(<span class="hljs-params">code_img_path</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(code_img_path):<br>        <span class="hljs-keyword">raise</span> FileExistsError(code_img_path)<br>    <span class="hljs-keyword">return</span> pyzbar.decode(Image.<span class="hljs-built_in">open</span>(code_img_path), symbols=[pyzbar.ZBarSymbol.QRCODE])<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-comment"># 添加此处将获取到的文件路径发送到剪切板</span><br>    cmd = <span class="hljs-string">&#x27;echo &#x27;</span> + sys.argv[<span class="hljs-number">1</span>].strip().replace(<span class="hljs-string">&#x27;&quot;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>) + <span class="hljs-string">&#x27;|clip&#x27;</span><br>    subprocess.check_call(cmd, shell=<span class="hljs-literal">True</span>)<br>    <span class="hljs-comment"># 修改此处直接从系统得到了路径</span><br>    src = sys.argv[<span class="hljs-number">1</span>].replace(<span class="hljs-string">&#x27;\\&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>).replace(<span class="hljs-string">&#x27;&quot;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>)<br>    results = decode_qr_code(src)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(results):<br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;http://&quot;</span> <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;https://&quot;</span> <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>):<br>            webbrowser.<span class="hljs-built_in">open</span>(results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>        <span class="hljs-built_in">print</span>(results[<span class="hljs-number">0</span>].data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Can not recognize.&quot;</span>)<br></code></pre></td></tr></table></figure>
 <p>经测试完美实现此功能。</p>
 <h2 id="最后">最后</h2>
-<p>这个二维码识别功能还比较简陋，只能识别单张二维码，且图片必须保存到本地，还有较大的改进空间。 有更新想法的可以在评论提出。 源码及后续改进将发布在<a target="_blank" rel="noopener" href="https://gitee.com/HWHfile/recognize-qrcode">Gitee</a></p>
+<p>这个二维码识别功能还比较简陋，只能识别单张二维码，且图片必须保存到本地，还有较大的改进空间。
+有更新想法的可以在评论提出。 源码及后续改进将发布在<a
+target="_blank" rel="noopener" href="https://gitee.com/HWHfile/recognize-qrcode">Gitee</a></p>
 
                 
               </div>

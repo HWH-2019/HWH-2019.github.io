@@ -23,21 +23,12 @@
 <meta property="og:site_name" content="HWH&#39;s Blogs">
 <meta property="og:description" content="编译环境  虚拟机： VMware workstation pro 16 虚拟机操作系统： ubuntu-20.04.3-desktop-amd64 原系统内核版本：5.11.0-46-generic 内核源码版本：5.11.1  环境准备  安装VMware虚拟机并创建虚拟机 安装Ubuntu系统 下载内核源码  新编译的内核源码版本建议和原系统内核版本相近(大版本一致">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/c2e9b73fc0a4448ca8447939159789e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/53d259b602ad4378b5ada1cf36d096d2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/0f736189f2cb431eb7b31f991caa84e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/48aa76ce139248ee90c309a90d1369b6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/ca3044cc312049e7b0ef17200c9761b0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/a7318e3b593340cfb43dce6e3f5474e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/ac1b9c5bf77a4b3c851f8f7b0a245025.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/d2f5ef8020da4f5d8aad24f2ed0182c0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
 <meta property="article:published_time" content="2022-12-03T12:20:20.000Z">
 <meta property="article:modified_time" content="2022-12-04T11:58:04.257Z">
 <meta property="article:author" content="HWH">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Kernel">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/c2e9b73fc0a4448ca8447939159789e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
   
   
   
@@ -308,7 +299,8 @@
 </ul>
 <h3 id="环境准备">环境准备</h3>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122522464">安装VMware虚拟机并创建虚拟机</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/h2763246823/article/details/122522464">安装VMware虚拟机并创建虚拟机</a></li>
 <li>安装Ubuntu系统</li>
 <li><a target="_blank" rel="noopener" href="https://cdn.kernel.org/pub/linux/kernel/">下载内核源码</a>
 <ul>
@@ -326,7 +318,8 @@
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">cd</span> /usr/src/<br></code></pre></td></tr></table></figure>
 <ul>
-<li>将内核源码解压，这里使用的是 <code>linux-5.11.1.tar.xz</code> ，<code>.xz</code>为双重压缩，因此先使用 <code>xz命令</code>解压</li>
+<li>将内核源码解压，这里使用的是 <code>linux-5.11.1.tar.xz</code>
+，<code>.xz</code>为双重压缩，因此先使用 <code>xz命令</code>解压</li>
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">sudo xz <span class="hljs-literal">-d</span> linux<span class="hljs-literal">-5</span>.<span class="hljs-number">11.1</span>.tar.xz<br></code></pre></td></tr></table></figure>
 <ul>
@@ -350,7 +343,8 @@
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">sudo apt install gcc<br></code></pre></td></tr></table></figure>
 <ul>
-<li>安装 <code>gtk+-2.0</code> 、<code>gmodule-2.0</code> 和 <code>libglade-2.0</code></li>
+<li>安装 <code>gtk+-2.0</code> 、<code>gmodule-2.0</code> 和
+<code>libglade-2.0</code></li>
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">sudo apt install libgtk2.<span class="hljs-number">0</span><span class="hljs-literal">-dev</span> libglib2.<span class="hljs-number">0</span><span class="hljs-literal">-dev</span> libglade2<span class="hljs-literal">-dev</span><br></code></pre></td></tr></table></figure>
 <ul>
@@ -366,23 +360,39 @@
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">sudo make gconfig<br></code></pre></td></tr></table></figure>
 <figure>
-<img src="https://img-blog.csdnimg.cn/c2e9b73fc0a4448ca8447939159789e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt="gconfig界面" /><figcaption aria-hidden="true">gconfig界面</figcaption>
+<img
+src="https://img-blog.csdnimg.cn/c2e9b73fc0a4448ca8447939159789e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload
+alt="gconfig界面" />
+<figcaption aria-hidden="true">gconfig界面</figcaption>
 </figure>
 <ul>
-<li>如果需要修改配置可以在 <strong>gconfig</strong>中图形化进行设置，在这里需要注意，配置选项有时分为三类，分别对应 <code>N</code>、<code>M</code> 和 <code>Y</code>
+<li>如果需要修改配置可以在
+<strong>gconfig</strong>中图形化进行设置，在这里需要注意，配置选项有时分为三类，分别对应
+<code>N</code>、<code>M</code> 和 <code>Y</code>
 <ul>
 <li><code>N</code> 未选中，即编译时不加入，gconfig中为不选中</li>
-<li><code>M</code> 编译成模块，gconfig中选中时为 <code>-</code> 表示</li>
-<li><code>Y</code> 编译入内核，gconfig中选中时为 <code>√</code> 表示</li>
+<li><code>M</code> 编译成模块，gconfig中选中时为 <code>-</code>
+表示</li>
+<li><code>Y</code> 编译入内核，gconfig中选中时为 <code>√</code>
+表示</li>
 </ul></li>
-<li>配置好后点击 <code>Save</code> 即可保存配置，生成 <code>.config</code> 文件</li>
-<li>通常源码所带的默认配置所需编译的内核和模块很多，编译一次时间大约在 2-3小时左右(与虚拟机的配置和电脑的性能有关)</li>
-<li>因此在开发中遇到需要编译内核的情况，往往对内核进行裁剪，这里我准备了一份<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1kG54AP5PTmyKTvRBmmVBWRQmwQjs5mJN/view?usp=sharing">裁剪过的内核配置</a>(裁剪的较多，很多模块缺失，谨慎使用)</li>
+<li>配置好后点击 <code>Save</code> 即可保存配置，生成
+<code>.config</code> 文件</li>
+<li>通常源码所带的默认配置所需编译的内核和模块很多，编译一次时间大约在
+2-3小时左右(与虚拟机的配置和电脑的性能有关)</li>
+<li>因此在开发中遇到需要编译内核的情况，往往对内核进行裁剪，这里我准备了一份<a
+target="_blank" rel="noopener" href="https://drive.google.com/file/d/1kG54AP5PTmyKTvRBmmVBWRQmwQjs5mJN/view?usp=sharing">裁剪过的内核配置</a>(裁剪的较多，很多模块缺失，谨慎使用)</li>
 <li><strong>使用方式</strong>：
 <ul>
-<li>【建议】先使用 <strong>gconfig</strong> 生成 <code>.config</code> 文件，并做好<strong>备份</strong></li>
-<li>下载 <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1kG54AP5PTmyKTvRBmmVBWRQmwQjs5mJN/view?usp=sharing">.config(Google 云端硬盘)</a> 或者<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1wWb4qSK69_rADOkFnuiSMg">.config(百度网盘 提取码 2022 )</a>后替换原本内核中的 <code>.config</code></li>
-<li>执行 <code>sudo make gconfig</code> 检查是否替换成功，点击 <code>Save</code> 保存</li>
+<li>【建议】先使用 <strong>gconfig</strong> 生成 <code>.config</code>
+文件，并做好<strong>备份</strong></li>
+<li>下载 <a
+target="_blank" rel="noopener" href="https://drive.google.com/file/d/1kG54AP5PTmyKTvRBmmVBWRQmwQjs5mJN/view?usp=sharing">.config(Google
+云端硬盘)</a> 或者<a
+target="_blank" rel="noopener" href="https://pan.baidu.com/s/1wWb4qSK69_rADOkFnuiSMg">.config(百度网盘
+提取码 2022 )</a>后替换原本内核中的 <code>.config</code></li>
+<li>执行 <code>sudo make gconfig</code> 检查是否替换成功，点击
+<code>Save</code> 保存</li>
 </ul></li>
 </ul>
 <h4 id="编译内核">编译内核</h4>
@@ -402,7 +412,8 @@
 <li>编译时间大概为半小时，开把游戏，倒杯茶，走几圈。</li>
 <li>编译成功如下图</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/53d259b602ad4378b5ada1cf36d096d2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/53d259b602ad4378b5ada1cf36d096d2.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="安装内核">安装内核</h3>
 <ul>
 <li>安装模块</li>
@@ -411,7 +422,8 @@
 <ul>
 <li>安装成功如下图</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/0f736189f2cb431eb7b31f991caa84e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/0f736189f2cb431eb7b31f991caa84e3.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>安装内核</li>
 </ul>
@@ -419,30 +431,37 @@
 <ul>
 <li>安装成功如下图</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/48aa76ce139248ee90c309a90d1369b6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/48aa76ce139248ee90c309a90d1369b6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="载入新内核">载入新内核</h3>
 <ul>
 <li><p>重启 Ubuntu</p>
 <p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">reboot<br></code></pre></td></tr></table></figure></p></li>
-<li><p>系统会默认将新安装的内核作为 <strong>grub</strong> 的第一个启动项</p></li>
-<li><p>如果想要自行切换不同内核，在出现载入进度条时，点击 <code>shift</code></p></li>
+<li><p>系统会默认将新安装的内核作为 <strong>grub</strong>
+的第一个启动项</p></li>
+<li><p>如果想要自行切换不同内核，在出现载入进度条时，点击
+<code>shift</code></p></li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/ca3044cc312049e7b0ef17200c9761b0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/ca3044cc312049e7b0ef17200c9761b0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>进入 <strong>grub</strong> 后选择 <code>ubuntu 高级选项</code></li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/a7318e3b593340cfb43dce6e3f5474e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/a7318e3b593340cfb43dce6e3f5474e5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <ul>
 <li>回车进入后，上下选择自己想要进入的内核，回车进入</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/ac1b9c5bf77a4b3c851f8f7b0a245025.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/ac1b9c5bf77a4b3c851f8f7b0a245025.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="检查内核">检查内核</h3>
 <ul>
 <li><p>检查内核版本</p>
 <p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">uname <span class="hljs-literal">-r</span><br></code></pre></td></tr></table></figure></p></li>
 <li><p>结果如下</p></li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/d2f5ef8020da4f5d8aad24f2ed0182c0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://img-blog.csdnimg.cn/d2f5ef8020da4f5d8aad24f2ed0182c0.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="常见问题">常见问题</h3>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">sudo: make：找不到命令<br></code></pre></td></tr></table></figure>
 <p><strong>解决办法：</strong> 安装 <code>make</code></p>
@@ -451,7 +470,8 @@
 <p><strong>解决办法：</strong> 安装 <code>gcc</code></p>
 <hr />
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs powershell">*<br>* Unable to find the GTK+ installation. Please make sure that<br>* the GTK+ <span class="hljs-number">2.0</span> development package is correctly installed.<br>* You need gtk+<span class="hljs-literal">-2</span>.<span class="hljs-number">0</span> gmodule<span class="hljs-literal">-2</span>.<span class="hljs-number">0</span> libglade<span class="hljs-literal">-2</span>.<span class="hljs-number">0</span><br>*<br>make[<span class="hljs-number">1</span>]: *** [<span class="hljs-type">scripts</span>/<span class="hljs-type">kconfig</span>/<span class="hljs-type">Makefile</span>:<span class="hljs-number">204</span>：<span class="hljs-type">scripts</span>/<span class="hljs-type">kconfig</span>/<span class="hljs-type">gconf</span>-<span class="hljs-type">cfg</span>] 错误 <span class="hljs-number">1</span><br>make: *** [<span class="hljs-type">Makefile</span>:<span class="hljs-number">601</span>：<span class="hljs-type">gconfig</span>] 错误 <span class="hljs-number">2</span><br><br></code></pre></td></tr></table></figure>
-<p><strong>解决办法：</strong> 安装 <code>gtk+-2.0</code> 、<code>gmodule-2.0</code> 和 <code>libglade-2.0</code></p>
+<p><strong>解决办法：</strong> 安装 <code>gtk+-2.0</code>
+、<code>gmodule-2.0</code> 和 <code>libglade-2.0</code></p>
 <hr />
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">/bin/sh: <span class="hljs-number">1</span>: flex: not found<br>make[<span class="hljs-number">1</span>]: *** [<span class="hljs-type">scripts</span>/<span class="hljs-type">Makefile.host</span>:<span class="hljs-number">9</span>：<span class="hljs-type">scripts</span>/<span class="hljs-type">kconfig</span>/<span class="hljs-type">lexer.lex.c</span>] 错误 <span class="hljs-number">127</span><br>make: *** [<span class="hljs-type">Makefile</span>:<span class="hljs-number">601</span>：<span class="hljs-type">gconfig</span>] 错误 <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
 <p><strong>解决办法：</strong> 安装 <code>flex</code></p>
@@ -466,7 +486,14 @@
 <p><strong>解决办法：</strong> 安装 <code>elf</code></p>
 <hr />
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">进入initramfs<br>alert：uuid=xxxxxx does not exist，<br><span class="hljs-built_in">ls</span> /dev下没有sda<br></code></pre></td></tr></table></figure>
-<p><strong>原因分析：</strong> 内核裁剪过度，将 <strong>SCSI</strong> 模块裁剪，<strong>MPT</strong>模块裁剪 <strong>解决办法：</strong> 重新修改内核配置，将 <strong>Device Drivers</strong>下， - <strong>Fusion MPT device suppot</strong>中所有模块加入 - <strong>SCSI device support</strong>下与 <strong>SCSI</strong> 有关的模块加入 - <strong>SCSI device support</strong>下 <strong>SCSI low-level drivers</strong> 下 <strong>LSI MPT Fusion SAS 3.0 &amp; SAS 2.0 Device Driver</strong>加入</p>
+<p><strong>原因分析：</strong> 内核裁剪过度，将 <strong>SCSI</strong>
+模块裁剪，<strong>MPT</strong>模块裁剪 <strong>解决办法：</strong>
+重新修改内核配置，将 <strong>Device Drivers</strong>下， -
+<strong>Fusion MPT device suppot</strong>中所有模块加入 - <strong>SCSI
+device support</strong>下与 <strong>SCSI</strong> 有关的模块加入 -
+<strong>SCSI device support</strong>下 <strong>SCSI low-level
+drivers</strong> 下 <strong>LSI MPT Fusion SAS 3.0 &amp; SAS 2.0 Device
+Driver</strong>加入</p>
 
                 
               </div>

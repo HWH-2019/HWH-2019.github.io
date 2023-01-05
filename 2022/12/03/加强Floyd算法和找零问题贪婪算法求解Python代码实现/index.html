@@ -16,22 +16,19 @@
   <meta name="author" content="HWH">
   <meta name="keywords" content="">
   
-    <meta name="description" content="加强Floyd算法，使得该算法能够求出最短路径本身，而不仅仅是它们的长度。 算法设计思想  所有路径都由两条路径构成： 一条从\(v_i\)到\(v_k\)的路径，路径中每个中间顶点的编号都不大于\(k-1\); 一条从\(v_k\)到\(v_j\)的路径，路径中每个中间顶点的编号也都不大于\(k-1\) 设路径长度为 \(d\) 得到以下递推式，\(当k\geq 1, d_{ij}^{(">
+    <meta name="description" content="加强Floyd算法，使得该算法能够求出最短路径本身，而不仅仅是它们的长度。 算法设计思想  所有路径都由两条路径构成： 一条从\(v_i\)到\(v_k\)的路径，路径中每个中间顶点的编号都不大于\(k-1\); 一条从\(v_k\)到\(v_j\)的路径，路径中每个中间顶点的编号也都不大于\(k-1\) 设路径长度为 \(d\) 得到以下递推式，\(当k\geq 1, d_{ij}^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="加强Floyd算法和找零问题贪婪算法求解Python代码实现">
 <meta property="og:url" content="https://hwh-2019.github.io/2022/12/03/%E5%8A%A0%E5%BC%BAFloyd%E7%AE%97%E6%B3%95%E5%92%8C%E6%89%BE%E9%9B%B6%E9%97%AE%E9%A2%98%E8%B4%AA%E5%A9%AA%E7%AE%97%E6%B3%95%E6%B1%82%E8%A7%A3Python%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="HWH&#39;s Blogs">
-<meta property="og:description" content="加强Floyd算法，使得该算法能够求出最短路径本身，而不仅仅是它们的长度。 算法设计思想  所有路径都由两条路径构成： 一条从\(v_i\)到\(v_k\)的路径，路径中每个中间顶点的编号都不大于\(k-1\); 一条从\(v_k\)到\(v_j\)的路径，路径中每个中间顶点的编号也都不大于\(k-1\) 设路径长度为 \(d\) 得到以下递推式，\(当k\geq 1, d_{ij}^{(">
+<meta property="og:description" content="加强Floyd算法，使得该算法能够求出最短路径本身，而不仅仅是它们的长度。 算法设计思想  所有路径都由两条路径构成： 一条从\(v_i\)到\(v_k\)的路径，路径中每个中间顶点的编号都不大于\(k-1\); 一条从\(v_k\)到\(v_j\)的路径，路径中每个中间顶点的编号也都不大于\(k-1\) 设路径长度为 \(d\) 得到以下递推式，\(当k\geq 1, d_{ij}^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/b89c49a2d8924595baca8c6e90544bf9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/00217dc58b3e4ebea0ffc6ae02b2731b.png">
 <meta property="article:published_time" content="2022-12-03T11:31:49.000Z">
 <meta property="article:modified_time" content="2022-12-03T12:00:33.791Z">
 <meta property="article:author" content="HWH">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Floyd">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/b89c49a2d8924595baca8c6e90544bf9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16">
   
   
   
@@ -293,11 +290,22 @@
             
               <div class="markdown-body">
                 
-                <h2 id="加强floyd算法使得该算法能够求出最短路径本身而不仅仅是它们的长度">加强Floyd算法，使得该算法能够求出最短路径本身，而不仅仅是它们的长度。</h2>
+                <h2
+id="加强floyd算法使得该算法能够求出最短路径本身而不仅仅是它们的长度">加强Floyd算法，使得该算法能够求出最短路径本身，而不仅仅是它们的长度。</h2>
 <h3 id="算法设计思想">算法设计思想</h3>
 <ul>
-<li><p>所有路径都由两条路径构成： 一条从<span class="math inline">\(v_i\)</span>到<span class="math inline">\(v_k\)</span>的路径，路径中每个中间顶点的编号都不大于<span class="math inline">\(k-1\)</span>; 一条从<span class="math inline">\(v_k\)</span>到<span class="math inline">\(v_j\)</span>的路径，路径中每个中间顶点的编号也都不大于<span class="math inline">\(k-1\)</span></p></li>
-<li><p>设路径长度为 <span class="math inline">\(d\)</span> 得到以下递推式，<span class="math inline">\(当k\geq 1, d_{ij}^{(0)}=w_{ij}时， d_{ij}^{(k)} = min\begin{Bmatrix} d_{ij}^{(k-1)}, d_{ik}^{(k-1)} + d_{kj}^{(k-1)} \end{Bmatrix}\)</span></p></li>
+<li><p>所有路径都由两条路径构成： 一条从<span
+class="math inline">\(v_i\)</span>到<span
+class="math inline">\(v_k\)</span>的路径，路径中每个中间顶点的编号都不大于<span
+class="math inline">\(k-1\)</span>; 一条从<span
+class="math inline">\(v_k\)</span>到<span
+class="math inline">\(v_j\)</span>的路径，路径中每个中间顶点的编号也都不大于<span
+class="math inline">\(k-1\)</span></p></li>
+<li><p>设路径长度为 <span class="math inline">\(d\)</span>
+得到以下递推式，<span class="math inline">\(当k\geq 1,
+d_{ij}^{(0)}=w_{ij}时， d_{ij}^{(k)} = min\begin{Bmatrix}
+d_{ij}^{(k-1)}, d_{ik}^{(k-1)} + d_{kj}^{(k-1)}
+\end{Bmatrix}\)</span></p></li>
 <li><p>同理路径本身也可以得到与上面相同的公式</p></li>
 </ul>
 <p><span class="math display">\[
@@ -309,19 +317,26 @@ E=mc^2
 <li><p>通过邻接矩阵来初始化路径矩阵</p></li>
 <li><p><span class="math inline">\(k\)</span> 从 0 开始循环</p></li>
 <li><p>遍历邻接矩阵，按照公式处理邻接矩阵和路径矩阵</p></li>
-<li><p><span class="math inline">\(当k\geq 1, d_{ij}^{(0)}=w_{ij}时， d_{ij}^{(k)} = min\begin{Bmatrix} d_{ij}^{(k-1)}, d_{ik}^{(k-1)} + d_{kj}^{(k-1)} \end{Bmatrix}\)</span></p></li>
+<li><p><span class="math inline">\(当k\geq 1, d_{ij}^{(0)}=w_{ij}时，
+d_{ij}^{(k)} = min\begin{Bmatrix} d_{ij}^{(k-1)}, d_{ik}^{(k-1)} +
+d_{kj}^{(k-1)} \end{Bmatrix}\)</span></p></li>
 <li><p>将两个矩阵返回，即得到最短路径的长度以及最短路径本身</p></li>
 </ul>
 <h3 id="实现源码">实现源码</h3>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 初始化邻接矩阵</span><br>W = [<br>    [<span class="hljs-number">0</span>, np.inf, <span class="hljs-number">3</span>, np.inf, np.inf],<br>    [<span class="hljs-number">2</span>, <span class="hljs-number">0</span>, np.inf, np.inf, <span class="hljs-number">5</span>],<br>    [np.inf, <span class="hljs-number">7</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, np.inf],<br>    [<span class="hljs-number">6</span>, np.inf, np.inf, <span class="hljs-number">0</span>, <span class="hljs-number">11</span>],<br>    [np.inf, np.inf, np.inf, np.inf, np.inf],<br>]<br><br>S = []<br><br><span class="hljs-comment"># 初始化路径矩阵</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(W)):<br>    S.append([<span class="hljs-built_in">chr</span>(<span class="hljs-number">97</span> + i) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(W))])<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">Floyd</span>(<span class="hljs-params">W, S</span>):<br>    D = W<br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(W)):<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(W)):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(W)):<br>                <span class="hljs-keyword">if</span> D[i][j] &gt; D[i][k] + D[k][j]:<br>                    S[i][j] = S[i][k] + S[k][j]<br>                    D[i][j] = D[i][k] + D[k][j]<br>                <span class="hljs-comment"># 给路径矩阵添上路径终点结点</span><br>                <span class="hljs-keyword">if</span> k == <span class="hljs-built_in">len</span>(W) - <span class="hljs-number">1</span>:<br>                    S[i][j] += S[j][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]<br>    <span class="hljs-keyword">return</span> np.array(D), np.<br>array(S)<br><br><br>W, S = Floyd(W, S)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;3190608027 黄文焕&quot;</span>)<br><span class="hljs-built_in">print</span>(W)<br><span class="hljs-built_in">print</span>(S)<br></code></pre></td></tr></table></figure>
 <h3 id="运行结果截图">运行结果截图</h3>
 <figure>
-<img src="https://img-blog.csdnimg.cn/b89c49a2d8924595baca8c6e90544bf9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload alt="运行结果" /><figcaption aria-hidden="true">运行结果</figcaption>
+<img
+src="https://img-blog.csdnimg.cn/b89c49a2d8924595baca8c6e90544bf9.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6Z6g5p2J,size_20,color_FFFFFF,t_70,g_se,x_16" srcset="/img/loading.gif" lazyload
+alt="运行结果" />
+<figcaption aria-hidden="true">运行结果</figcaption>
 </figure>
-<h2 id="为找零问题写一个贪婪算法的伪代码它以金额n和硬币的面额d1d2...dm作为输入">为找零问题写一个贪婪算法的伪代码，它以金额n和硬币的面额d1&gt;d2&gt;...&gt;dm作为输入。</h2>
+<h2
+id="为找零问题写一个贪婪算法的伪代码它以金额n和硬币的面额d1d2...dm作为输入">为找零问题写一个贪婪算法的伪代码，它以金额n和硬币的面额d1&gt;d2&gt;...&gt;dm作为输入。</h2>
 <h3 id="算法设计思想-1">算法设计思想</h3>
 <ul>
-<li>将 n 和 d1 相除，商为硬币个数，再 n 取余 d1 赋值给 n，循环下去，直到 dm</li>
+<li>将 n 和 d1 相除，商为硬币个数，再 n 取余 d1 赋值给 n，循环下去，直到
+dm</li>
 </ul>
 <h3 id="具体步骤描述-1">具体步骤描述</h3>
 <ul>
@@ -334,7 +349,10 @@ E=mc^2
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;3190608027 黄文焕&quot;</span>)<br>n = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入n: &quot;</span>))<br>li = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>, <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请从大到小输入币值: &quot;</span>).split()))<br>d = <span class="hljs-built_in">dict</span>()<br>index = <span class="hljs-number">0</span><br><br><span class="hljs-keyword">while</span> index &lt; <span class="hljs-built_in">len</span>(li):<br>    m = <span class="hljs-built_in">int</span>(n / li[index])<br>    d[li[index]] = m<br>    n = n % li[index]<br>    index += <span class="hljs-number">1</span><br><span class="hljs-built_in">print</span>(d)<br></code></pre></td></tr></table></figure>
 <h2 id="运行结果截图-1">运行结果截图</h2>
 <figure>
-<img src="https://img-blog.csdnimg.cn/00217dc58b3e4ebea0ffc6ae02b2731b.png" srcset="/img/loading.gif" lazyload alt="运行结果" /><figcaption aria-hidden="true">运行结果</figcaption>
+<img
+src="https://img-blog.csdnimg.cn/00217dc58b3e4ebea0ffc6ae02b2731b.png" srcset="/img/loading.gif" lazyload
+alt="运行结果" />
+<figcaption aria-hidden="true">运行结果</figcaption>
 </figure>
 
                 
