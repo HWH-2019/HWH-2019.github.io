@@ -1,9 +1,19 @@
-/* #body-wrap {
-	background: linear-gradient(90deg, #ffd7e4 0%, #c8f1ff 100%)
-} */
+
 
 #footer {
 	background-color: unset;
+}
+
+#footer .page-title{
+	
+}
+
+#page{
+	border-radius: 0;
+	background: unset;
+	-webkit-box-shadow: unset;
+	box-shadow: unset;
+	padding: 0
 }
 
 #post{
@@ -96,8 +106,3 @@
   background-color: #49b1f5;
 }
 
-
-/* #recent-posts .recent-post-item{
-	background: rgba(255,255,255,0.333);
-}
- */
